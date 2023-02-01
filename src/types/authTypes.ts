@@ -1,5 +1,5 @@
 export interface InitialUser {
-  isAuthenticated: false;
+  isAuthenticated: boolean;
   accessToken: string;
   refreshToken: string;
   user: {
