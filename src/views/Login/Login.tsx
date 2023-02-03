@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputAdornment, TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
@@ -21,8 +21,6 @@ const Login = () => {
     <div className="main">
       <div className="box">
         <p className="box-text">LOGIN</p>
-        <p className="italic">If you have an account with us, please login.</p>
-        <br />
         <p className="red-font">* Required fields</p>
         <TextField
           value={loginData.email}
@@ -69,6 +67,7 @@ const Login = () => {
             Not registered with us? Register Now
           </Link>
         </p>
+        <Button variant="contained">Login</Button>
       </div>
     </div>
   );

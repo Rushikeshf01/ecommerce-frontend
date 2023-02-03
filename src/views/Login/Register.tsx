@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -12,18 +12,25 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  const [isPasswordsSame, setIsPasswordsSame] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setRegisterData((prevState) => ({ ...prevState, [name]: value }));
+    setIsPasswordsSame(false);
+    if (name == "confirmPassword") {
+      if (registerData.password != value) {
+        setIsPasswordsSame(true);
+      } else {
+        setIsPasswordsSame(false);
+      }
+    }
   };
 
   return (
     <div className="main">
       <div className="box">
-        <p className="box-text">REGISTER</p>
-        <p className="italic">If you have an account with us, please login.</p>
-        <br />
+        <p className="box-text">SIGN UP</p>
         <p className="red-font">* Required fields</p>
         <TextField
           value={registerData.email}
@@ -81,6 +88,7 @@ const Register = () => {
           id="outlined-basic"
           variant="outlined"
         />
+        {isPasswordsSame && <p className="red-font">Password doesn't match</p>}
         <p className="my-3">
           <Link
             className="pointer blue-font"
@@ -89,6 +97,7 @@ const Register = () => {
             Already our user? Login Now
           </Link>
         </p>
+        <Button variant="contained">Register</Button>
       </div>
     </div>
   );
