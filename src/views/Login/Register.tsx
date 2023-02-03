@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { RegisterStateType } from "../../types/authTypes";
+import "./login.css";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterStateType>({
@@ -65,7 +66,7 @@ const Register = () => {
           value={registerData.confirmPassword}
           name="confirmPassword"
           onChange={handleOnChange}
-          label="Password"
+          label="Confirm Password"
           type="password"
           required
           fullWidth
@@ -80,12 +81,14 @@ const Register = () => {
           id="outlined-basic"
           variant="outlined"
         />
-        <Link
-          className="pointer blue-font"
-          to={ApplicationConstant.LOGIN_URL_PATH}
-        >
-          Already our user? Login Now
-        </Link>
+        <p className="my-3">
+          <Link
+            className="pointer blue-font"
+            to={ApplicationConstant.LOGIN_URL_PATH}
+          >
+            Already our user? Login Now
+          </Link>
+        </p>
       </div>
     </div>
   );

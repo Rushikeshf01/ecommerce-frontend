@@ -4,6 +4,7 @@ import { AccountCircle, Lock } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { LoginStateType } from "../../types/authTypes";
+import "./login.css";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginStateType>({
@@ -60,12 +61,14 @@ const Login = () => {
           id="outlined-basic"
           variant="outlined"
         />
-        <Link
-          className="pointer blue-font"
-          to={ApplicationConstant.REGISTER_URL_PATH}
-        >
-          Not registered with us? Register Now
-        </Link>
+        <p className="my-3">
+          <Link
+            className="pointer blue-font"
+            to={ApplicationConstant.REGISTER_URL_PATH}
+          >
+            Not registered with us? Register Now
+          </Link>
+        </p>
       </div>
     </div>
   );
