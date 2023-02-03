@@ -7,6 +7,11 @@ export interface InitialUser {
     user_id: string;
   };
 }
+export interface RegisterStateType {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export interface LoginStateType {
   email: string;

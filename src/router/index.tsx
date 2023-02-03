@@ -1,9 +1,10 @@
 import { useRoutes } from "react-router-dom";
 import { ApplicationConstant } from "../constant/applicationConstant";
-import Login from "../views/Login";
 import Dashboard from "../views/Home";
 import { useSelector } from "react-redux";
-import { RootState } from "@store/store";
+import { RootState } from "../../store/store";
+import Register from "../views/Login/Register";
+import Login from "../views/Login/Login";
 
 export default function App() {
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -13,6 +14,10 @@ export default function App() {
       {
         path: ApplicationConstant.LOGIN_URL_PATH,
         element: <Login />,
+      },
+      {
+        path: ApplicationConstant.REGISTER_URL_PATH,
+        element: <Register />,
       },
     ]);
   }
