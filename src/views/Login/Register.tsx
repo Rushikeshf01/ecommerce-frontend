@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { RegisterStateType } from "../../types/authTypes";
 import "./login.css";
+import authClient from "../../network/AuthClient";
+import { ToastSuccessMessage } from "../../utils/toastMessages";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterStateType>({
@@ -25,6 +27,14 @@ const Register = () => {
         setIsPasswordsSame(false);
       }
     }
+  };
+
+  const handleOnClick = async () => {
+    let res = await authClient.post("/a1/auth/register", {
+      email: registerData.email,
+      password: registerData.password,
+    });
+    ToastSuccessMessage(res.data.msg)
   };
 
   return (
@@ -97,7 +107,9 @@ const Register = () => {
             Already our user? Login Now
           </Link>
         </p>
-        <Button variant="contained">Register</Button>
+        <Button variant="contained" onClick={handleOnClick}>
+          Register
+        </Button>
       </div>
     </div>
   );
