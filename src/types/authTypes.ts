@@ -7,3 +7,8 @@ export interface InitialUser {
     user_id: string;
   };
 }
+
+export interface LoginStateType {
+  email: string;
+  password: string;
+}
