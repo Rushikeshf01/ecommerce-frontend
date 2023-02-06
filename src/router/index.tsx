@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Register from "../views/Login/Register";
 import Login from "../views/Login/Login";
+import User from "../views/User";
 
 export default function App() {
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -34,6 +35,10 @@ export default function App() {
     {
       path: ApplicationConstant.HOME_URL_PATH,
       element: <Dashboard />,
+    },
+    {
+      path: ApplicationConstant.USER_URL_PATH,
+      element: <User />,
     },
   ]);
 }
