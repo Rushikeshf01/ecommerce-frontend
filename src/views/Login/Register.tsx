@@ -41,7 +41,7 @@ const Register = () => {
   };
 
   const handleOnClick = async () => {
-    let res = await authClient.post("/a1/auth/register", {
+    let res = await authClient.post("/register", {
       email: registerData.email,
       password: registerData.password,
     });

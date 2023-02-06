@@ -32,8 +32,7 @@ const Login = () => {
   };
 
   const handleOnClick = async () => {
-    let res = await authClient.post("/a1/auth/login", loginData);
-    console.log(res.data);
+    let res = await authClient.post("/login", loginData);
     localStorage.setItem(
       ApplicationConstant.REFRESH_TOKEN,
       res.data.refreshToken

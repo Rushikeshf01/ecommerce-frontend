@@ -4,11 +4,14 @@ import {
   setAuthentication,
 } from "../../store/slices/authSlice";
 import { store } from "../../store/store";
-import { ApplicationConstant } from "../constant/applicationConstant";
+import {
+  ApiConstant,
+  ApplicationConstant,
+} from "../constant/applicationConstant";
 import { ToastDangerMessage, ToastWarnMessage } from "../utils/toastMessages";
 
 const authClient = axios.create({
-  baseURL: "http://127.0.0.1:5000/api",
+  baseURL: ApiConstant.AUTH_API_PATH,
 });
 
 authClient.interceptors.request.use(
@@ -56,7 +59,7 @@ export const initializeAuthData = async () => {
     return false;
   }
   try {
-    const authResponse = await authClient.get("/a1/auth/get-access-token", {
+    const authResponse = await authClient.get("/get-access-token", {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
       },
@@ -69,7 +72,6 @@ export const initializeAuthData = async () => {
         isAuthenticated: true,
       })
     );
-    console.log("New access token received")
     return true;
   } catch {
     localStorage.clear();
