@@ -38,7 +38,7 @@ const UserSidebar = () => {
   ];
 
   return (
-    <div className="flex flex-direction-column">
+    <div className="flex flex-direction-column w-[30%]">
       {userSidebarLinks.map((item, index) => (
         <NavLink
           to={item.link}

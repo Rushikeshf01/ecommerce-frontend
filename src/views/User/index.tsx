@@ -20,7 +20,7 @@ const User = () => {
           className="mb-6"
         />
         <p className="text-[36px] font-semibold mb-3">My Account</p>
-        <div>
+        <div className="flex">
           <UserSidebar />
           <UserProfileMain />
         </div>
