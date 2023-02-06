@@ -1,6 +1,27 @@
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
+import { UserPersonalInformationType } from "../../../types/authTypes";
 
 const UserProfilePersonalInformation = () => {
+  const [personalInfo, setPersonalInfo] = useState<UserPersonalInformationType>(
+    {
+      firstName: "",
+      lastName: "",
+      dob: "",
+      mobile: "",
+    }
+  );
+  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setPersonalInfo((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleOnClick = () => {
+    setIsSaveButtonClicked(true);
+  };
+
   return (
     <div>
       <p className="font-medium">Personal information</p>
@@ -13,6 +34,9 @@ const UserProfilePersonalInformation = () => {
         </p>
         <div className="w-[70%]">
           <TextField
+            name="firstName"
+            value={personalInfo.firstName}
+            onChange={handleOnChange}
             label="First Name"
             id="filled-basic"
             variant="filled"
@@ -20,6 +44,9 @@ const UserProfilePersonalInformation = () => {
             fullWidth
           />
           <TextField
+            name="lastName"
+            value={personalInfo.lastName}
+            onChange={handleOnChange}
             label="Last Name"
             id="filled-basic"
             variant="filled"
@@ -27,6 +54,9 @@ const UserProfilePersonalInformation = () => {
             fullWidth
           />
           <TextField
+            name="mobile"
+            value={personalInfo.mobile}
+            onChange={handleOnChange}
             label="Mobile Number"
             id="filled-basic"
             variant="filled"
@@ -34,6 +64,9 @@ const UserProfilePersonalInformation = () => {
             fullWidth
           />
           <TextField
+            name="dob"
+            value={personalInfo.dob}
+            onChange={handleOnChange}
             type="date"
             InputLabelProps={{ shrink: true }}
             label="Date Of Birth"
@@ -42,7 +75,13 @@ const UserProfilePersonalInformation = () => {
             margin="normal"
             fullWidth
           />
-          <Button variant="contained">Save</Button>
+          <Button
+            onClick={handleOnClick}
+            disabled={isSaveButtonClicked}
+            variant="contained"
+          >
+            Save
+          </Button>
         </div>
       </div>
     </div>

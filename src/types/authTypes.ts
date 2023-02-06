@@ -17,3 +17,16 @@ export interface LoginStateType {
   email: string;
   password: string;
 }
+
+export interface UserAccountInformationType {
+  email: string;
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface UserPersonalInformationType {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  mobile: string;
+}

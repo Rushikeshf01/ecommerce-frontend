@@ -1,6 +1,24 @@
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
+import { UserAccountInformationType } from "../../../types/authTypes";
 
 const UserProfileAccountInformation = () => {
+  const [accountInfo, setAccountInfo] = useState<UserAccountInformationType>({
+    email: "",
+    oldPassword: "",
+    newPassword: "",
+  });
+  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setAccountInfo((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleOnClick = () => {
+    setIsSaveButtonClicked(true);
+  };
+
   return (
     <div className="my-8">
       <p className="font-medium">Account information</p>
@@ -13,6 +31,9 @@ const UserProfileAccountInformation = () => {
         </p>
         <div className="w-[70%]">
           <TextField
+            name="email"
+            value={accountInfo.email}
+            onChange={handleOnChange}
             label="Email"
             id="filled-basic"
             variant="filled"
@@ -20,13 +41,32 @@ const UserProfileAccountInformation = () => {
             fullWidth
           />
           <TextField
+            name="oldPassword"
+            value={accountInfo.oldPassword}
+            onChange={handleOnChange}
+            label="Old Password"
+            id="filled-basic"
+            variant="filled"
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            name="newPassword"
+            value={accountInfo.newPassword}
+            onChange={handleOnChange}
             label="New Password"
             id="filled-basic"
             variant="filled"
             margin="normal"
             fullWidth
           />
-          <Button variant="contained">Save</Button>
+          <Button
+            onClick={handleOnClick}
+            disabled={isSaveButtonClicked}
+            variant="contained"
+          >
+            Save
+          </Button>
         </div>
       </div>
     </div>
