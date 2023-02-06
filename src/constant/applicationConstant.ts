@@ -3,6 +3,8 @@ export const ApplicationConstant = {
   LOGIN_URL_PATH: "/login",
   REGISTER_URL_PATH: "/register",
   HOME_URL_PATH: "/home",
+  USER_URL_PATH: "/user",
+  CART_URL_PATH: "/cart",
 };
 
 export const ApiConstant = {
