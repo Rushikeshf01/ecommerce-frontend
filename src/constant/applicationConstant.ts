@@ -4,6 +4,10 @@ export const ApplicationConstant = {
   REGISTER_URL_PATH: "/register",
   HOME_URL_PATH: "/home",
   USER_URL_PATH: "/user",
+  USER_ADDRESSES_URL_PATH: "/user/saved-addesses",
+  USER_ORDERS_URL_PATH: "/user/orders",
+  USER_REVIEWS_URL_PATH: "/user/reviews",
+  USER_FAVORITES_URL_PATH: "/user/favorites",
   CART_URL_PATH: "/cart",
 };
 
