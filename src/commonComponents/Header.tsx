@@ -31,11 +31,11 @@ const Header = () => {
           to={ApplicationConstant.USER_URL_PATH}
           className="mx-10 flex-column"
         >
-          <AccountCircle sx={{ fontSize: "36px" }} />
+          <AccountCircle sx={{ fontSize: "32px" }} />
           Account
         </Link>
         <Link to={ApplicationConstant.CART_URL_PATH} className="flex-column">
-          <ShoppingCart sx={{ fontSize: "36px" }} />
+          <ShoppingCart sx={{ fontSize: "32px" }} />
           Cart
         </Link>
       </div>
