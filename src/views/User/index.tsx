@@ -12,7 +12,7 @@ const User = () => {
     <div>
       <Header />
       <div className="user-main-box">
-        <AppBreadcrumps previousData={previousData} currentData="User" />
+        <AppBreadcrumps previousData={previousData} currentData="User" className="mb-6" />
         User
       </div>
     </div>

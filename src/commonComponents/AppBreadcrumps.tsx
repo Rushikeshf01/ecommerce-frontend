@@ -1,18 +1,26 @@
-import { Breadcrumbs, Link, Typography } from "@mui/material";
+import { Breadcrumbs, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const AppBreadcrumps = (props: {
   previousData: { previousText: string; previousLink: string }[];
   currentData: string;
+  className?: string;
 }) => {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      {props.previousData.map((item, index) => (
-        <Link underline="hover" color="inherit" href={item.previousLink}>
-          {item.previousText}
-        </Link>
-      ))}
-      <Typography color="text.primary">{props.currentData}</Typography>
-    </Breadcrumbs>
+    <div className={props.className}>
+      <Breadcrumbs aria-label="breadcrumb">
+        {props.previousData.map((item, index) => (
+          <Link
+            color="inherit"
+            to={item.previousLink}
+            key={`breadcrumbs: ${index}`}
+          >
+            {item.previousText}
+          </Link>
+        ))}
+        <Typography color="text.primary">{props.currentData}</Typography>
+      </Breadcrumbs>
+    </div>
   );
 };
 
