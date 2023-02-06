@@ -6,9 +6,10 @@ import { ApplicationConstant } from "../../constant/applicationConstant";
 import { RegisterStateType } from "../../types/authTypes";
 import "./login.css";
 import authClient from "../../network/AuthClient";
-import { ToastSuccessMessage } from "../../utils/toastMessages";
+import { ToastDangerMessage, ToastSuccessMessage } from "../../utils/toastMessages";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { joiUtilObject } from "../../utils/joiValidation";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterStateType>({
@@ -42,17 +43,27 @@ const Register = () => {
         setIsPasswordsSame(true);
       }
     }
-
     setIsRegisterButtonClicked(false);
   };
 
-  const handleOnClick = async () => {
-    setIsRegisterButtonClicked(true);
-    let res = await authClient.post("/register", {
-      email: registerData.email,
-      password: registerData.password,
-    });
-    ToastSuccessMessage(res.data.msg);
+  const registerDataValidation = async () => {
+    const validationResult: any =
+      joiUtilObject.validateRegisterData(registerData);
+    if (!validationResult.true) {
+      setIsRegisterButtonClicked(true);
+      let res = await authClient.post("/register", {
+        email: registerData.email,
+        password: registerData.password,
+      });
+      ToastSuccessMessage(res.data.msg);
+      return;
+    }
+    ToastDangerMessage(validationResult.error);
+    return;
+  };
+
+  const handleOnClick = () => {
+    registerDataValidation();
   };
 
   return (
