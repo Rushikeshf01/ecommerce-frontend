@@ -17,6 +17,7 @@ const Register = () => {
     confirmPassword: "",
   });
   const [isPasswordsSame, setIsPasswordsSame] = useState(false);
+  const [isRegisterButtonClicked, setIsRegisterButtonClicked] = useState(false);
 
   const navigate = useNavigate();
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -30,17 +31,23 @@ const Register = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setRegisterData((prevState) => ({ ...prevState, [name]: value }));
-    setIsPasswordsSame(false);
-    if (name == "confirmPassword") {
-      if (registerData.password != value) {
-        setIsPasswordsSame(true);
-      } else {
+
+    if (name == "confirmPassword" || name == "password") {
+      if (
+        registerData.password === value ||
+        registerData.confirmPassword === value
+      ) {
         setIsPasswordsSame(false);
+      } else {
+        setIsPasswordsSame(true);
       }
     }
+
+    setIsRegisterButtonClicked(false);
   };
 
   const handleOnClick = async () => {
+    setIsRegisterButtonClicked(true);
     let res = await authClient.post("/register", {
       email: registerData.email,
       password: registerData.password,
@@ -95,7 +102,6 @@ const Register = () => {
           name="confirmPassword"
           onChange={handleOnChange}
           label="Confirm Password"
-          type="password"
           required
           fullWidth
           InputProps={{
@@ -118,7 +124,11 @@ const Register = () => {
             Already our user? Login Now
           </Link>
         </p>
-        <Button variant="contained" onClick={handleOnClick}>
+        <Button
+          variant="contained"
+          disabled={isRegisterButtonClicked}
+          onClick={handleOnClick}
+        >
           Register
         </Button>
       </div>

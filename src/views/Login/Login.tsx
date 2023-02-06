@@ -16,6 +16,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -29,9 +31,11 @@ const Login = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
+    setIsLoginButtonClicked(false);
   };
 
   const handleOnClick = async () => {
+    setIsLoginButtonClicked(true);
     let res = await authClient.post("/login", loginData);
     localStorage.setItem(
       ApplicationConstant.REFRESH_TOKEN,
@@ -98,7 +102,11 @@ const Login = () => {
             Not registered with us? Register Now
           </Link>
         </p>
-        <Button onClick={handleOnClick} variant="contained">
+        <Button
+          onClick={handleOnClick}
+          disabled={isLoginButtonClicked}
+          variant="contained"
+        >
           Login
         </Button>
       </div>
