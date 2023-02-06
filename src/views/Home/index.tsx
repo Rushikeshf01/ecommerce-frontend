@@ -1,5 +1,11 @@
-const index = () => {
-  return <div>index</div>;
+import Header from "../../commonComponents/Header";
+
+const Home = () => {
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
-export default index;
+export default Home;

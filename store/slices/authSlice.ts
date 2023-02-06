@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 import { InitialUser } from "../../src/types/authTypes";
 
-const initialState: InitialUser = {
+export const initialAuthState: InitialUser = {
   isAuthenticated: false,
   accessToken: "",
   refreshToken: "",
@@ -14,7 +14,7 @@ const initialState: InitialUser = {
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: initialAuthState,
   reducers: {
     setAuthentication: (
       state: InitialUser,
