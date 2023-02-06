@@ -1,12 +1,14 @@
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { RegisterStateType } from "../../types/authTypes";
 import "./login.css";
 import authClient from "../../network/AuthClient";
 import { ToastSuccessMessage } from "../../utils/toastMessages";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterStateType>({
@@ -15,6 +17,15 @@ const Register = () => {
     confirmPassword: "",
   });
   const [isPasswordsSame, setIsPasswordsSame] = useState(false);
+
+  const navigate = useNavigate();
+  const authStore = useSelector((state: RootState) => state.authReducer);
+
+  useEffect(() => {
+    if (authStore.isAuthenticated) {
+      navigate(ApplicationConstant.HOME_URL_PATH);
+    }
+  });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -34,7 +45,7 @@ const Register = () => {
       email: registerData.email,
       password: registerData.password,
     });
-    ToastSuccessMessage(res.data.msg)
+    ToastSuccessMessage(res.data.msg);
   };
 
   return (

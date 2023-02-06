@@ -1,20 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { LoginStateType } from "../../types/authTypes";
 import "./login.css";
+import { ToastSuccessMessage } from "../../utils/toastMessages";
+import authClient from "../../network/AuthClient";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthentication } from "../../../store/slices/authSlice";
+import { RootState } from "../../../store/store";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginStateType>({
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authStore = useSelector((state: RootState) => state.authReducer);
+
+  useEffect(() => {
+    if (authStore.isAuthenticated) {
+      navigate(ApplicationConstant.HOME_URL_PATH);
+    }
+  });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleOnClick = async () => {
+    let res = await authClient.post("/a1/auth/login", loginData);
+    console.log(res.data);
+    localStorage.setItem(
+      ApplicationConstant.REFRESH_TOKEN,
+      res.data.refreshToken
+    );
+    dispatch(
+      setAuthentication({
+        accessToken: res.data.accessToken,
+        refreshToken: res.data.refreshToken,
+        user: res.data.user,
+        isAuthenticated: true,
+      })
+    );
+    navigate(ApplicationConstant.HOME_URL_PATH);
   };
 
   return (
@@ -67,7 +99,9 @@ const Login = () => {
             Not registered with us? Register Now
           </Link>
         </p>
-        <Button variant="contained">Login</Button>
+        <Button onClick={handleOnClick} variant="contained">
+          Login
+        </Button>
       </div>
     </div>
   );

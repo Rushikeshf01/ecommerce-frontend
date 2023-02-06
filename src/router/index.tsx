@@ -24,6 +24,14 @@ export default function App() {
 
   return useRoutes([
     {
+      path: ApplicationConstant.LOGIN_URL_PATH,
+      element: <Login />,
+    },
+    {
+      path: ApplicationConstant.REGISTER_URL_PATH,
+      element: <Register />,
+    },
+    {
       path: ApplicationConstant.HOME_URL_PATH,
       element: <Dashboard />,
     },

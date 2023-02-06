@@ -1,5 +1,11 @@
 import axios from "axios";
-import { ToastDangerMessage } from "../utils/toastMessages";
+import {
+  initialAuthState,
+  setAuthentication,
+} from "../../store/slices/authSlice";
+import { store } from "../../store/store";
+import { ApplicationConstant } from "../constant/applicationConstant";
+import { ToastDangerMessage, ToastWarnMessage } from "../utils/toastMessages";
 
 const authClient = axios.create({
   baseURL: "http://127.0.0.1:5000/api",
@@ -34,11 +40,43 @@ authClient.interceptors.response.use(
           break;
       }
     } else {
-      // handle network error
+      ToastWarnMessage(
+        "Server not responding, please try again after some time!!"
+      );
     }
 
     return Promise.reject(error);
   }
 );
+
+export const initializeAuthData = async () => {
+  const refreshToken = localStorage.getItem(ApplicationConstant.REFRESH_TOKEN);
+  if (!refreshToken) {
+    store.dispatch(setAuthentication(initialAuthState));
+    return false;
+  }
+  try {
+    const authResponse = await authClient.get("/a1/auth/get-access-token", {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+    store.dispatch(
+      setAuthentication({
+        accessToken: authResponse.data.accessToken,
+        refreshToken: refreshToken,
+        user: authResponse.data.user,
+        isAuthenticated: true,
+      })
+    );
+    console.log("New access token received")
+    return true;
+  } catch {
+    localStorage.clear();
+    sessionStorage.clear();
+    store.dispatch(setAuthentication(initialAuthState));
+    return false;
+  }
+};
 
 export default authClient;
