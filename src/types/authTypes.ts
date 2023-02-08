@@ -41,5 +41,5 @@ export interface UserAddressesType {
   country: string;
   postal_code: string;
   mobile: string;
-  address_id?: number;
+  address_id: number;
 }

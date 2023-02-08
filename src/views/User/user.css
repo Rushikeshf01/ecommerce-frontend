@@ -26,10 +26,23 @@
 
 .user-address-box-main {
     display: flex;
-    width: fit-content;
-    padding: 15px;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 10px;
+    padding: 15px;
     border: 1px solid #E5E7EB;
     border-radius: 4px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.20);
+}
+
+.user-address-input-box-main {
+    position: fixed;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+.user-address-input-box {
+    display: inline-block;
+    background: gray;
 }
