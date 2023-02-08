@@ -7,15 +7,19 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import appClient from "../../../network/AppClient";
 import { UserAddressesType } from "../../../types/authTypes";
+import { ToastSuccessMessage } from "../../../utils/toastMessages";
 import { userAddressInputs } from "./UserAddresses";
 
 const UserAddressInput = (props: {
   isEditAddressClicked: boolean;
   isAddAddressClicked: boolean;
+  filledAddressData: UserAddressesType;
+  filledAddressDataList: UserAddressesType[];
   setIsEditAddressClicked: any;
   setIsAddAddressClicked: any;
-  filledAddressData: UserAddressesType;
+  setFilledAddressDataList: any;
 }) => {
   const [userAddressInputState, setUserAddressInputState] =
     useState<UserAddressesType>(userAddressInputs);
@@ -26,7 +30,7 @@ const UserAddressInput = (props: {
     } else {
       setUserAddressInputState(userAddressInputs);
     }
-  },[]);
+  }, []);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -35,6 +39,55 @@ const UserAddressInput = (props: {
 
   const handleClose = () => {
     props.setIsAddAddressClicked(false);
+    props.setIsEditAddressClicked(false);
+  };
+
+  const handleSubmitData = () => {
+    if (props.isEditAddressClicked) return editAddressApiCall();
+    if (props.isAddAddressClicked) return addAddressApiCall();
+  };
+
+  const addAddressApiCall = async () => {
+    const res = await appClient.post(`/a2/addresses`, {
+      name: userAddressInputState.name,
+      line1: userAddressInputState.address_line1,
+      line2: userAddressInputState.address_line2,
+      area: userAddressInputState.area,
+      city: userAddressInputState.city,
+      state: userAddressInputState.state,
+      country: userAddressInputState.country,
+      postalCode: userAddressInputState.postal_code,
+      mobile: userAddressInputState.mobile,
+    });
+    var array = [...props.filledAddressDataList];
+    array.push(res.data.address);
+    ToastSuccessMessage(res.data.msg);
+    props.setFilledAddressDataList(array);
+    props.setIsAddAddressClicked(false);
+  };
+
+  const editAddressApiCall = async () => {
+    const res = await appClient.put(
+      `/a2/address/${userAddressInputState.address_id}`,
+      {
+        name: userAddressInputState.name,
+        line1: userAddressInputState.address_line1,
+        line2: userAddressInputState.address_line2,
+        area: userAddressInputState.area,
+        city: userAddressInputState.city,
+        state: userAddressInputState.state,
+        country: userAddressInputState.country,
+        postalCode: userAddressInputState.postal_code,
+        mobile: userAddressInputState.mobile,
+      }
+    );
+    var array = [...props.filledAddressDataList];
+    var index = array.findIndex(
+      (obj) => obj.address_id == userAddressInputState.address_id
+    );
+    array[index] = userAddressInputState;
+    ToastSuccessMessage(res.data.msg);
+    props.setFilledAddressDataList(array);
     props.setIsEditAddressClicked(false);
   };
 
@@ -145,7 +198,9 @@ const UserAddressInput = (props: {
         <Button onClick={handleClose} variant="outlined">
           Close
         </Button>
-        <Button variant="contained">Save</Button>
+        <Button onClick={handleSubmitData} variant="contained">
+          Save
+        </Button>
       </DialogActions>
     </Dialog>
   );

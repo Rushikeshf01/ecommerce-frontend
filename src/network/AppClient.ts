@@ -38,7 +38,7 @@ appClient.interceptors.response.use(
           break;
       }
     } else {
-      // handle network error
+      ToastWarnMessage("Network error occured, please try again after some time.");
     }
 
     return Promise.reject(error);

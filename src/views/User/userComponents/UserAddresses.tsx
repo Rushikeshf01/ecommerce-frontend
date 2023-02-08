@@ -69,7 +69,9 @@ const UserAddresses = (props: {
             </div>
             <div className="mt-3 flex justify-content-space-between">
               <Button
-                onClick={() => handleEditAddressInputClicked(item.address_id)}
+                onClick={() =>
+                  handleEditAddressInputClicked(item.address_id)
+                }
                 startIcon={<Edit />}
                 color="success"
                 size="small"
@@ -104,6 +106,8 @@ const UserAddresses = (props: {
           isEditAddressClicked={isEditAddressClicked}
           isAddAddressClicked={isAddAddressClicked}
           filledAddressData={editAddressData}
+          setFilledAddressDataList={props.setUserAddresses}
+          filledAddressDataList={props.userAddresses}
         />
       )}
     </div>
