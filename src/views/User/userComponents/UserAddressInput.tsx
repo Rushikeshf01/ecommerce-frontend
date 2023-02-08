@@ -6,22 +6,38 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { UserAddressesType } from "../../../types/authTypes";
+
+export const userAddressInputs = {
+  name: "",
+  address_line1: "",
+  address_line2: "",
+  area: "",
+  city: "",
+  state: "",
+  country: "",
+  postal_code: "",
+  mobile: "",
+  address_id: 0,
+};
 
 const UserAddressInput = (props: {
-  open: boolean;
+  isEditAddressClicked: boolean;
+  isAddAddressClicked: boolean;
   setIsEditAddressClicked: any;
+  setIsAddAddressClicked: any;
+  filledAddressData: UserAddressesType;
 }) => {
-  const [userAddressInputState, setUserAddressInputState] = useState({
-    name: "",
-    line1: "",
-    line2: "",
-    area: "",
-    city: "",
-    state: "",
-    country: "",
-    postalCode: "",
-    mobile: "",
+  const [userAddressInputState, setUserAddressInputState] =
+    useState<UserAddressesType>(userAddressInputs);
+
+  useEffect(() => {
+    if (props.isEditAddressClicked) {
+      setUserAddressInputState(props.filledAddressData);
+    } else {
+      setUserAddressInputState(userAddressInputs);
+    }
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,18 +46,20 @@ const UserAddressInput = (props: {
   };
 
   const handleClose = () => {
+    props.setIsAddAddressClicked(false);
     props.setIsEditAddressClicked(false);
   };
 
   return (
     <Dialog
-      open={props.open}
+      open={props.isEditAddressClicked || props.isAddAddressClicked}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        Add/Edit Delivary Address
+        {props.isEditAddressClicked && "Edit delivary address"}
+        {props.isAddAddressClicked && "Add delivary address"}
       </DialogTitle>
       <DialogContent>
         <TextField
@@ -65,8 +83,8 @@ const UserAddressInput = (props: {
           variant="outlined"
         />
         <TextField
-          value={userAddressInputState.line1}
-          name="line1"
+          value={userAddressInputState.address_line1}
+          name="address_line1"
           onChange={handleOnChange}
           label="Address Line 1"
           required
@@ -75,8 +93,8 @@ const UserAddressInput = (props: {
           variant="outlined"
         />
         <TextField
-          value={userAddressInputState.line2}
-          name="line2"
+          value={userAddressInputState.address_line2}
+          name="address_line2"
           onChange={handleOnChange}
           label="Address Line 2"
           required
@@ -125,8 +143,8 @@ const UserAddressInput = (props: {
           variant="outlined"
         />
         <TextField
-          value={userAddressInputState.postalCode}
-          name="postalCode"
+          value={userAddressInputState.postal_code}
+          name="postal_code"
           onChange={handleOnChange}
           label="Postal Code"
           required

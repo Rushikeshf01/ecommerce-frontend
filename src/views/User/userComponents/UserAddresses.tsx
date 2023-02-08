@@ -1,23 +1,34 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import appClient from "../../../network/AppClient";
 import { UserAddressesType } from "../../../types/authTypes";
 import {
   capitalizeFirstLetter,
   combineJSONDataForUserAddress,
 } from "../../../utils/jsFunctionsUtils";
-import UserAddressInput from "./UserAddressInput";
+import UserAddressInput, { userAddressInputs } from "./UserAddressInput";
 
 const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
   const [isEditAddressClicked, setIsEditAddressClicked] =
+    useState<boolean>(false);
+  const [editAddressData, setEditAddressData] =
+    useState<UserAddressesType>(userAddressInputs);
+  const [isAddAddressClicked, setIsAddAddressClicked] =
     useState<boolean>(false);
 
   const handleDeleteAddress = (id: number) => {
     console.log(id);
   };
 
-  const handleAddressInputClicked = () => {
+  const handleEditAddressInputClicked = async (id: number) => {
     setIsEditAddressClicked(true);
+    const res = await appClient.get(`/a2/address/${id}`);
+    setEditAddressData(res.data);
+  };
+
+  const handleAddAddressInputClicked = () => {
+    setIsAddAddressClicked(true);
   };
 
   return (
@@ -35,7 +46,7 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
             </div>
             <div className="mt-3 flex justify-content-space-between">
               <Button
-                onClick={handleAddressInputClicked}
+                onClick={() => handleEditAddressInputClicked(item.address_id)}
                 startIcon={<Edit />}
                 color="success"
                 size="small"
@@ -60,12 +71,15 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
           </div>
         ))}
       </div>
-      <Button variant="contained" onClick={handleAddressInputClicked}>
+      <Button variant="contained" onClick={handleAddAddressInputClicked}>
         Add Delivary Address
       </Button>
       <UserAddressInput
-        open={isEditAddressClicked}
         setIsEditAddressClicked={setIsEditAddressClicked}
+        setIsAddAddressClicked={setIsAddAddressClicked}
+        isEditAddressClicked={isEditAddressClicked}
+        isAddAddressClicked={isAddAddressClicked}
+        filledAddressData={editAddressData}
       />
     </div>
   );

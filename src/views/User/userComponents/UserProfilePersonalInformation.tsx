@@ -29,7 +29,7 @@ const UserProfilePersonalInformation = () => {
       <div className="flex">
         <p className="text-slate-500 w-[30%] mr-10 text-[15px]">
           In order to properly handle the processing, payment and shipment of
-          your orders, our web-app collect information such as your address,
+          your orders, our application collect information such as your address,
           phone numbers, email and payment accounts.
         </p>
         <div className="w-[70%]">

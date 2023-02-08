@@ -13,7 +13,6 @@ const UserAddressMain = () => {
 
   const getUserAddresses = async () => {
     const res = await appClient.get(`/a2/addresses`);
-    console.log(res.data);
     setUserAddresses(res.data.addresses);
   };
 
