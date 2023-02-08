@@ -1,4 +1,9 @@
-import { AccountCircle, Search, ShoppingCart } from "@mui/icons-material";
+import {
+  AccountCircle,
+  FavoriteBorder,
+  Search,
+  ShoppingCart,
+} from "@mui/icons-material";
 import { IconButton, InputBase } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../constant/applicationConstant";
@@ -29,10 +34,17 @@ const Header = () => {
       <div className="flex align-items-center">
         <Link
           to={ApplicationConstant.USER_URL_PATH}
-          className="mx-10 flex-column"
+          className="mr-7 flex-column"
         >
           <AccountCircle sx={{ fontSize: "32px" }} />
           Account
+        </Link>
+        <Link
+          to={ApplicationConstant.USER_FAVORITES_URL_PATH}
+          className=" mr-7 flex-column"
+        >
+          <FavoriteBorder sx={{ fontSize: "32px" }} />
+          Favorites
         </Link>
         <Link to={ApplicationConstant.CART_URL_PATH} className="flex-column">
           <ShoppingCart sx={{ fontSize: "32px" }} />

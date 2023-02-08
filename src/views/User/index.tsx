@@ -17,7 +17,7 @@ const User = (props: { component: React.ReactNode }) => {
         <AppBreadcrumps
           previousData={previousData}
           currentData="User"
-          className="mb-6"
+          className="mb-3"
         />
         <p className="text-[36px] font-semibold mb-3">My Account</p>
         <div className="flex">

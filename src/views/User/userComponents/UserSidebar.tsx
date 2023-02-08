@@ -1,14 +1,16 @@
 import {
   AccountCircleOutlined,
+  Edit,
   FavoriteBorderOutlined,
   RoomOutlined,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ApplicationConstant } from "../../../constant/applicationConstant";
 import "../user.css";
 
 const UserSidebar = () => {
+  const router = useLocation();
   const userSidebarLinks = [
     {
       icon: <AccountCircleOutlined />,
@@ -31,7 +33,7 @@ const UserSidebar = () => {
       link: ApplicationConstant.USER_FAVORITES_URL_PATH,
     },
     {
-      icon: <FavoriteBorderOutlined />,
+      icon: <Edit />,
       text: "My reviews",
       link: ApplicationConstant.USER_REVIEWS_URL_PATH,
     },
@@ -40,14 +42,18 @@ const UserSidebar = () => {
   return (
     <div className="flex flex-direction-column w-[30%]">
       {userSidebarLinks.map((item, index) => (
-        <NavLink
+        <Link
           to={item.link}
           key={`user-sidebar: ${index}`}
-          className="user-sidebar-item"
+          className={
+            router.pathname == item.link
+              ? "user-sidebar-item user-sidebar-item-active"
+              : "user-sidebar-item"
+          }
         >
           <p className="mr-1">{item.icon}</p>
           <p>{item.text}</p>
-        </NavLink>
+        </Link>
       ))}
     </div>
   );
