@@ -8,19 +8,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { UserAddressesType } from "../../../types/authTypes";
-
-export const userAddressInputs = {
-  name: "",
-  address_line1: "",
-  address_line2: "",
-  area: "",
-  city: "",
-  state: "",
-  country: "",
-  postal_code: "",
-  mobile: "",
-  address_id: 0,
-};
+import { userAddressInputs } from "./UserAddresses";
 
 const UserAddressInput = (props: {
   isEditAddressClicked: boolean;
@@ -38,7 +26,7 @@ const UserAddressInput = (props: {
     } else {
       setUserAddressInputState(userAddressInputs);
     }
-  });
+  },[]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;

@@ -8,7 +8,20 @@ import {
   combineJSONDataForUserAddress,
 } from "../../../utils/jsFunctionsUtils";
 import { ToastSuccessMessage } from "../../../utils/toastMessages";
-import UserAddressInput, { userAddressInputs } from "./UserAddressInput";
+import UserAddressInput from "./UserAddressInput";
+
+export const userAddressInputs = {
+  name: "",
+  address_line1: "",
+  address_line2: "",
+  area: "",
+  city: "",
+  state: "",
+  country: "",
+  postal_code: "",
+  mobile: "",
+  address_id: 0,
+};
 
 const UserAddresses = (props: {
   userAddresses: UserAddressesType[];
@@ -62,7 +75,7 @@ const UserAddresses = (props: {
                 size="small"
                 fullWidth
                 sx={{ marginRight: "5px" }}
-                variant="contained"
+                variant="outlined"
               >
                 Edit
               </Button>
@@ -84,13 +97,15 @@ const UserAddresses = (props: {
       <Button variant="contained" onClick={handleAddAddressInputClicked}>
         Add Delivary Address
       </Button>
-      <UserAddressInput
-        setIsEditAddressClicked={setIsEditAddressClicked}
-        setIsAddAddressClicked={setIsAddAddressClicked}
-        isEditAddressClicked={isEditAddressClicked}
-        isAddAddressClicked={isAddAddressClicked}
-        filledAddressData={editAddressData}
-      />
+      {(isAddAddressClicked || isEditAddressClicked) && (
+        <UserAddressInput
+          setIsEditAddressClicked={setIsEditAddressClicked}
+          setIsAddAddressClicked={setIsAddAddressClicked}
+          isEditAddressClicked={isEditAddressClicked}
+          isAddAddressClicked={isAddAddressClicked}
+          filledAddressData={editAddressData}
+        />
+      )}
     </div>
   );
 };
