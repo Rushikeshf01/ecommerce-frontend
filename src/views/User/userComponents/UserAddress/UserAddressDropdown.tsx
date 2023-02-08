@@ -16,13 +16,9 @@ const UserAddressDropdown = (props: {
   setUserAddressInputState: any;
   userAddressInputState: UserAddressesType;
 }) => {
-  const [countryOptions, setCountryOptions] = useState<
-    { country_name: string }[]
-  >([]);
-  const [stateOptions, setStateOptions] = useState<{ state_name: string }[]>(
-    []
-  );
-  const [cityOptions, setCityOptions] = useState<{ city_name: string }[]>([]);
+  const [countryOptions, setCountryOptions] = useState<string[]>([]);
+  const [stateOptions, setStateOptions] = useState<string[]>([]);
+  const [cityOptions, setCityOptions] = useState<string[]>([]);
 
   useEffect(() => {
     getCountries();
@@ -84,11 +80,8 @@ const UserAddressDropdown = (props: {
           onChange={(e: any) => handleCountryChange(e)}
         >
           {countryOptions.map((item, index) => (
-            <MenuItem
-              value={item.country_name}
-              key={`${item.country_name}: ${index}`}
-            >
-              {item.country_name}
+            <MenuItem value={item} key={`${item}: ${index}`}>
+              {item}
             </MenuItem>
           ))}
         </CustomSelect>
@@ -107,10 +100,10 @@ const UserAddressDropdown = (props: {
         >
           {stateOptions.map((item, index) => (
             <MenuItem
-              value={item.state_name}
-              key={`${item.state_name}: ${index}`}
+              value={item}
+              key={`${item}: ${index}`}
             >
-              {item.state_name}
+              {item}
             </MenuItem>
           ))}
         </CustomSelect>
@@ -129,10 +122,10 @@ const UserAddressDropdown = (props: {
         >
           {cityOptions.map((item, index) => (
             <MenuItem
-              value={item.city_name}
-              key={`${item.city_name}: ${index}`}
+              value={item}
+              key={`${item}: ${index}`}
             >
-              {item.city_name}
+              {item}
             </MenuItem>
           ))}
         </CustomSelect>
