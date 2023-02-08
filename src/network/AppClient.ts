@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState, store } from "../../store/store";
+import { ToastWarnMessage } from "../utils/toastMessages";
 
 const appClient = axios.create({
   baseURL: "http://127.0.0.1:5000/api",
@@ -8,7 +9,7 @@ const appClient = axios.create({
 
 appClient.interceptors.request.use(
   (config) => {
-    const authStore = useSelector((state: RootState) => state.authReducer);
+    const authStore = store.getState().authReducer;
     config.headers["Authorization"] = `Bearer ${authStore.accessToken}`;
     return config;
   },
@@ -20,6 +21,9 @@ appClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       switch (error.response.status) {
+        case 400:
+          ToastWarnMessage(error.response.data.msg);
+          break;
         case 401:
           // handle unauthorized error
           break;

@@ -2,14 +2,14 @@ import "./user.css";
 import AppBreadcrumps from "../../commonComponents/AppBreadcrumps";
 import Header from "../../commonComponents/Header";
 import { ApplicationConstant } from "../../constant/applicationConstant";
-import UserProfileMain from "./userComponents/UserProfileMain";
+// import UserProfileMain from "./userComponents/UserProfileMain";
 import UserSidebar from "./userComponents/UserSidebar";
 
 const previousData = [
   { previousText: "Home", previousLink: ApplicationConstant.HOME_URL_PATH },
 ];
 
-const User = () => {
+const User = (props: { component: React.ReactNode }) => {
   return (
     <div>
       <Header />
@@ -22,7 +22,7 @@ const User = () => {
         <p className="text-[36px] font-semibold mb-3">My Account</p>
         <div className="flex">
           <UserSidebar />
-          <UserProfileMain />
+          {props.component}
         </div>
       </div>
     </div>

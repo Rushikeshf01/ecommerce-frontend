@@ -30,3 +30,16 @@ export interface UserPersonalInformationType {
   dob: string;
   mobile: string;
 }
+
+export interface UserAddressesType {
+  name: string;
+  address_line1: string;
+  address_line2: string;
+  area: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: string;
+  mobile: string;
+  address_id?: number;
+}
