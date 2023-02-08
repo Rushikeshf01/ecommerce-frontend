@@ -1,5 +1,5 @@
-import "../user.css";
-import User from "../index";
+import "../../user.css";
+import User from "../../index";
 import UserProfileAccountInformation from "./UserProfileAccountInformation";
 import UserProfilePersonalInformation from "./UserProfilePersonalInformation";
 

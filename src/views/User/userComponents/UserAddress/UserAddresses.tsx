@@ -1,14 +1,14 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import appClient from "../../../network/AppClient";
-import { UserAddressesType } from "../../../types/authTypes";
+import appClient from "../../../../network/AppClient";
+import { UserAddressesType } from "../../../../types/authTypes";
 import {
   capitalizeFirstLetter,
   combineJSONDataForUserAddress,
-} from "../../../utils/jsFunctionsUtils";
-import { ToastSuccessMessage } from "../../../utils/toastMessages";
-import UserAddressInput from "./UserAddressInput";
+} from "../../../../utils/jsFunctionsUtils";
+import { ToastSuccessMessage } from "../../../../utils/toastMessages";
+import UserAddressInputMain from "./UserAddressInputMain";
 
 export const userAddressInputs = {
   name: "",
@@ -69,9 +69,7 @@ const UserAddresses = (props: {
             </div>
             <div className="mt-3 flex justify-content-space-between">
               <Button
-                onClick={() =>
-                  handleEditAddressInputClicked(item.address_id)
-                }
+                onClick={() => handleEditAddressInputClicked(item.address_id)}
                 startIcon={<Edit />}
                 color="success"
                 size="small"
@@ -100,7 +98,7 @@ const UserAddresses = (props: {
         Add Delivary Address
       </Button>
       {(isAddAddressClicked || isEditAddressClicked) && (
-        <UserAddressInput
+        <UserAddressInputMain
           setIsEditAddressClicked={setIsEditAddressClicked}
           setIsAddAddressClicked={setIsAddAddressClicked}
           isEditAddressClicked={isEditAddressClicked}

@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from "react";
-import appClient from "../../../network/AppClient";
-import { UserAddressesType } from "../../../types/authTypes";
-import User from "../index";
+import appClient from "../../../../network/AppClient";
+import { UserAddressesType } from "../../../../types/authTypes";
+import User from "../../index";
 import UserAddresses from "./UserAddresses";
 
 const UserAddressMain = () => {

@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { UserPersonalInformationType } from "../../../types/authTypes";
+import { UserPersonalInformationType } from "../../../../types/authTypes";
 
 const UserProfilePersonalInformation = () => {
   const [personalInfo, setPersonalInfo] = useState<UserPersonalInformationType>(

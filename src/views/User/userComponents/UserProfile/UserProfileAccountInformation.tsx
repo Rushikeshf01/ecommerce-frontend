@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { UserAccountInformationType } from "../../../types/authTypes";
+import { UserAccountInformationType } from "../../../../types/authTypes";
 
 const UserProfileAccountInformation = () => {
   const [accountInfo, setAccountInfo] = useState<UserAccountInformationType>({
