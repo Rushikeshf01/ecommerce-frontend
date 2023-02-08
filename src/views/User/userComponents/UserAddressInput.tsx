@@ -38,7 +38,9 @@ const UserAddressInput = (props: {
   const [countryOptions, setCountryOptions] = useState<
     { country_iso_code: string; country_name: string }[]
   >([]);
-  const [stateOptions, setStateOptions] = useState<any[]>([]);
+  const [stateOptions, setStateOptions] = useState<
+    { state_iso_code: string; state_name: string }[]
+  >([]);
   const [cityOptions, setCityOptions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -61,7 +63,21 @@ const UserAddressInput = (props: {
       ...prevState,
       [name]: value,
     }));
-    // getStates(value);
+    getStates(value);
+  };
+
+  const getStates = async (isoCode:string) => {
+    const res = await appClient.get(`/a2/location/states?country=${isoCode}`);
+    setStateOptions(res.data.states);
+  };
+
+  const handleStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserAddressInputState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    // getCities(value);
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,6 +210,28 @@ const UserAddressInput = (props: {
                   key={`${item.country_iso_code}: ${index}`}
                 >
                   {item.country_name}
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          </FormControl>
+          <FormControl fullWidth>
+            <label htmlFor="state" className="pointer">
+              State
+              <span className="red-font">*</span>
+            </label>
+            <CustomSelect
+              id="state"
+              labelId="state"
+              name="state"
+              value={userAddressInputState.state}
+              onChange={(e: any) => handleStateChange(e)}
+            >
+              {stateOptions.map((item, index) => (
+                <MenuItem
+                  value={item.state_iso_code}
+                  key={`${item.state_iso_code}: ${index}`}
+                >
+                  {item.state_name}
                 </MenuItem>
               ))}
             </CustomSelect>
