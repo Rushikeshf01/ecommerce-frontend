@@ -41,7 +41,9 @@ const UserAddressInput = (props: {
   const [stateOptions, setStateOptions] = useState<
     { state_iso_code: string; state_name: string }[]
   >([]);
-  const [cityOptions, setCityOptions] = useState<any[]>([]);
+  const [cityOptions, setCityOptions] = useState<
+    { state_iso_code: string; city_name: string }[]
+  >([]);
 
   useEffect(() => {
     getCountries();
@@ -66,7 +68,7 @@ const UserAddressInput = (props: {
     getStates(value);
   };
 
-  const getStates = async (isoCode:string) => {
+  const getStates = async (isoCode: string) => {
     const res = await appClient.get(`/a2/location/states?country=${isoCode}`);
     setStateOptions(res.data.states);
   };
@@ -77,7 +79,20 @@ const UserAddressInput = (props: {
       ...prevState,
       [name]: value,
     }));
-    // getCities(value);
+    getCities(value);
+  };
+
+  const getCities = async (isoCode: string) => {
+    const res = await appClient.get(`/a2/location/cities?state=${isoCode}`);
+    setCityOptions(res.data.cities);
+  };
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserAddressInputState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -195,7 +210,7 @@ const UserAddressInput = (props: {
           <FormControl fullWidth>
             <label htmlFor="country" className="pointer">
               Country
-              <span className="red-font">*</span>
+              <span className="red-font"> *</span>
             </label>
             <CustomSelect
               id="country"
@@ -217,7 +232,7 @@ const UserAddressInput = (props: {
           <FormControl fullWidth>
             <label htmlFor="state" className="pointer">
               State
-              <span className="red-font">*</span>
+              <span className="red-font"> *</span>
             </label>
             <CustomSelect
               id="state"
@@ -232,6 +247,28 @@ const UserAddressInput = (props: {
                   key={`${item.state_iso_code}: ${index}`}
                 >
                   {item.state_name}
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          </FormControl>
+          <FormControl fullWidth>
+            <label htmlFor="city" className="pointer">
+              City
+              <span className="red-font"> *</span>
+            </label>
+            <CustomSelect
+              id="city"
+              labelId="city"
+              name="city"
+              value={userAddressInputState.city}
+              onChange={(e: any) => handleCityChange(e)}
+            >
+              {cityOptions.map((item, index) => (
+                <MenuItem
+                  value={item.city_name}
+                  key={`${item.city_name}: ${index}`}
+                >
+                  {item.city_name}
                 </MenuItem>
               ))}
             </CustomSelect>
