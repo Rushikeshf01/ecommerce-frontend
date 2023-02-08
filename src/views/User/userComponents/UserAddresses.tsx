@@ -2,7 +2,10 @@ import { Delete, Edit } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { UserAddressesType } from "../../../types/authTypes";
-import { capitalizeFirstLetter } from "../../../utils/jsFunctionsUtils";
+import {
+  capitalizeFirstLetter,
+  combineJSONDataForUserAddress,
+} from "../../../utils/jsFunctionsUtils";
 import UserAddressInput from "./UserAddressInput";
 
 const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
@@ -27,14 +30,7 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
               <p className="font-medium mb-2">
                 {`${capitalizeFirstLetter(item.name)}`}
               </p>
-              <p>
-                {`${capitalizeFirstLetter(item.address_line1)},`}{" "}
-                {`${capitalizeFirstLetter(item.address_line2)},`}
-                {`${capitalizeFirstLetter(item.area)},`}{" "}
-                {`${capitalizeFirstLetter(item.city)},`}{" "}
-                {`${capitalizeFirstLetter(item.state)},`}{" "}
-                {`${capitalizeFirstLetter(item.country)}`} - {item.postal_code}
-              </p>
+              <p>{combineJSONDataForUserAddress(item)}</p>
               <p>Mobile Number: {item.mobile}</p>
             </div>
             <div className="mt-3 flex justify-content-space-between">
