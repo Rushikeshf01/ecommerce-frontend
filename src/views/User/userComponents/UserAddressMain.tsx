@@ -22,7 +22,10 @@ const UserAddressMain = () => {
         component={
           <div className="w-[100%] user-profile-main-box">
             <p className="text-[30px] font-medium mb-4">My addresses</p>
-            <UserAddresses userAddresses={userAddresses} />
+            <UserAddresses
+              userAddresses={userAddresses}
+              setUserAddresses={setUserAddresses}
+            />
           </div>
         }
       />

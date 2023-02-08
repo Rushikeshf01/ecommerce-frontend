@@ -7,9 +7,13 @@ import {
   capitalizeFirstLetter,
   combineJSONDataForUserAddress,
 } from "../../../utils/jsFunctionsUtils";
+import { ToastSuccessMessage } from "../../../utils/toastMessages";
 import UserAddressInput, { userAddressInputs } from "./UserAddressInput";
 
-const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
+const UserAddresses = (props: {
+  userAddresses: UserAddressesType[];
+  setUserAddresses: any;
+}) => {
   const [isEditAddressClicked, setIsEditAddressClicked] =
     useState<boolean>(false);
   const [editAddressData, setEditAddressData] =
@@ -17,14 +21,20 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
   const [isAddAddressClicked, setIsAddAddressClicked] =
     useState<boolean>(false);
 
-  const handleDeleteAddress = (id: number) => {
-    console.log(id);
+  const handleDeleteAddress = async (id: number, index: number) => {
+    const res = await appClient.delete(`/a2/address/${id}`);
+    var array = [...props.userAddresses];
+    if (index !== -1) {
+      array.splice(index, 1);
+      props.setUserAddresses(array);
+    }
+    ToastSuccessMessage(res.data.msg);
   };
 
   const handleEditAddressInputClicked = async (id: number) => {
-    setIsEditAddressClicked(true);
     const res = await appClient.get(`/a2/address/${id}`);
     setEditAddressData(res.data);
+    setIsEditAddressClicked(true);
   };
 
   const handleAddAddressInputClicked = () => {
@@ -57,7 +67,7 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
                 Edit
               </Button>
               <Button
-                onClick={() => handleDeleteAddress(item.address_id)}
+                onClick={() => handleDeleteAddress(item.address_id, index)}
                 startIcon={<Delete />}
                 color="error"
                 size="small"
