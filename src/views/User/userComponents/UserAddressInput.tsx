@@ -4,13 +4,25 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import appClient from "../../../network/AppClient";
 import { UserAddressesType } from "../../../types/authTypes";
 import { ToastSuccessMessage } from "../../../utils/toastMessages";
+import CustomizedTextField from "./muiUserCustomizedComponents/CustomizedTextField";
 import { userAddressInputs } from "./UserAddresses";
+import { MenuItem, Select } from "@mui/material";
+import { styled } from "@mui/system";
+
+const CustomSelect = styled(Select)({
+  color: "darkslategray",
+  backgroundColor: "aliceblue",
+  marginBottom: "5px",
+  marginTop: 2,
+  borderRadius: 4,
+});
 
 const UserAddressInput = (props: {
   isEditAddressClicked: boolean;
@@ -23,14 +35,34 @@ const UserAddressInput = (props: {
 }) => {
   const [userAddressInputState, setUserAddressInputState] =
     useState<UserAddressesType>(userAddressInputs);
+  const [countryOptions, setCountryOptions] = useState<
+    { country_iso_code: string; country_name: string }[]
+  >([]);
+  const [stateOptions, setStateOptions] = useState<any[]>([]);
+  const [cityOptions, setCityOptions] = useState<any[]>([]);
 
   useEffect(() => {
+    getCountries();
     if (props.isEditAddressClicked) {
       setUserAddressInputState(props.filledAddressData);
     } else {
       setUserAddressInputState(userAddressInputs);
     }
   }, []);
+
+  const getCountries = async () => {
+    const res = await appClient.get("/a2/location/countries");
+    setCountryOptions(res.data.countries);
+  };
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserAddressInputState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    // getStates(value);
+  };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -103,96 +135,78 @@ const UserAddressInput = (props: {
         {props.isAddAddressClicked && "Add delivary address"}
       </DialogTitle>
       <DialogContent>
-        <TextField
-          value={userAddressInputState.name}
-          name="name"
-          onChange={handleOnChange}
-          label="Name"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.mobile}
-          name="mobile"
-          onChange={handleOnChange}
-          label="Mobile Number"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.address_line1}
-          name="address_line1"
-          onChange={handleOnChange}
-          label="Address Line 1"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.address_line2}
-          name="address_line2"
-          onChange={handleOnChange}
-          label="Address Line 2"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.area}
-          name="area"
-          onChange={handleOnChange}
-          label="Area"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.city}
-          name="city"
-          onChange={handleOnChange}
-          label="City"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.state}
-          name="state"
-          onChange={handleOnChange}
-          label="State"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.country}
-          name="country"
-          onChange={handleOnChange}
-          label="Country"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
-        <TextField
-          value={userAddressInputState.postal_code}
-          name="postal_code"
-          onChange={handleOnChange}
-          label="Postal Code"
-          required
-          margin="normal"
-          id="outlined-basic"
-          variant="outlined"
-        />
+        <div className="grid grid-cols-2 gap-[10px]">
+          <CustomizedTextField
+            value={userAddressInputState.name}
+            name="name"
+            onChange={handleOnChange}
+            label="Name"
+            required
+            fullWidth
+          />
+          <CustomizedTextField
+            value={userAddressInputState.mobile}
+            name="mobile"
+            onChange={handleOnChange}
+            label="Mobile Number"
+            required
+            fullWidth
+          />
+          <CustomizedTextField
+            value={userAddressInputState.address_line1}
+            name="address_line1"
+            onChange={handleOnChange}
+            label="Address Line 1"
+            required
+            fullWidth
+          />
+          <CustomizedTextField
+            value={userAddressInputState.address_line2}
+            name="address_line2"
+            onChange={handleOnChange}
+            label="Address Line 2"
+            required
+            fullWidth
+          />
+          <CustomizedTextField
+            value={userAddressInputState.area}
+            name="area"
+            onChange={handleOnChange}
+            label="Area"
+            required
+            fullWidth
+          />
+          <FormControl fullWidth>
+            <label htmlFor="country" className="pointer">
+              Country
+              <span className="red-font">*</span>
+            </label>
+            <CustomSelect
+              id="country"
+              labelId="country"
+              name="country"
+              value={userAddressInputState.country}
+              onChange={(e: any) => handleCountryChange(e)}
+            >
+              {countryOptions.map((item, index) => (
+                <MenuItem
+                  value={item.country_iso_code}
+                  key={`${item.country_iso_code}: ${index}`}
+                >
+                  {item.country_name}
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          </FormControl>
+          <CustomizedTextField
+            value={userAddressInputState.postal_code}
+            name="postal_code"
+            onChange={handleOnChange}
+            label="Postal Code"
+            required
+            fullWidth
+          />
+        </div>
       </DialogContent>
       <DialogActions sx={{ padding: "10px 20px" }}>
         <Button onClick={handleClose} variant="outlined">

@@ -5,6 +5,13 @@ import { RootState } from "../store/store";
 import { ApplicationConstant } from "./constant/applicationConstant";
 import { initializeAuthData } from "./network/AuthClient";
 import Routes from "./router";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Rubik",
+  },
+});
 
 function App() {
   const navigate = useNavigate();
@@ -22,7 +29,9 @@ function App() {
 
   return (
     <div>
-      <Routes />
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
     </div>
   );
 }
