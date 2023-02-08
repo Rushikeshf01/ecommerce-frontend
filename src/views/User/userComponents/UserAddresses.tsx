@@ -14,14 +14,14 @@ const UserAddresses = (props: { userAddresses: UserAddressesType[] }) => {
           <div className="user-address-box-main" key={`user-address: ${index}`}>
             <div>
               <p>
-                {capitalizeFirstLetter(item.address_line1)},{" "}
-                {capitalizeFirstLetter(item.address_line2)}
+                {`${capitalizeFirstLetter(item.address_line1)},`}{" "}
+                {`${capitalizeFirstLetter(item.address_line2)}`}
               </p>
               <p>
-                {capitalizeFirstLetter(item.area)},{" "}
-                {capitalizeFirstLetter(item.city)},{" "}
-                {capitalizeFirstLetter(item.country)},{" "}
-                {capitalizeFirstLetter(item.country)} - {item.postal_code}
+                {`${capitalizeFirstLetter(item.area)},`}{" "}
+                {`${capitalizeFirstLetter(item.city)},`}{" "}
+                {`${capitalizeFirstLetter(item.state)},`}{" "}
+                {`${capitalizeFirstLetter(item.country)}`} - {item.postal_code}
               </p>
               <p>Mobile Number: {item.mobile}</p>
             </div>
