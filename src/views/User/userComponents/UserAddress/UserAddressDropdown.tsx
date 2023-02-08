@@ -65,71 +65,49 @@ const UserAddressDropdown = (props: {
     }));
   };
 
+  const inputFieldsData = [
+    {
+      name: "country",
+      label: "Country",
+      onChange: handleCountryChange,
+      options: countryOptions,
+    },
+    {
+      name: "state",
+      label: "State",
+      onChange: handleStateChange,
+      options: stateOptions,
+    },
+    {
+      name: "city",
+      label: "City",
+      onChange: handleCityChange,
+      options: cityOptions,
+    },
+  ];
+
   return (
     <>
-      <FormControl fullWidth>
-        <label htmlFor="country" className="pointer">
-          Country
-          <span className="red-font"> *</span>
-        </label>
-        <CustomSelect
-          id="country"
-          labelId="country"
-          name="country"
-          value={props.userAddressInputState.country}
-          onChange={(e: any) => handleCountryChange(e)}
-        >
-          {countryOptions.map((item, index) => (
-            <MenuItem value={item} key={`${item}: ${index}`}>
-              {item}
-            </MenuItem>
-          ))}
-        </CustomSelect>
-      </FormControl>
-      <FormControl fullWidth>
-        <label htmlFor="state" className="pointer">
-          State
-          <span className="red-font"> *</span>
-        </label>
-        <CustomSelect
-          id="state"
-          labelId="state"
-          name="state"
-          value={props.userAddressInputState.state}
-          onChange={(e: any) => handleStateChange(e)}
-        >
-          {stateOptions.map((item, index) => (
-            <MenuItem
-              value={item}
-              key={`${item}: ${index}`}
-            >
-              {item}
-            </MenuItem>
-          ))}
-        </CustomSelect>
-      </FormControl>
-      <FormControl fullWidth>
-        <label htmlFor="city" className="pointer">
-          City
-          <span className="red-font"> *</span>
-        </label>
-        <CustomSelect
-          id="city"
-          labelId="city"
-          name="city"
-          value={props.userAddressInputState.city}
-          onChange={(e: any) => handleCityChange(e)}
-        >
-          {cityOptions.map((item, index) => (
-            <MenuItem
-              value={item}
-              key={`${item}: ${index}`}
-            >
-              {item}
-            </MenuItem>
-          ))}
-        </CustomSelect>
-      </FormControl>
+      {inputFieldsData.map((item, index) => (
+        <FormControl fullWidth key={`user-address-select: ${index}`}>
+          <label htmlFor={item.name} className="pointer">
+            {item.label}<span className="red-font"> *</span>
+          </label>
+          <CustomSelect
+            id={item.name}
+            labelId={item.name}
+            name={item.name}
+            value={(props.userAddressInputState as any)[item.name]}
+            onChange={(e: any) => {(item.onChange as any)(e);}}
+          >
+            {item.options.map((subItem, subIndex) => (
+              <MenuItem value={subItem} key={`${subItem}: ${subIndex}`}>
+                {subItem}
+              </MenuItem>
+            ))}
+          </CustomSelect>
+        </FormControl>
+      ))}
     </>
   );
 };
