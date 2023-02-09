@@ -33,7 +33,7 @@ class JoiUtils {
     country: Joi.string().required().label("Country"),
     state: Joi.string().required().label("State"),
     city: Joi.string().required().label("City"),
-    addressId: Joi.string().label("Address Id"),
+    addressId: Joi.number().label("Address Id"),
   });
 
   public validateLoginData(loginData: LoginStateType) {
