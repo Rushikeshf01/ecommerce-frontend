@@ -1,0 +1,22 @@
+.card {
+    box-sizing: border-box;
+    /* border: 2px solid red; */
+    background-color: rgb(223, 217, 217);
+    display: flex;
+    border-radius: 8px;
+
+}
+.category-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.category-logo{
+    padding: 2px 10px;
+    width: 35%;
+}
+
+
+img{
+    border-radius: 50%
+}

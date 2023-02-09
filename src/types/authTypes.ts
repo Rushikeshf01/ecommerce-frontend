@@ -17,3 +17,9 @@ export interface LoginStateType {
   email: string;
   password: string;
 }
+
+export interface HomeCategoriesType {
+  product_category_description: string;
+  product_category_id: number;
+  product_category_name: string;
+}
