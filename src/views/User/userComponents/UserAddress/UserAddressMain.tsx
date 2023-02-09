@@ -21,7 +21,7 @@ const UserAddressMain = () => {
         setIsApiCalling(false);
         setUserAddresses(res.data.addresses);
       })
-      .catch(() => setIsApiCalling(true));
+      .catch(() => setIsApiCalling(false));
   };
 
   return (

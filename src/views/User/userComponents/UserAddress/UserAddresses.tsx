@@ -63,7 +63,7 @@ const UserAddresses = (props: {
   return (
     <div>
       <hr className="my-2" />
-      {props.userAddresses ? (
+      {props.userAddresses.length != 0 ? (
         <div className="mb-5 grid grid-cols-2 gap-4">
           {props.userAddresses.map((item, index) => (
             <div
@@ -105,7 +105,7 @@ const UserAddresses = (props: {
           ))}
         </div>
       ) : (
-        <NotAvailable />
+        <NotAvailable label="Address" className="my-3" />
       )}
       <Button variant="contained" onClick={handleAddAddressInputClicked}>
         Add Delivary Address
