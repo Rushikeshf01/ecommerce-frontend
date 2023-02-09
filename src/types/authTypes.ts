@@ -23,3 +23,28 @@ export interface HomeCategoriesType {
   product_category_id: number;
   product_category_name: string;
 }
+export interface UserAccountInformationType {
+  email: string;
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface UserPersonalInformationType {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  mobile: string;
+}
+
+export interface UserAddressesType {
+  name: string;
+  line1: string;
+  line2: string;
+  area: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+  mobile: string;
+  addressId: number;
+}

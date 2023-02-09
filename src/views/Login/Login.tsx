@@ -5,17 +5,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { LoginStateType } from "../../types/authTypes";
 import "./login.css";
-import { ToastSuccessMessage } from "../../utils/toastMessages";
+import {
+  ToastDangerMessage,
+  ToastSuccessMessage,
+} from "../../utils/toastMessages";
 import authClient from "../../network/AuthClient";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthentication } from "../../../store/slices/authSlice";
 import { RootState } from "../../../store/store";
+import { joiUtilObject } from "../../utils/joiValidation";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginStateType>({
     email: "",
     password: "",
   });
+  const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -29,23 +35,35 @@ const Login = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setLoginData((prevState) => ({ ...prevState, [name]: value }));
+    setIsLoginButtonClicked(false);
   };
 
-  const handleOnClick = async () => {
-    let res = await authClient.post("/login", loginData);
-    localStorage.setItem(
-      ApplicationConstant.REFRESH_TOKEN,
-      res.data.refreshToken
-    );
-    dispatch(
-      setAuthentication({
-        accessToken: res.data.accessToken,
-        refreshToken: res.data.refreshToken,
-        user: res.data.user,
-        isAuthenticated: true,
-      })
-    );
-    navigate(ApplicationConstant.HOME_URL_PATH);
+  const loginDataValidation = async () => {
+    const validationResult: any = joiUtilObject.validateLoginData(loginData);
+    if (!validationResult.true) {
+      setIsLoginButtonClicked(true);
+      let res = await authClient.post("/login", loginData);
+      localStorage.setItem(
+        ApplicationConstant.REFRESH_TOKEN,
+        res.data.refreshToken
+      );
+      dispatch(
+        setAuthentication({
+          accessToken: res.data.accessToken,
+          refreshToken: res.data.refreshToken,
+          user: res.data.user,
+          isAuthenticated: true,
+        })
+      );
+      navigate(ApplicationConstant.HOME_URL_PATH);
+      return;
+    }
+    ToastDangerMessage(validationResult.error);
+    return;
+  };
+
+  const handleOnClick = () => {
+    loginDataValidation();
   };
 
   return (
@@ -98,7 +116,11 @@ const Login = () => {
             Not registered with us? Register Now
           </Link>
         </p>
-        <Button onClick={handleOnClick} variant="contained">
+        <Button
+          onClick={handleOnClick}
+          disabled={isLoginButtonClicked}
+          variant="contained"
+        >
           Login
         </Button>
       </div>
