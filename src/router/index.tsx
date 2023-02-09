@@ -6,6 +6,8 @@ import { RootState } from "../../store/store";
 import Register from "../views/Login/Register";
 import Login from "../views/Login/Login";
 import User from "../views/User";
+import UserAddressMain from "../views/User/userComponents/UserAddress/UserAddressMain";
+import UserProfileMain from "../views/User/userComponents/UserProfile/UserProfileMain";
 
 export default function App() {
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -38,7 +40,11 @@ export default function App() {
     },
     {
       path: ApplicationConstant.USER_URL_PATH,
-      element: <User />,
+      element: <UserProfileMain />,
+    },
+    {
+      path: ApplicationConstant.USER_ADDRESSES_URL_PATH,
+      element: <UserAddressMain />,
     },
   ]);
 }

@@ -2,8 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     padding: 10px 30px;
-    background-color: #fff;
+    background: #fff;
 }
 
 .header-middle-area-main {
