@@ -1,6 +1,8 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import NotAvailable from "../../../../commonComponents/NotAvailable";
+import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserAddressesType } from "../../../../types/authTypes";
 import {
@@ -12,15 +14,15 @@ import UserAddressInputMain from "./UserAddressInputMain";
 
 export const userAddressInputs = {
   name: "",
-  address_line1: "",
-  address_line2: "",
+  line1: "",
+  line2: "",
   area: "",
   city: "",
   state: "",
   country: "",
-  postal_code: "",
+  postalCode: "",
   mobile: "",
-  address_id: 0,
+  addressId: 0,
 };
 
 const UserAddresses = (props: {
@@ -35,7 +37,9 @@ const UserAddresses = (props: {
     useState<boolean>(false);
 
   const handleDeleteAddress = async (id: number, index: number) => {
-    const res = await appClient.delete(`/a2/address/${id}`);
+    const res = await appClient.delete(
+      `${ApiConstant.USER_ADDRESS_API_PATH}/${id}`
+    );
     var array = [...props.userAddresses];
     if (index !== -1) {
       array.splice(index, 1);
@@ -45,7 +49,9 @@ const UserAddresses = (props: {
   };
 
   const handleEditAddressInputClicked = async (id: number) => {
-    const res = await appClient.get(`/a2/address/${id}`);
+    const res = await appClient.get(
+      `${ApiConstant.USER_ADDRESS_API_PATH}/${id}`
+    );
     setEditAddressData(res.data);
     setIsEditAddressClicked(true);
   };
@@ -57,43 +63,50 @@ const UserAddresses = (props: {
   return (
     <div>
       <hr className="my-2" />
-      <div className="mb-5 grid grid-cols-2 gap-4">
-        {props.userAddresses.map((item, index) => (
-          <div className="user-address-box-main" key={`user-address: ${index}`}>
-            <div>
-              <p className="font-medium mb-2">
-                {`${capitalizeFirstLetter(item.name)}`}
-              </p>
-              <p>{combineJSONDataForUserAddress(item)}</p>
-              <p>Mobile Number: {item.mobile}</p>
+      {props.userAddresses ? (
+        <div className="mb-5 grid grid-cols-2 gap-4">
+          {props.userAddresses.map((item, index) => (
+            <div
+              className="user-address-box-main"
+              key={`user-address: ${index}`}
+            >
+              <div>
+                <p className="font-medium mb-2">
+                  {`${capitalizeFirstLetter(item.name)}`}
+                </p>
+                <p>{combineJSONDataForUserAddress(item)}</p>
+                <p>Mobile Number: {item.mobile}</p>
+              </div>
+              <div className="mt-3 flex justify-content-space-between">
+                <Button
+                  onClick={() => handleEditAddressInputClicked(item.addressId)}
+                  startIcon={<Edit />}
+                  color="success"
+                  size="small"
+                  fullWidth
+                  sx={{ marginRight: "5px" }}
+                  variant="outlined"
+                >
+                  Edit
+                </Button>
+                <Button
+                  onClick={() => handleDeleteAddress(item.addressId, index)}
+                  startIcon={<Delete />}
+                  color="error"
+                  size="small"
+                  fullWidth
+                  sx={{ marginLeft: "5px" }}
+                  variant="outlined"
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
-            <div className="mt-3 flex justify-content-space-between">
-              <Button
-                onClick={() => handleEditAddressInputClicked(item.address_id)}
-                startIcon={<Edit />}
-                color="success"
-                size="small"
-                fullWidth
-                sx={{ marginRight: "5px" }}
-                variant="outlined"
-              >
-                Edit
-              </Button>
-              <Button
-                onClick={() => handleDeleteAddress(item.address_id, index)}
-                startIcon={<Delete />}
-                color="error"
-                size="small"
-                fullWidth
-                sx={{ marginLeft: "5px" }}
-                variant="outlined"
-              >
-                Delete
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <NotAvailable />
+      )}
       <Button variant="contained" onClick={handleAddAddressInputClicked}>
         Add Delivary Address
       </Button>

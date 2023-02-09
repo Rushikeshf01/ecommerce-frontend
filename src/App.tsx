@@ -11,6 +11,26 @@ const theme = createTheme({
   typography: {
     fontFamily: "Rubik",
   },
+  palette: {
+    primary: {
+      main: "#006EC5",
+      light: "#5791b3",
+      dark: "#043e7d",
+    },
+    // success: {
+    //   main: "",
+    //   dark: "",
+    // },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        text: {
+          textTransform: "lowercase",
+        },
+      },
+    },
+  },
 });
 
 function App() {

@@ -14,7 +14,7 @@ const Header = () => {
     <div className="header-main">
       <Link
         to={ApplicationConstant.HOME_URL_PATH}
-        className="text-[28px] font-bold green-font"
+        className="text-[28px] font-bold blue-font"
       >
         AMEZON
       </Link>
@@ -33,11 +33,11 @@ const Header = () => {
       </div>
       <div className="flex align-items-center">
         <Link
-          to={ApplicationConstant.USER_URL_PATH}
+          to={ApplicationConstant.CART_URL_PATH}
           className="mr-7 flex-column"
         >
-          <AccountCircle sx={{ fontSize: "32px" }} />
-          Account
+          <ShoppingCart sx={{ fontSize: "32px" }} />
+          Cart
         </Link>
         <Link
           to={ApplicationConstant.USER_FAVORITES_URL_PATH}
@@ -46,9 +46,9 @@ const Header = () => {
           <FavoriteBorder sx={{ fontSize: "32px" }} />
           Favorites
         </Link>
-        <Link to={ApplicationConstant.CART_URL_PATH} className="flex-column">
-          <ShoppingCart sx={{ fontSize: "32px" }} />
-          Cart
+        <Link to={ApplicationConstant.USER_URL_PATH} className="flex-column">
+          <AccountCircle sx={{ fontSize: "32px" }} />
+          Account
         </Link>
       </div>
     </div>

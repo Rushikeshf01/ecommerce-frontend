@@ -13,5 +13,6 @@ export const ApplicationConstant = {
 
 export const ApiConstant = {
   AUTH_API_PATH: "http://127.0.0.1:5000/api/a1/auth",
-  USER_API_PATH: "http://127.0.0.1:5000/api/a4/user",
+  USER_PROFILE_API_PATH: "/a4/user/profile",
+  USER_ADDRESS_API_PATH: "/a4/user/address",
 };

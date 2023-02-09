@@ -33,13 +33,13 @@ export interface UserPersonalInformationType {
 
 export interface UserAddressesType {
   name: string;
-  address_line1: string;
-  address_line2: string;
+  line1: string;
+  line2: string;
   area: string;
   city: string;
   state: string;
   country: string;
-  postal_code: string;
+  postalCode: string;
   mobile: string;
-  address_id: number;
+  addressId: number;
 }

@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { LoginStateType, RegisterStateType } from "../types/authTypes";
+import { LoginStateType, RegisterStateType, UserAddressesType } from "../types/authTypes";
 
 class JoiUtils {
   private loginDataSchema: Joi.ObjectSchema = Joi.object({
@@ -23,6 +23,19 @@ class JoiUtils {
       .label("Confirm Password"),
   });
 
+  private userAddressSchema: Joi.ObjectSchema = Joi.object({
+    name: Joi.string().required().label("Name"),
+    mobile: Joi.string().min(10).required().label("Mobile"),
+    line1: Joi.string().required().label("Address Line 1"),
+    line2: Joi.string().required().label("Address Line 2"),
+    area: Joi.string().required().label("Area"),
+    postalCode: Joi.string().required().label("Postal Code"),
+    country: Joi.string().required().label("Country"),
+    state: Joi.string().required().label("State"),
+    city: Joi.string().required().label("City"),
+    addressId: Joi.string().label("Address Id"),
+  });
+
   public validateLoginData(loginData: LoginStateType) {
     const { error, value } = this.loginDataSchema.validate(loginData);
     if (error) {
@@ -36,6 +49,17 @@ class JoiUtils {
 
   public validateRegisterData(registerData: RegisterStateType) {
     const { error, value } = this.registerDataSchema.validate(registerData);
+    if (error) {
+      return { true: true, error: error.details[0].message };
+    }
+    if (value) {
+      return false;
+    }
+    return false;
+  }
+
+  public validateUserAddressData(userAddressData: UserAddressesType) {
+    const { error, value } = this.userAddressSchema.validate(userAddressData);
     if (error) {
       return { true: true, error: error.details[0].message };
     }

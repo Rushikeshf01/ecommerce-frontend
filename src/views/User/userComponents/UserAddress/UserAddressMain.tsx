@@ -1,5 +1,6 @@
-import { CircularProgress } from "@mui/material";
-import react, { useEffect, useState } from "react";
+import { Button, CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
+import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserAddressesType } from "../../../../types/authTypes";
 import User from "../../index";
@@ -14,10 +15,13 @@ const UserAddressMain = () => {
   }, []);
 
   const getUserAddresses = () => {
-    appClient.get(`/a2/addresses`).then((res) => {
-      setIsApiCalling(false);
-      setUserAddresses(res.data.addresses);
-    });
+    appClient
+      .get(ApiConstant.USER_ADDRESS_API_PATH)
+      .then((res) => {
+        setIsApiCalling(false);
+        setUserAddresses(res.data.addresses);
+      })
+      .catch(() => setIsApiCalling(true));
   };
 
   return (

@@ -17,10 +17,10 @@ const UserAddressInputFields = (props: {
   const inputFieldsData: { name: string; label: string }[] = [
     { name: "name", label: "Name" },
     { name: "mobile", label: "Mobile Number" },
-    { name: "address_line1", label: "Address Line 1" },
-    { name: "address_line2", label: "Address Line 2" },
+    { name: "line1", label: "Address Line 1" },
+    { name: "line2", label: "Address Line 2" },
     { name: "area", label: "Area" },
-    { name: "postal_code", label: "Postal Code" },
+    { name: "postalCode", label: "Postal Code" },
   ];
 
   return (
