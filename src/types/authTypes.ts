@@ -44,3 +44,18 @@ export interface UserAddressesType {
   mobile: string;
   addressId: number;
 }
+
+export interface UserReviewsType {
+  productCategoryId: number;
+  productDescription: string;
+  productId: number;
+  productInventoryId: number;
+  productName: string;
+  productPrice: number;
+  productRating: number;
+  productRatingId: number;
+  productReviewId: number;
+  productReviewMsg: string;
+  productSubcategoryId: number;
+  userId: number;
+}

@@ -1,13 +1,14 @@
 import { CircularProgress } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
+import { UserReviewsType } from "../../../../types/authTypes";
 import User from "../../index";
 import UserReview from "./UserReview";
 
 const UserReviewsMain = () => {
-  const [userReviewsList, setUserReviewsList] = useState([]);
+  const [userReviewsList, setUserReviewsList] = useState<UserReviewsType[]>([]);
   const [isUserReviewApiCalling, setIsUserReviewApiCalling] = useState(true);
   useEffect(() => {
     getUserReviews();
@@ -35,7 +36,7 @@ const UserReviewsMain = () => {
               {userReviewsList.length === 0 ? (
                 <NotAvailable label="Reviews" />
               ) : (
-                <UserReview />
+                <UserReview userReviewsList={userReviewsList} />
               )}
             </>
           )}

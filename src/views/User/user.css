@@ -47,3 +47,11 @@
     display: inline-block;
     background: gray;
 }
+
+.user-review-product-link {
+    text-decoration: underline;
+}
+
+.user-review-product-link:hover {
+    color: #015392;
+}
