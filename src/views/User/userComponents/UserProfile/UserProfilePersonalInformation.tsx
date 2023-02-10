@@ -15,6 +15,7 @@ const UserProfilePersonalInformation = () => {
   );
   const [profilePicBase64, setProfilePicBase64] = useState("");
   const [profilePicImage, setProfilePicImage] = useState<any>();
+  const [profilePicSizeError, setProfilePicSizeError] = useState(false);
   const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +26,12 @@ const UserProfilePersonalInformation = () => {
   const handleImageOnChange = async (e: any) => {
     const { name, value } = e.currentTarget;
     const filelist = e.target.files[0];
+
+    setProfilePicSizeError(false);
+    if (filelist.size / 1024 >= 2048) {
+      setProfilePicSizeError(true);
+      return;
+    }
 
     setPersonalInfo((prevState) => ({
       ...prevState,
@@ -111,6 +118,9 @@ const UserProfilePersonalInformation = () => {
                 alt="preview image"
                 className="w-[100px] mt-2"
               />
+            )}
+            {profilePicSizeError && (
+              <span className="red-font">Upload image upto 2MB</span>
             )}
           </div>
           <Button
