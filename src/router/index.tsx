@@ -8,6 +8,7 @@ import Login from "../views/Login/Login";
 import User from "../views/User";
 import UserAddressMain from "../views/User/userComponents/UserAddress/UserAddressMain";
 import UserProfileMain from "../views/User/userComponents/UserProfile/UserProfileMain";
+import UserOrderMain from "../views/User/userComponents/UserOrder/UserOrderMain";
 
 export default function App() {
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -45,6 +46,10 @@ export default function App() {
     {
       path: ApplicationConstant.USER_ADDRESSES_URL_PATH,
       element: <UserAddressMain />,
+    },
+    {
+      path: ApplicationConstant.USER_ORDERS_URL_PATH,
+      element: <UserOrderMain />,
     },
   ]);
 }

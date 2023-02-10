@@ -9,6 +9,7 @@ const UserProfilePersonalInformation = () => {
       lastName: "",
       dob: "",
       mobile: "",
+      // profilePic: "",
     }
   );
   const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
@@ -33,6 +34,18 @@ const UserProfilePersonalInformation = () => {
           phone numbers, email and payment accounts.
         </p>
         <div className="w-[70%]">
+          {/* <TextField
+            name="profilePic"
+            value={personalInfo.profilePic}
+            onChange={handleOnChange}
+            type="file"
+            InputLabelProps={{ shrink: true }}
+            label="Profile Picture"
+            id="filled-basic"
+            variant="filled"
+            margin="normal"
+            fullWidth
+          /> */}
           <TextField
             name="firstName"
             value={personalInfo.firstName}

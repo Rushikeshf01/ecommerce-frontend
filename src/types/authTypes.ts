@@ -29,6 +29,7 @@ export interface UserPersonalInformationType {
   lastName: string;
   dob: string;
   mobile: string;
+  // profilePic: string;
 }
 
 export interface UserAddressesType {
