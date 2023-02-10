@@ -15,4 +15,5 @@ export const ApiConstant = {
   AUTH_API_PATH: "http://127.0.0.1:5000/api/a1/auth",
   USER_PROFILE_API_PATH: "/a4/user/profile",
   USER_ADDRESS_API_PATH: "/a4/user/address",
+  USER_REVIEWS_API_PATH: "/a4/user/reviews",
 };
