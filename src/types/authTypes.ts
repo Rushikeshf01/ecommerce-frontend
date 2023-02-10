@@ -58,4 +58,5 @@ export interface UserReviewsType {
   productReviewMsg: string;
   productSubcategoryId: number;
   userId: number;
+  updatedAt: string;
 }

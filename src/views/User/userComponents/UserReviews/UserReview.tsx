@@ -2,8 +2,6 @@ import { Star } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { UserReviewsType } from "../../../../types/authTypes";
 
-const loop = [1, 2, 3, 4, 5, 6, 7];
-
 const UserReview = (props: { userReviewsList: UserReviewsType[] }) => {
   return (
     <div>
@@ -17,10 +15,10 @@ const UserReview = (props: { userReviewsList: UserReviewsType[] }) => {
             <p className="font-medium text-[20px]">{item.productReviewMsg}</p>
             <p className="orange-font">{item.productRating}</p>
             {[1, 2, 3, 4, 5].map((item) => (
-              <Star key={item} />
+              <Star key={item} className="pointer" />
             ))}
-            <p className="orange-font">At (Review Time)</p>
-            <Link to={""} className="blue-font user-review-product-link">
+            <p className="orange-font text-[14px] my-1">{`(${item.updatedAt})`}</p>
+            <Link to={`${item.productId}`} className="blue-font user-review-product-link">
               {item.productName}
             </Link>
           </div>

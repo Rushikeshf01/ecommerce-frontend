@@ -47,8 +47,8 @@ const UserSidebar = () => {
           key={`user-sidebar: ${index}`}
           className={
             router.pathname == item.link
-              ? "user-sidebar-item user-sidebar-item-active"
-              : "user-sidebar-item"
+              ? "user-sidebar-item user-sidebar-item-active blue-font-hover"
+              : "user-sidebar-item blue-font-hover"
           }
         >
           <p className="mr-1">{item.icon}</p>

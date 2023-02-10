@@ -2,14 +2,37 @@ import {
   AccountCircle,
   FavoriteBorder,
   Search,
-  ShoppingCart,
+  ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { IconButton, InputBase } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../constant/applicationConstant";
 import "./header.css";
 
 const Header = () => {
+  const headerIconsArray = [
+    {
+      link: ApplicationConstant.CART_URL_PATH,
+      component: (
+        <ShoppingCartOutlined
+          className="blue-font-hover"
+          sx={{ fontSize: "30px" }}
+        />
+      ),
+    },
+    {
+      link: ApplicationConstant.USER_FAVORITES_URL_PATH,
+      component: (
+        <FavoriteBorder className="blue-font-hover" sx={{ fontSize: "30px" }} />
+      ),
+    },
+    {
+      link: ApplicationConstant.USER_URL_PATH,
+      component: (
+        <AccountCircle className="blue-font-hover" sx={{ fontSize: "30px" }} />
+      ),
+    },
+  ];
+
   return (
     <div className="header-main">
       <Link
@@ -32,24 +55,15 @@ const Header = () => {
         </div>
       </div>
       <div className="flex align-items-center">
-        <Link
-          to={ApplicationConstant.CART_URL_PATH}
-          className="mr-7 flex-column"
-        >
-          <ShoppingCart sx={{ fontSize: "32px" }} />
-          Cart
-        </Link>
-        <Link
-          to={ApplicationConstant.USER_FAVORITES_URL_PATH}
-          className=" mr-7 flex-column"
-        >
-          <FavoriteBorder sx={{ fontSize: "32px" }} />
-          Favorites
-        </Link>
-        <Link to={ApplicationConstant.USER_URL_PATH} className="flex-column">
-          <AccountCircle sx={{ fontSize: "32px" }} />
-          Account
-        </Link>
+        {headerIconsArray.map((item, index) => (
+          <Link
+            to={item.link}
+            className="mr-7 flex-column"
+            key={`header-icon:${index}`}
+          >
+            {item.component}
+          </Link>
+        ))}
       </div>
     </div>
   );
