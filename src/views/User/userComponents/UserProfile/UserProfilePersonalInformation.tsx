@@ -23,23 +23,29 @@ const UserProfilePersonalInformation = () => {
     setPersonalInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const handleImageOnClick = () => {
+    setProfilePicSizeError(false);
+    setProfilePicImage(undefined);
+    setProfilePicBase64("");
+  };
+
   const handleImageOnChange = async (e: any) => {
     const { name, value } = e.currentTarget;
     const filelist = e.target.files[0];
-
-    setProfilePicSizeError(false);
-    if (filelist.size / 1024 >= 2048) {
-      setProfilePicSizeError(true);
-      return;
-    }
 
     setPersonalInfo((prevState) => ({
       ...prevState,
       [name]: value,
     }));
 
+    if (filelist.size / 1024 >= 2048) {
+      setProfilePicSizeError(true);
+      setProfilePicBase64("");
+      return;
+    }
+
     if (e.currentTarget.files && filelist) {
-      setProfilePicImage(URL.createObjectURL(e.target.files[0]));
+      setProfilePicImage(URL.createObjectURL(filelist));
     }
 
     const base64 = await convertIntoBase64(filelist);
@@ -106,11 +112,13 @@ const UserProfilePersonalInformation = () => {
           <div className="my-3">
             <input
               name="profilePicName"
-              value={personalInfo.profilePicName}
+              value={personalInfo.profilePicName || ""}
               onChange={handleImageOnChange}
+              onClick={handleImageOnClick}
               type="file"
               placeholder="Upload profile picture"
               accept=".png, .jpg, .jpeg"
+              className="pointer w-[100%] p-[12px] rounded-t-[4px] bg-[#F0F0F0] border-b-[0.5px] border-b-[#8B8B8B]"
             />
             {profilePicImage && (
               <img
