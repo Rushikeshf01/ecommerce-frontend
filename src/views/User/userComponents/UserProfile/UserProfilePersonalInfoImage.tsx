@@ -7,13 +7,12 @@ const UserProfilePersonalInfoImage = (props: {
   setProfilePicBase64: any;
   setIsSaveButtonClicked: any;
   setPersonalInfo: any;
+  base64: string;
 }) => {
-  const [profilePicImage, setProfilePicImage] = useState<any>();
   const [profilePicSizeError, setProfilePicSizeError] = useState(false);
 
   const handleImageOnClick = () => {
     setProfilePicSizeError(false);
-    setProfilePicImage(undefined);
     props.setProfilePicBase64("");
   };
 
@@ -32,9 +31,6 @@ const UserProfilePersonalInfoImage = (props: {
       props.setProfilePicBase64("");
       return;
     }
-    if (e.currentTarget.files && filelist) {
-      setProfilePicImage(URL.createObjectURL(filelist));
-    }
     const base64 = await convertIntoBase64(filelist);
     props.setProfilePicBase64(typeof base64 === "string" ? base64 : "");
   };
@@ -50,9 +46,9 @@ const UserProfilePersonalInfoImage = (props: {
         accept=".png, .jpg, .jpeg"
         className="pointer w-[100%] p-[12px] rounded-t-[4px] bg-[#F0F0F0] border-b-[0.5px] border-b-[#8B8B8B]"
       />
-      {profilePicImage && (
+      {props.base64 && (
         <img
-          src={profilePicImage}
+          src={props.base64}
           alt="preview image"
           className="w-[100px] mt-2"
         />

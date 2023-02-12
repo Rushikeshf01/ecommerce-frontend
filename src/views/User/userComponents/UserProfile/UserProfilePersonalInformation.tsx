@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserPersonalInformationType } from "../../../../types/authTypes";
@@ -20,31 +20,37 @@ const UserProfilePersonalInformation = () => {
   const [profilePicBase64, setProfilePicBase64] = useState("");
   const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsSaveButtonClicked(false);
-    const { name, value } = e.currentTarget;
-    setPersonalInfo((prevState) => ({ ...prevState, [name]: value }));
+  useEffect(() => {
+    getPrefilledProfile();
+  }, []);
+
+  const getPrefilledProfile = async () => {
+    let infoRes = await appClient.get(ApiConstant.USER_PROFILE_API_PATH);
+    setPersonalInfo({
+      dob: infoRes.data.dob,
+      firstName: infoRes.data.firstName,
+      lastName: infoRes.data.lastName,
+      mobile: infoRes.data.mobile,
+      profilePicName: ""
+    });
+    let picRes = await appClient.get(ApiConstant.USER_PROFILE_IMAGE_API_PATH);
+    setProfilePicBase64(picRes.data.userProfileDataUrl);
   };
 
   const handleOnClick = () => {
     setIsSaveButtonClicked(true);
-    sendPersonalData();
-    sendProfilePic();
+    sendProfile();
   };
 
-  const sendPersonalData = async () => {
-    let res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
+  const sendProfile = async () => {
+    let res = await appClient.put(ApiConstant.USER_PROFILE_IMAGE_API_PATH, {
+      profilePic: profilePicBase64,
+    });
+    res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
       firstName: personalInfo.firstName,
       lastName: personalInfo.lastName,
       dob: personalInfo.dob,
       mobile: personalInfo.mobile,
-    });
-    ToastSuccessMessage(res.data.msg);
-  };
-
-  const sendProfilePic = async () => {
-    let res = await appClient.put(ApiConstant.USER_PROFILE_IMAGE_API_PATH, {
-      profilePic: profilePicBase64,
     });
     ToastSuccessMessage(res.data.msg);
   };
@@ -61,14 +67,16 @@ const UserProfilePersonalInformation = () => {
         </p>
         <div className="w-[70%]">
           <UserProfilePersonalInfoTextfields
-            handleOnChange={handleOnChange}
             personalInfo={personalInfo}
+            setIsSaveButtonClicked={setIsSaveButtonClicked}
+            setPersonalInfo={setPersonalInfo}
           />
           <UserProfilePersonalInfoImage
             personalInfo={personalInfo}
             setProfilePicBase64={setProfilePicBase64}
             setIsSaveButtonClicked={setIsSaveButtonClicked}
             setPersonalInfo={setPersonalInfo}
+            base64={profilePicBase64}
           />
           <Button
             onClick={handleOnClick}
