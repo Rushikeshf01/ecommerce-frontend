@@ -15,7 +15,7 @@ const Header = () => {
       link: ApplicationConstant.CART_URL_PATH,
       component: (
         <ShoppingCartOutlined
-          className="blue-font-hover"
+          className="blue-font-hover hover:scale-110"
           sx={{ fontSize: "30px" }}
         />
       ),
@@ -23,13 +23,19 @@ const Header = () => {
     {
       link: ApplicationConstant.USER_FAVORITES_URL_PATH,
       component: (
-        <FavoriteBorder className="blue-font-hover" sx={{ fontSize: "30px" }} />
+        <FavoriteBorder
+          className="blue-font-hover hover:scale-110"
+          sx={{ fontSize: "30px" }}
+        />
       ),
     },
     {
       link: ApplicationConstant.USER_URL_PATH,
       component: (
-        <AccountCircle className="blue-font-hover" sx={{ fontSize: "30px" }} />
+        <AccountCircle
+          className="blue-font-hover hover:scale-110"
+          sx={{ fontSize: "30px" }}
+        />
       ),
     },
   ];

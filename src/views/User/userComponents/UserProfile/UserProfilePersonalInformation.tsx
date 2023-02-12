@@ -18,41 +18,44 @@ const UserProfilePersonalInformation = () => {
     }
   );
   const [profilePicBase64, setProfilePicBase64] = useState("");
-  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isSaveOrUpdate, setIsSaveOrUpdate] = useState("Save");
 
   useEffect(() => {
     getPrefilledProfile();
   }, []);
 
   const getPrefilledProfile = async () => {
-    let infoRes = await appClient.get(ApiConstant.USER_PROFILE_API_PATH);
-    setPersonalInfo({
-      dob: infoRes.data.dob,
-      firstName: infoRes.data.firstName,
-      lastName: infoRes.data.lastName,
-      mobile: infoRes.data.mobile,
-      profilePicName: ""
+    appClient.get(ApiConstant.USER_PROFILE_API_PATH).then((res) => {
+      setPersonalInfo({
+        dob: res.data.dob,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        mobile: res.data.mobile,
+        profilePicName: "",
+      });
+      setProfilePicBase64(res.data.profilePicBase64);
+      setIsSaveOrUpdate("Update");
     });
-    let picRes = await appClient.get(ApiConstant.USER_PROFILE_IMAGE_API_PATH);
-    setProfilePicBase64(picRes.data.userProfileDataUrl);
   };
 
   const handleOnClick = () => {
-    setIsSaveButtonClicked(true);
+    setIsButtonClicked(true);
     sendProfile();
+    setIsSaveOrUpdate("Update")
   };
 
   const sendProfile = async () => {
-    let res = await appClient.put(ApiConstant.USER_PROFILE_IMAGE_API_PATH, {
-      profilePic: profilePicBase64,
-    });
-    res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
+    let res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
       firstName: personalInfo.firstName,
       lastName: personalInfo.lastName,
       dob: personalInfo.dob,
       mobile: personalInfo.mobile,
+      profilePicBase64: profilePicBase64,
     });
-    ToastSuccessMessage(res.data.msg);
+    isSaveOrUpdate === "Save"
+      ? ToastSuccessMessage("Profile added successfully")
+      : ToastSuccessMessage("Profile updated successfully");
   };
 
   return (
@@ -68,22 +71,22 @@ const UserProfilePersonalInformation = () => {
         <div className="w-[70%]">
           <UserProfilePersonalInfoTextfields
             personalInfo={personalInfo}
-            setIsSaveButtonClicked={setIsSaveButtonClicked}
+            setIsSaveButtonClicked={setIsButtonClicked}
             setPersonalInfo={setPersonalInfo}
           />
           <UserProfilePersonalInfoImage
             personalInfo={personalInfo}
             setProfilePicBase64={setProfilePicBase64}
-            setIsSaveButtonClicked={setIsSaveButtonClicked}
+            setIsSaveButtonClicked={setIsButtonClicked}
             setPersonalInfo={setPersonalInfo}
             base64={profilePicBase64}
           />
           <Button
             onClick={handleOnClick}
-            disabled={isSaveButtonClicked}
+            disabled={isButtonClicked}
             variant="contained"
           >
-            Save
+            {isSaveOrUpdate}
           </Button>
         </div>
       </div>
