@@ -17,10 +17,6 @@ const theme = createTheme({
       light: "#5791b3",
       dark: "#043e7d",
     },
-    // success: {
-    //   main: "",
-    //   dark: "",
-    // },
   },
   components: {
     MuiButton: {

@@ -1,7 +1,11 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { useState } from "react";
+import { ApiConstant } from "../../../../constant/applicationConstant";
+import appClient from "../../../../network/AppClient";
 import { UserPersonalInformationType } from "../../../../types/authTypes";
-import { convertIntoBase64 } from "../../../../utils/jsFunctionsUtils";
+import { ToastSuccessMessage } from "../../../../utils/toastMessages";
+import UserProfilePersonalInfoImage from "./UserProfilePersonalInfoImage";
+import UserProfilePersonalInfoTextfields from "./UserProfilePersonalInfoTextfields";
 
 const UserProfilePersonalInformation = () => {
   const [personalInfo, setPersonalInfo] = useState<UserPersonalInformationType>(
@@ -14,46 +18,35 @@ const UserProfilePersonalInformation = () => {
     }
   );
   const [profilePicBase64, setProfilePicBase64] = useState("");
-  const [profilePicImage, setProfilePicImage] = useState<any>();
-  const [profilePicSizeError, setProfilePicSizeError] = useState(false);
   const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSaveButtonClicked(false);
     const { name, value } = e.currentTarget;
     setPersonalInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleImageOnClick = () => {
-    setProfilePicSizeError(false);
-    setProfilePicImage(undefined);
-    setProfilePicBase64("");
-  };
-
-  const handleImageOnChange = async (e: any) => {
-    const { name, value } = e.currentTarget;
-    const filelist = e.target.files[0];
-
-    setPersonalInfo((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-
-    if (filelist.size / 1024 >= 2048) {
-      setProfilePicSizeError(true);
-      setProfilePicBase64("");
-      return;
-    }
-
-    if (e.currentTarget.files && filelist) {
-      setProfilePicImage(URL.createObjectURL(filelist));
-    }
-
-    const base64 = await convertIntoBase64(filelist);
-    setProfilePicBase64(typeof base64 === "string" ? base64 : "");
-  };
-
   const handleOnClick = () => {
     setIsSaveButtonClicked(true);
+    sendPersonalData();
+    sendProfilePic();
+  };
+
+  const sendPersonalData = async () => {
+    let res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
+      firstName: personalInfo.firstName,
+      lastName: personalInfo.lastName,
+      dob: personalInfo.dob,
+      mobile: personalInfo.mobile,
+    });
+    ToastSuccessMessage(res.data.msg);
+  };
+
+  const sendProfilePic = async () => {
+    let res = await appClient.put(ApiConstant.USER_PROFILE_IMAGE_API_PATH, {
+      profilePic: profilePicBase64,
+    });
+    ToastSuccessMessage(res.data.msg);
   };
 
   return (
@@ -67,70 +60,16 @@ const UserProfilePersonalInformation = () => {
           phone numbers, email and payment accounts.
         </p>
         <div className="w-[70%]">
-          <TextField
-            name="firstName"
-            value={personalInfo.firstName}
-            onChange={handleOnChange}
-            label="First Name"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
+          <UserProfilePersonalInfoTextfields
+            handleOnChange={handleOnChange}
+            personalInfo={personalInfo}
           />
-          <TextField
-            name="lastName"
-            value={personalInfo.lastName}
-            onChange={handleOnChange}
-            label="Last Name"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
+          <UserProfilePersonalInfoImage
+            personalInfo={personalInfo}
+            setProfilePicBase64={setProfilePicBase64}
+            setIsSaveButtonClicked={setIsSaveButtonClicked}
+            setPersonalInfo={setPersonalInfo}
           />
-          <TextField
-            name="mobile"
-            value={personalInfo.mobile}
-            onChange={handleOnChange}
-            label="Mobile Number"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            name="dob"
-            value={personalInfo.dob}
-            onChange={handleOnChange}
-            type="date"
-            InputLabelProps={{ shrink: true }}
-            label="Date Of Birth"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <div className="my-3">
-            <input
-              name="profilePicName"
-              value={personalInfo.profilePicName || ""}
-              onChange={handleImageOnChange}
-              onClick={handleImageOnClick}
-              type="file"
-              placeholder="Upload profile picture"
-              accept=".png, .jpg, .jpeg"
-              className="pointer w-[100%] p-[12px] rounded-t-[4px] bg-[#F0F0F0] border-b-[0.5px] border-b-[#8B8B8B]"
-            />
-            {profilePicImage && (
-              <img
-                src={profilePicImage}
-                alt="preview image"
-                className="w-[100px] mt-2"
-              />
-            )}
-            {profilePicSizeError && (
-              <span className="red-font">Upload image upto 2MB</span>
-            )}
-          </div>
           <Button
             onClick={handleOnClick}
             disabled={isSaveButtonClicked}
