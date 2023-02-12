@@ -4,6 +4,7 @@ import {
   Search,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ApplicationConstant } from "../constant/applicationConstant";
 import "./header.css";
@@ -42,16 +43,16 @@ const Header = () => {
         AMEZON
       </Link>
       <div className="header-middle-area-main">
-        <p>Categories</p>
-        <p>Top Deals</p>
-        <p>What's New</p>
-        <div>
+        <p className="pointer">Categories</p>
+        <p className="pointer">Top Deals</p>
+        <p className="pointer">What's New</p>
+        <div className="border-[1px] px-[10px] rounded-[10px]">
           <input
             type="text"
             placeholder="Search product"
-            className="header-searchbar"
+            className="py-[5px] outline-none"
           />
-          <Search className="pointer" />
+          <Search className="pointer header-search-icon" />
         </div>
       </div>
       <div className="flex align-items-center">
