@@ -9,22 +9,21 @@ const ProductByCategory = () => {
     useEffect(()=>{ 
         getAllcategory()
     },[])
+
     const getAllcategory = async () => {
         const res = await appClient.get('/a3/products/categories')
-        console.log(res);
         
-        // setHomePageAllCategories(res.data)
+        setHomePageAllCategories(res.data.categories)
+
     }
     return (
        <div className="category-container">
-           <h2>Choose by Category</h2>
-           <div className="category-cards">
-               <div><CategoryCard /></div> 
-               <div><CategoryCard /></div> 
-               <div><CategoryCard /></div> 
-               <div><CategoryCard /></div>
-               <div><CategoryCard /></div>
-               <div><CategoryCard /></div>
+           <p className="text-[28px] font-semibold blue-font">Choose by Category</p>
+           <div className="category-cards grid">
+               {homePageAllCategories?.map((item, index) => (
+
+                    <CategoryCard categoryName={item.product_category_name} categoryDescription={item.product_category_description} key={`homeAllCategories-${index}`} /> 
+               ))}
            </div>
        </div>
     )

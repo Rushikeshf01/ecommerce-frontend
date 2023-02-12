@@ -1,23 +1,26 @@
 import React from 'react'
 import "./category-card.css"
 import img from '../img/elec.png'
+import DevicesIcon from '@mui/icons-material/Devices';
 
-function CategoryCard() {
+function CategoryCard(props: { categoryName: string, categoryDescription: string }) {
   return (
-    <div className="card">
+    <div className="card flex pointer">
 
-    <div className="category-logo">
-        <img src={img} alt="category img here" />
-    </div>
+      <div className="category-logo">
+        {/* <img src={img} alt="category img here" /> */}
+        <DevicesIcon sx={{ fontSize: "60px" }}/>
+      </div>
 
-    <div className="category-detail">
-      <div className="category-name">
-        Electronics
+      <div className="flex flex-direction-column justify-content-center text-left">
+      {/* <div className="category-detail"> */}
+        <div className="font-medium">
+          {props.categoryName}
+        </div>
+        <div className="font-normal">
+          {props.categoryDescription}
+        </div>
       </div>
-      <div className="category-desc">
-          All Electronics devices and more..
-      </div>
-    </div>
 
     </div>
   )
