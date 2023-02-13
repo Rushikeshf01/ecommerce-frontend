@@ -1,5 +1,11 @@
 import Joi from "joi";
-import { LoginStateType, RegisterStateType, UserAddressesType } from "../types/authTypes";
+import {
+  LoginStateType,
+  RegisterStateType,
+  UserAddressesType,
+  UserPersonalInformationBase64Type,
+  UserPersonalInformationType,
+} from "../types/authTypes";
 
 class JoiUtils {
   private loginDataSchema: Joi.ObjectSchema = Joi.object({
@@ -21,6 +27,15 @@ class JoiUtils {
       .max(20)
       .required()
       .label("Confirm Password"),
+  });
+
+  private userProfileSchema: Joi.ObjectSchema = Joi.object({
+    firstName: Joi.string().required().label("First name"),
+    lastName: Joi.string().required().label("Last name"),
+    mobile: Joi.string().min(10).required().label("Mobile number"),
+    dob: Joi.string().required().label("Date of birth"),
+    profilePicName: Joi.optional(),
+    profilePicBase64: Joi.string().required().label("Profile picture"),
   });
 
   private userAddressSchema: Joi.ObjectSchema = Joi.object({
@@ -60,6 +75,19 @@ class JoiUtils {
 
   public validateUserAddressData(userAddressData: UserAddressesType) {
     const { error, value } = this.userAddressSchema.validate(userAddressData);
+    if (error) {
+      return { true: true, error: error.details[0].message };
+    }
+    if (value) {
+      return false;
+    }
+    return false;
+  }
+
+  public validateUserProfileData(
+    userProfileData: UserPersonalInformationBase64Type
+  ) {
+    const { error, value } = this.userProfileSchema.validate(userProfileData);
     if (error) {
       return { true: true, error: error.details[0].message };
     }

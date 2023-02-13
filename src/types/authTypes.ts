@@ -32,6 +32,15 @@ export interface UserPersonalInformationType {
   profilePicName: string;
 }
 
+export interface UserPersonalInformationBase64Type {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  mobile: string;
+  profilePicName?: string;
+  profilePicBase64: string;
+}
+
 export interface UserAddressesType {
   name: string;
   line1: string;
