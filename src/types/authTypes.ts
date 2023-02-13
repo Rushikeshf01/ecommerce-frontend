@@ -20,7 +20,6 @@ export interface LoginStateType {
 
 export interface UserAccountInformationType {
   email: string;
-  oldPassword: string;
   newPassword: string;
 }
 

@@ -2,21 +2,26 @@ import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { UserAccountInformationType } from "../../../../types/authTypes";
 
+const userAccountSectionInputs = [
+  { label: "Email", name: "email" },
+  { label: "New Password", name: "newPassword" },
+];
+
 const UserProfileAccountInformation = () => {
   const [accountInfo, setAccountInfo] = useState<UserAccountInformationType>({
     email: "",
-    oldPassword: "",
     newPassword: "",
   });
-  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsButtonClicked(false);
     const { name, value } = e.currentTarget;
     setAccountInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleOnClick = () => {
-    setIsSaveButtonClicked(true);
+    setIsButtonClicked(true);
   };
 
   return (
@@ -30,42 +35,25 @@ const UserProfileAccountInformation = () => {
           phone numbers, email and payment accounts.
         </p>
         <div className="w-[70%]">
-          <TextField
-            name="email"
-            value={accountInfo.email}
-            onChange={handleOnChange}
-            label="Email"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            name="oldPassword"
-            value={accountInfo.oldPassword}
-            onChange={handleOnChange}
-            label="Old Password"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            name="newPassword"
-            value={accountInfo.newPassword}
-            onChange={handleOnChange}
-            label="New Password"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
+          {userAccountSectionInputs.map((item, index) => (
+            <TextField
+              name={item.name}
+              value={(accountInfo as any)[item.name]}
+              onChange={handleOnChange}
+              label={item.label}
+              key={`user-account-index: ${index}`}
+              id="filled-basic"
+              variant="filled"
+              margin="normal"
+              fullWidth
+            />
+          ))}
           <Button
             onClick={handleOnClick}
-            disabled={isSaveButtonClicked}
+            disabled={isButtonClicked}
             variant="contained"
           >
-            Save
+            Update
           </Button>
         </div>
       </div>
