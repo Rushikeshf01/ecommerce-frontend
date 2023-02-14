@@ -1,10 +1,23 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../store/store";
+import { ApiConstant } from "../../../../constant/applicationConstant";
+import appClient from "../../../../network/AppClient";
 import { UserAccountInformationType } from "../../../../types/authTypes";
+import {
+  ToastDangerMessage,
+  ToastSuccessMessage,
+} from "../../../../utils/toastMessages";
 
 const userAccountSectionInputs = [
-  { label: "Email", name: "email" },
-  { label: "New Password", name: "newPassword" },
+  { label: "Email", name: "email", disabled: true, type: "text" },
+  {
+    label: "New Password",
+    name: "newPassword",
+    disabled: false,
+    type: "password",
+  },
 ];
 
 const UserProfileAccountInformation = () => {
@@ -13,6 +26,11 @@ const UserProfileAccountInformation = () => {
     newPassword: "",
   });
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const authState = useSelector((state: RootState) => state.authReducer);
+
+  useEffect(() => {
+    setAccountInfo((prev) => ({ ...prev, email: authState.user.email }));
+  }, []);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
@@ -22,6 +40,19 @@ const UserProfileAccountInformation = () => {
 
   const handleOnClick = () => {
     setIsButtonClicked(true);
+    accountInfo.newPassword.length >= 5
+      ? updateUserPasswordAPI()
+      : ToastDangerMessage("Password must be 5 character long");
+  };
+
+  const updateUserPasswordAPI = async () => {
+    appClient
+      .put(ApiConstant.USER_PASSWORD_API_PATH, {
+        newPassword: accountInfo.newPassword,
+      })
+      .then((res) => {
+        ToastSuccessMessage(res.data.msg);
+      });
   };
 
   return (
@@ -39,13 +70,17 @@ const UserProfileAccountInformation = () => {
             <TextField
               name={item.name}
               value={(accountInfo as any)[item.name]}
+              defaultValue={(accountInfo as any)[item.name]}
               onChange={handleOnChange}
               label={item.label}
+              disabled={item.disabled}
+              type={item.type}
               key={`user-account-index: ${index}`}
               id="filled-basic"
               variant="filled"
               margin="normal"
               fullWidth
+              required
             />
           ))}
           <Button
