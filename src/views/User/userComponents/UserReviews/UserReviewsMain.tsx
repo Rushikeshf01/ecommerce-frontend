@@ -6,7 +6,6 @@ import appClient from "../../../../network/AppClient";
 import { UserReviewsType } from "../../../../types/authTypes";
 import User from "../../index";
 import UserReview from "./UserReview";
-import StarRating from "./UserStarRatings";
 
 const UserReviewsMain = () => {
   const [userReviewsList, setUserReviewsList] = useState<UserReviewsType[]>([]);
@@ -45,7 +44,6 @@ const UserReviewsMain = () => {
               )}
             </>
           )}
-          <StarRating />
         </div>
       }
     />

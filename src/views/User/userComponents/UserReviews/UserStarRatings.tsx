@@ -1,41 +1,31 @@
 import { Star } from "@mui/icons-material";
 import { useState } from "react";
 
-const StarRating = () => {
-  const [rating, setRating] = useState(0);
-  const [className, setClassName] = useState<string[]>([
-    "pointer",
-    "pointer",
-    "pointer",
-    "pointer",
-    "pointer",
-  ]);
-
-  const handleMouseEnter = (index: number) => {
-    setRating(index + 1);
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setRating(0);
-  };
-
-  const handleClick = (index: number) => {
-    setRating(index + 1);
-  };
+const StarRatingInput = (props: {
+  productRating: number;
+  isEditable: boolean;
+}) => {
+  const [rating, setRating] = useState(props.productRating);
 
   return (
     <div>
-      {[1, 2, 3, 4, 5].map((star, index) => (
-        <Star
-          key={star}
-          className={className[index]}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-          onClick={() => handleClick(index)}
-        />
-      ))}
+      <div className="flex">
+        {[...Array(5)].map((star, i) => (
+          <Star
+            key={i}
+            sx={{
+              color: i < rating ? "#ffc107" : "#e4e5e9",
+            }}
+            className={props.isEditable ? "pointer" : ""}
+            onClick={() => {
+              props.isEditable ? setRating(i + 1) : undefined;
+            }}
+          />
+        ))}
+      </div>
+      <p>{rating} of 5 stars</p>
     </div>
   );
 };
 
-export default StarRating;
+export default StarRatingInput;
