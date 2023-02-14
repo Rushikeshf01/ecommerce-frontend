@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserAddressesType } from "../../../../types/authTypes";
@@ -9,8 +9,11 @@ import UserAddresses from "./UserAddresses";
 const UserAddressMain = () => {
   const [userAddresses, setUserAddresses] = useState<UserAddressesType[]>([]);
   const [isApiCalling, setIsApiCalling] = useState<boolean>(true);
+  const dataFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getUserAddresses();
   }, []);
 

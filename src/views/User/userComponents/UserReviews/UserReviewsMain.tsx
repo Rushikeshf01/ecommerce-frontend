@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
@@ -11,7 +11,11 @@ import StarRating from "./UserStarRatings";
 const UserReviewsMain = () => {
   const [userReviewsList, setUserReviewsList] = useState<UserReviewsType[]>([]);
   const [isUserReviewApiCalling, setIsUserReviewApiCalling] = useState(true);
+  const dataFetchedRef = useRef(false);
+
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getUserReviews();
   }, []);
 

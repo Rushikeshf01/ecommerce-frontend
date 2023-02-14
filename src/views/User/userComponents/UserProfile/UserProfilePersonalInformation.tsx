@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserPersonalInformationType } from "../../../../types/authTypes";
@@ -8,7 +8,6 @@ import {
   ToastDangerMessage,
   ToastSuccessMessage,
 } from "../../../../utils/toastMessages";
-import { userAddressInputs } from "../UserAddress/UserAddresses";
 import UserProfilePersonalInfoImage from "./UserProfilePersonalInfoImage";
 import UserProfilePersonalInfoTextfields from "./UserProfilePersonalInfoTextfields";
 
@@ -25,8 +24,11 @@ const UserProfilePersonalInformation = () => {
   const [profilePicBase64, setProfilePicBase64] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [isSaveOrUpdate, setIsSaveOrUpdate] = useState("Save");
+  const dataFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getPrefilledProfile();
   }, []);
 
