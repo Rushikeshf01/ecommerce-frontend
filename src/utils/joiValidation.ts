@@ -44,7 +44,7 @@ class JoiUtils {
     line1: Joi.string().required().label("Address Line 1"),
     line2: Joi.string().required().label("Address Line 2"),
     area: Joi.string().required().label("Area"),
-    postalCode: Joi.string().required().label("Postal Code"),
+    postalCode: Joi.number().required().label("Postal Code"),
     country: Joi.string().required().label("Country"),
     state: Joi.string().required().label("State"),
     city: Joi.string().required().label("City"),

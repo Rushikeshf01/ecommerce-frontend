@@ -10,7 +10,10 @@ import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserAddressesType } from "../../../../types/authTypes";
 import { joiUtilObject } from "../../../../utils/joiValidation";
-import { ToastDangerMessage, ToastSuccessMessage } from "../../../../utils/toastMessages";
+import {
+  ToastDangerMessage,
+  ToastSuccessMessage,
+} from "../../../../utils/toastMessages";
 import UserAddressDropdown from "./UserAddressDropdown";
 import { userAddressInputs } from "./UserAddresses";
 import UserAddressInputFields from "./UserAddressInputFields";
@@ -73,28 +76,36 @@ const UserAddressInputMain = (props: {
   };
 
   const editAddressApiCall = async () => {
-    const res = await appClient.put(
-      `${ApiConstant.USER_ADDRESS_API_PATH}/${userAddressInputState.addressId}`,
-      {
-        name: userAddressInputState.name,
-        line1: userAddressInputState.line1,
-        line2: userAddressInputState.line2,
-        area: userAddressInputState.area,
-        city: userAddressInputState.city,
-        state: userAddressInputState.state,
-        country: userAddressInputState.country,
-        postalCode: userAddressInputState.postalCode,
-        mobile: userAddressInputState.mobile,
-      }
+    const validateAddressData: any = joiUtilObject.validateUserAddressData(
+      userAddressInputState
     );
-    var array = [...props.filledAddressDataList];
-    var index = array.findIndex(
-      (obj) => obj.addressId == userAddressInputState.addressId
-    );
-    array[index] = userAddressInputState;
-    ToastSuccessMessage(res.data.msg);
-    props.setFilledAddressDataList(array);
-    props.setIsEditAddressClicked(false);
+    if (!validateAddressData.true) {
+      const res = await appClient.put(
+        `${ApiConstant.USER_ADDRESS_API_PATH}/${userAddressInputState.addressId}`,
+        {
+          name: userAddressInputState.name,
+          line1: userAddressInputState.line1,
+          line2: userAddressInputState.line2,
+          area: userAddressInputState.area,
+          city: userAddressInputState.city,
+          state: userAddressInputState.state,
+          country: userAddressInputState.country,
+          postalCode: userAddressInputState.postalCode,
+          mobile: userAddressInputState.mobile,
+        }
+      );
+      var array = [...props.filledAddressDataList];
+      var index = array.findIndex(
+        (obj) => obj.addressId == userAddressInputState.addressId
+      );
+      array[index] = userAddressInputState;
+      ToastSuccessMessage(res.data.msg);
+      props.setFilledAddressDataList(array);
+      props.setIsEditAddressClicked(false);
+      return;
+    }
+    ToastDangerMessage(validateAddressData.error);
+    return;
   };
 
   return (

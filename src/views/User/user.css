@@ -13,11 +13,6 @@
     border-left: 3px solid;
 }
 
-.user-sidebar-item-active {
-    color: #006EC5;
-    text-shadow: 0px 0px 5px rgba(1, 60, 126, 0.3);
-}
-
 .user-profile-main-box {
     padding: 50px 30px;
     background-color: #fff;
