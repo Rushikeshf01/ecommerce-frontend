@@ -18,6 +18,16 @@ export interface LoginStateType {
   password: string;
 }
 
+export interface HomeCategoriesType {
+  productCategoryDescription: string;
+  productCategoryId: number;
+  productCategoryName: string;
+}
+export interface TopProductType {
+  productCategoryId: number;
+  productDescription: string;
+  productName: string;
+}
 export interface UserAccountInformationType {
   email: string;
   oldPassword: string;
