@@ -1,6 +1,11 @@
-import { Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { ApiConstant } from "../../../../constant/applicationConstant";
+import appClient from "../../../../network/AppClient";
 import { UserPersonalInformationType } from "../../../../types/authTypes";
+import { ToastSuccessMessage } from "../../../../utils/toastMessages";
+import UserProfilePersonalInfoImage from "./UserProfilePersonalInfoImage";
+import UserProfilePersonalInfoTextfields from "./UserProfilePersonalInfoTextfields";
 
 const UserProfilePersonalInformation = () => {
   const [personalInfo, setPersonalInfo] = useState<UserPersonalInformationType>(
@@ -9,17 +14,48 @@ const UserProfilePersonalInformation = () => {
       lastName: "",
       dob: "",
       mobile: "",
+      profilePicName: "",
     }
   );
-  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+  const [profilePicBase64, setProfilePicBase64] = useState("");
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isSaveOrUpdate, setIsSaveOrUpdate] = useState("Save");
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    setPersonalInfo((prevState) => ({ ...prevState, [name]: value }));
+  useEffect(() => {
+    getPrefilledProfile();
+  }, []);
+
+  const getPrefilledProfile = async () => {
+    appClient.get(ApiConstant.USER_PROFILE_API_PATH).then((res) => {
+      setPersonalInfo({
+        dob: res.data.dob,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        mobile: res.data.mobile,
+        profilePicName: "",
+      });
+      setProfilePicBase64(res.data.profilePicBase64);
+      setIsSaveOrUpdate("Update");
+    });
   };
 
   const handleOnClick = () => {
-    setIsSaveButtonClicked(true);
+    setIsButtonClicked(true);
+    sendProfile();
+    setIsSaveOrUpdate("Update")
+  };
+
+  const sendProfile = async () => {
+    let res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
+      firstName: personalInfo.firstName,
+      lastName: personalInfo.lastName,
+      dob: personalInfo.dob,
+      mobile: personalInfo.mobile,
+      profilePicBase64: profilePicBase64,
+    });
+    isSaveOrUpdate === "Save"
+      ? ToastSuccessMessage("Profile added successfully")
+      : ToastSuccessMessage("Profile updated successfully");
   };
 
   return (
@@ -33,54 +69,24 @@ const UserProfilePersonalInformation = () => {
           phone numbers, email and payment accounts.
         </p>
         <div className="w-[70%]">
-          <TextField
-            name="firstName"
-            value={personalInfo.firstName}
-            onChange={handleOnChange}
-            label="First Name"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
+          <UserProfilePersonalInfoTextfields
+            personalInfo={personalInfo}
+            setIsSaveButtonClicked={setIsButtonClicked}
+            setPersonalInfo={setPersonalInfo}
           />
-          <TextField
-            name="lastName"
-            value={personalInfo.lastName}
-            onChange={handleOnChange}
-            label="Last Name"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            name="mobile"
-            value={personalInfo.mobile}
-            onChange={handleOnChange}
-            label="Mobile Number"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            name="dob"
-            value={personalInfo.dob}
-            onChange={handleOnChange}
-            type="date"
-            InputLabelProps={{ shrink: true }}
-            label="Date Of Birth"
-            id="filled-basic"
-            variant="filled"
-            margin="normal"
-            fullWidth
+          <UserProfilePersonalInfoImage
+            personalInfo={personalInfo}
+            setProfilePicBase64={setProfilePicBase64}
+            setIsSaveButtonClicked={setIsButtonClicked}
+            setPersonalInfo={setPersonalInfo}
+            base64={profilePicBase64}
           />
           <Button
             onClick={handleOnClick}
-            disabled={isSaveButtonClicked}
+            disabled={isButtonClicked}
             variant="contained"
           >
-            Save
+            {isSaveOrUpdate}
           </Button>
         </div>
       </div>

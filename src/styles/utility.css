@@ -165,6 +165,15 @@
     color: #006EC5;
 }
 
+.blue-font-hover:hover {
+    color: #006EC5;
+    transition: 0.3s;
+}
+
+.orange-font {
+    color: #FF9A02;
+}
+
 /* Background Color */
 .bg-white {
     background-color: #fff;

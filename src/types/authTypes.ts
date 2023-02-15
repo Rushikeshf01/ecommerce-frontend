@@ -39,6 +39,7 @@ export interface UserPersonalInformationType {
   lastName: string;
   dob: string;
   mobile: string;
+  profilePicName: string;
 }
 
 export interface UserAddressesType {
@@ -52,4 +53,20 @@ export interface UserAddressesType {
   postalCode: string;
   mobile: string;
   addressId: number;
+}
+
+export interface UserReviewsType {
+  productCategoryId: number;
+  productDescription: string;
+  productId: number;
+  productInventoryId: number;
+  productName: string;
+  productPrice: number;
+  productRating: number;
+  productRatingId: number;
+  productReviewId: number;
+  productReviewMsg: string;
+  productSubcategoryId: number;
+  userId: number;
+  updatedAt: string;
 }
