@@ -6,11 +6,10 @@ import StarRatingInput from "./UserStarRatings";
 const UserReview = (props: { userReviewsList: UserReviewsType[] }) => {
   return (
     <div>
-      <hr className="my-2 mb-5" />
       <div className="grid gap-[10px] grid-cols-3">
         {props.userReviewsList.map((item, index) => (
           <div
-            className="border-[1px] p-[15px]"
+            className="border-[1px] border-radius-4px p-[15px]"
             key={`user-review-item:${index}`}
           >
             <p className="font-medium text-[20px]">{item.productReviewMsg}</p>

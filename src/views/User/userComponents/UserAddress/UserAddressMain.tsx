@@ -33,6 +33,7 @@ const UserAddressMain = () => {
         component={
           <div className="w-[100%] user-profile-main-box">
             <p className="text-[30px] font-medium mb-4">My Addresses</p>
+            <hr className="my-2 mb-5" />
             {isApiCalling ? (
               <CircularProgress color="success" size="30px" />
             ) : (

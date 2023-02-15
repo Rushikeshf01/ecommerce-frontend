@@ -33,6 +33,7 @@ const UserReviewsMain = () => {
       component={
         <div className="w-[100%] user-profile-main-box">
           <p className="text-[30px] font-medium mb-4">My Reviews</p>
+          <hr className="my-2 mb-5" />
           {isUserReviewApiCalling ? (
             <CircularProgress color="success" size="30px" />
           ) : (

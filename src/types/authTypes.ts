@@ -68,3 +68,7 @@ export interface UserReviewsType {
   userId: number;
   updatedAt: string;
 }
+
+export interface UserOrdersType {}
+
+export interface UserFavoritesType {}
