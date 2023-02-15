@@ -12,6 +12,7 @@ const ProductByCategory = () => {
 
     const getAllcategory = async () => {
         const res = await appClient.get('/a3/products/categories')
+        // console.log(res);
         
         setHomePageAllCategories(res.data.categories)
 
@@ -21,8 +22,7 @@ const ProductByCategory = () => {
            <p className="text-[28px] font-semibold blue-font">Choose by Category</p>
            <div className="category-cards grid">
                {homePageAllCategories?.map((item, index) => (
-
-                    <CategoryCard categoryName={item.product_category_name} categoryDescription={item.product_category_description} key={`homeAllCategories-${index}`} /> 
+                    <CategoryCard categoryName={item.productCategoryName} categoryDescription={item.productCategoryDescription} key={`homeAllCategories-${index}`} /> 
                ))}
            </div>
        </div>

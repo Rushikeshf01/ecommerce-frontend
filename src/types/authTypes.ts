@@ -19,9 +19,14 @@ export interface LoginStateType {
 }
 
 export interface HomeCategoriesType {
-  product_category_description: string;
-  product_category_id: number;
-  product_category_name: string;
+  productCategoryDescription: string;
+  productCategoryId: number;
+  productCategoryName: string;
+}
+export interface TopProductType {
+  productCategoryId: number;
+  productDescription: string;
+  productName: string;
 }
 export interface UserAccountInformationType {
   email: string;

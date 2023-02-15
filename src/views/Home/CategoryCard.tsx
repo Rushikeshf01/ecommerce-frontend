@@ -6,7 +6,6 @@ import DevicesIcon from '@mui/icons-material/Devices';
 function CategoryCard(props: { categoryName: string, categoryDescription: string }) {
   return (
     <div className="card flex pointer">
-
       <div className="category-logo">
         {/* <img src={img} alt="category img here" /> */}
         <DevicesIcon sx={{ fontSize: "60px" }}/>
