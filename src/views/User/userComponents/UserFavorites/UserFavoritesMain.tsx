@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
 import { UserFavoritesType } from "../../../../types/authTypes";
 import User from "../../index";
@@ -8,7 +8,15 @@ const UserFavoritesMain = () => {
   const [userFavorites, setUserFavorites] = useState<UserFavoritesType[]>([]);
   const [isUserFavoritesApiCalling, setIsUserFavoritesApiCalling] =
     useState(true);
+  const dataFechedRef = useRef(false);
 
+  useEffect(() => {
+    if (dataFechedRef.current) return;
+    dataFechedRef.current = true;
+    getUserFavorites();
+  }, []);
+
+  const getUserFavorites = async () => {};
   return (
     <User
       component={

@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
 import { UserOrdersType } from "../../../../types/authTypes";
 import User from "../../index";
@@ -7,7 +7,15 @@ import User from "../../index";
 const UserOrderMain = () => {
   const [userOrders, setUserOrders] = useState<UserOrdersType[]>([]);
   const [isUserOrdersApiCalling, setIsUserOrdersApiCalling] = useState(true);
+  const dataFechedRef = useRef(false);
 
+  useEffect(() => {
+    if (dataFechedRef.current) return;
+    dataFechedRef.current = true;
+    getUserOrders();
+  }, []);
+
+  const getUserOrders = async () => {};
   return (
     <User
       component={
