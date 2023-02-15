@@ -1,6 +1,4 @@
-import React from 'react'
 import "./category-card.css"
-import img from '../img/elec.png'
 import DevicesIcon from '@mui/icons-material/Devices';
 
 function CategoryCard(props: { categoryName: string, categoryDescription: string }) {

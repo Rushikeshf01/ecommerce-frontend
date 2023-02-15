@@ -1,11 +1,9 @@
-import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Fab from '@mui/material/Fab';
+import { Button, CardActions } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import img from '../img/mobile.png'

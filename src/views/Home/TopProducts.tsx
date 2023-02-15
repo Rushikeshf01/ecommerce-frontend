@@ -1,6 +1,6 @@
 import React from 'react'
 import "./top-products.css"
-import { useState,useEffect } from "react"
+import { useState,useEffect,useRef } from "react"
 import ProductCard from "./ProductCard"
 import { TopProductType } from "../../types/authTypes"
 import appClient from '../../network/AppClient'
@@ -9,7 +9,10 @@ import appClient from '../../network/AppClient'
 const TopProducts = () => {
 
   const [topProduct, setTopProduct] = useState<TopProductType[]> ()
+  const dataFetchedRef = useRef(false);
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getTopProducts()
   }, [])
   

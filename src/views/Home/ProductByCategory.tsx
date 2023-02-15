@@ -1,12 +1,15 @@
 import "./product-category.css"
 import CategoryCard from "./CategoryCard"
-import { useEffect, useState } from "react"
+import { useEffect, useState,useRef } from "react"
 import { HomeCategoriesType } from "../../types/authTypes"
 import appClient from "../../network/AppClient"
 
 const ProductByCategory = () => {
     const [homePageAllCategories, setHomePageAllCategories] = useState<HomeCategoriesType[]>()
+    const dataFetchedRef = useRef(false);
     useEffect(()=>{ 
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
         getAllcategory()
     },[])
 
