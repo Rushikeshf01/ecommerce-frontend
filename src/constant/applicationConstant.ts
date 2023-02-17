@@ -18,4 +18,5 @@ export const ApiConstant = {
   USER_ADDRESS_API_PATH: "/a4/user/address",
   USER_REVIEWS_API_PATH: "/a4/user/reviews",
   USER_PASSWORD_API_PATH: "/a4/user/update-password",
+  PRODUCT_API_PATH: "/a3/products",
 };
