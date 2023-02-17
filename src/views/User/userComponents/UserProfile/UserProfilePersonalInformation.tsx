@@ -1,9 +1,13 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserPersonalInformationType } from "../../../../types/authTypes";
-import { ToastSuccessMessage } from "../../../../utils/toastMessages";
+import { joiUtilObject } from "../../../../utils/joiValidation";
+import {
+  ToastDangerMessage,
+  ToastSuccessMessage,
+} from "../../../../utils/toastMessages";
 import UserProfilePersonalInfoImage from "./UserProfilePersonalInfoImage";
 import UserProfilePersonalInfoTextfields from "./UserProfilePersonalInfoTextfields";
 
@@ -20,8 +24,11 @@ const UserProfilePersonalInformation = () => {
   const [profilePicBase64, setProfilePicBase64] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [isSaveOrUpdate, setIsSaveOrUpdate] = useState("Save");
+  const dataFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getPrefilledProfile();
   }, []);
 
@@ -34,7 +41,7 @@ const UserProfilePersonalInformation = () => {
         mobile: res.data.mobile,
         profilePicName: "",
       });
-      setProfilePicBase64(res.data.profilePicBase64);
+      setProfilePicBase64(res.data.profilePic);
       setIsSaveOrUpdate("Update");
     });
   };
@@ -42,20 +49,31 @@ const UserProfilePersonalInformation = () => {
   const handleOnClick = () => {
     setIsButtonClicked(true);
     sendProfile();
-    setIsSaveOrUpdate("Update")
   };
 
   const sendProfile = async () => {
-    let res = await appClient.put(ApiConstant.USER_PROFILE_API_PATH, {
-      firstName: personalInfo.firstName,
-      lastName: personalInfo.lastName,
-      dob: personalInfo.dob,
-      mobile: personalInfo.mobile,
+    const validateUserProfileData: any = joiUtilObject.validateUserProfileData({
+      ...personalInfo,
       profilePicBase64: profilePicBase64,
     });
-    isSaveOrUpdate === "Save"
-      ? ToastSuccessMessage("Profile added successfully")
-      : ToastSuccessMessage("Profile updated successfully");
+    if (!validateUserProfileData.true) {
+      appClient
+        .put(ApiConstant.USER_PROFILE_API_PATH, {
+          firstName: personalInfo.firstName,
+          lastName: personalInfo.lastName,
+          dob: personalInfo.dob,
+          mobile: personalInfo.mobile,
+          profilePic: profilePicBase64,
+        })
+        .then(() => {
+          isSaveOrUpdate === "Save"
+            ? ToastSuccessMessage("Profile added successfully")
+            : ToastSuccessMessage("Profile updated successfully");
+          setIsSaveOrUpdate("Update");
+        });
+      return;
+    }
+    ToastDangerMessage(validateUserProfileData.error);
   };
 
   return (
