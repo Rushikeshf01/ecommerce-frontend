@@ -34,6 +34,7 @@ const UserProfilePersonalInfoTextfields = (props: {
           variant="filled"
           margin="normal"
           fullWidth
+          required
         />
       ))}
     </>

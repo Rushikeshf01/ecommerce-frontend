@@ -7,6 +7,7 @@ export interface InitialUser {
     user_id: string;
   };
 }
+
 export interface RegisterStateType {
   email: string;
   password: string;
@@ -16,6 +17,13 @@ export interface RegisterStateType {
 export interface LoginStateType {
   email: string;
   password: string;
+}
+
+export interface HeaderSubCategoryType {
+  productCategoryId: number;
+  productSubcategoryDescription: string | null;
+  productSubcategoryId: number;
+  productSubcategoryName: string;
 }
 
 export interface HomeCategoriesType {
@@ -34,7 +42,6 @@ export interface TopProductType {
 
 export interface UserAccountInformationType {
   email: string;
-  oldPassword: string;
   newPassword: string;
 }
 
@@ -44,6 +51,15 @@ export interface UserPersonalInformationType {
   dob: string;
   mobile: string;
   profilePicName: string;
+}
+
+export interface UserPersonalInformationBase64Type {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  mobile: string;
+  profilePicName?: string;
+  profilePicBase64: string;
 }
 
 export interface UserAddressesType {
@@ -74,3 +90,7 @@ export interface UserReviewsType {
   userId: number;
   updatedAt: string;
 }
+
+export interface UserOrdersType {}
+
+export interface UserFavoritesType {}
