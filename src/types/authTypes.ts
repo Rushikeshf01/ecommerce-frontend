@@ -23,11 +23,15 @@ export interface HomeCategoriesType {
   productCategoryId: number;
   productCategoryName: string;
 }
+
 export interface TopProductType {
   productCategoryId: number;
   productDescription: string;
   productName: string;
+  productPrice:number;
+  avg_rating: number;
 }
+
 export interface UserAccountInformationType {
   email: string;
   oldPassword: string;

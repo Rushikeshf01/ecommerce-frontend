@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActions } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import img from '../img/mobile.png'
 
@@ -12,14 +13,14 @@ const ProductCard = (props: { productName: string, productDescription: string })
   return (
       <Card sx={{ maxWidth: 265, maxHeight: 600 }}>
           <IconButton aria-label="add to favorites"  className='float-right'>
-            <FavoriteIcon />
+            <FavoriteBorderIcon />
           </IconButton>
           <CardMedia
             component="img"
             height="140"
             image={img}
             alt="green iguana"
-            sx={{ height: 250 }}
+            sx={{ height: 180 }}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
