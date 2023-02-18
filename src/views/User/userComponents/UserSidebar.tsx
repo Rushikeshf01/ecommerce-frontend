@@ -4,6 +4,7 @@ import {
   FavoriteBorderOutlined,
   RoomOutlined,
   ShoppingBagOutlined,
+  ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { ApplicationConstant } from "../../../constant/applicationConstant";
@@ -16,6 +17,11 @@ const UserSidebar = () => {
       icon: <AccountCircleOutlined />,
       text: "My details",
       link: ApplicationConstant.USER_URL_PATH,
+    },
+    {
+      icon: <ShoppingCartOutlined />,
+      text: "My cart",
+      link: ApplicationConstant.USER_CART_URL_PATH,
     },
     {
       icon: <RoomOutlined />,

@@ -11,6 +11,7 @@ import UserProfileMain from "../views/User/userComponents/UserProfile/UserProfil
 import UserOrderMain from "../views/User/userComponents/UserOrder/UserOrderMain";
 import UserFavoritesMain from "../views/User/userComponents/UserFavorites/UserFavoritesMain";
 import UserReviewsMain from "../views/User/userComponents/UserReviews/UserReviewsMain";
+import UserCartMain from "../views/User/userComponents/UserCart/UserCartMain";
 
 export default function App() {
   const authStore = useSelector((state: RootState) => state.authReducer);
@@ -60,6 +61,10 @@ export default function App() {
     {
       path: ApplicationConstant.USER_REVIEWS_URL_PATH,
       element: <UserReviewsMain />,
+    },
+    {
+      path: ApplicationConstant.USER_CART_URL_PATH,
+      element: <UserCartMain />,
     },
   ]);
 }

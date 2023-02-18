@@ -8,7 +8,7 @@ export const ApplicationConstant = {
   USER_ORDERS_URL_PATH: "/user/orders",
   USER_REVIEWS_URL_PATH: "/user/reviews",
   USER_FAVORITES_URL_PATH: "/user/favorites",
-  CART_URL_PATH: "/cart",
+  USER_CART_URL_PATH: "/user/cart",
   PRODUCT_URL_PATH: "/product/:id",
 };
 
