@@ -37,7 +37,7 @@ const Header = () => {
   };
 
   const handleOnClick = () => {
-    setIsCategoryDroped(true);
+    setIsCategoryDroped(!isCategoryDroped);
   };
 
   const [headerIconsArray, setHeaderIconsArray] = useState([

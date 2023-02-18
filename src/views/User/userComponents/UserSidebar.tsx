@@ -6,12 +6,20 @@ import {
   ShoppingBagOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  initialAuthState,
+  setAuthentication,
+} from "../../../../store/slices/authSlice";
 import { ApplicationConstant } from "../../../constant/applicationConstant";
 import "../user.css";
 
 const UserSidebar = () => {
   const router = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const userSidebarLinks = [
     {
       icon: <AccountCircleOutlined />,
@@ -45,6 +53,13 @@ const UserSidebar = () => {
     },
   ];
 
+  const handleLogOutClick = () => {
+    dispatch(setAuthentication(initialAuthState));
+    localStorage.clear();
+    navigate(ApplicationConstant.LOGIN_URL_PATH);
+  };
+
+  const handleDeleteAccountClick = () => {};
   return (
     <div className="flex flex-direction-column w-[30%]">
       {userSidebarLinks.map((item, index) => (
@@ -62,11 +77,14 @@ const UserSidebar = () => {
         </Link>
       ))}
       <div>
-        <button type="submit" className="user-sidebar-logout-button">
+        <button
+          onClick={handleLogOutClick}
+          className="user-sidebar-logout-button"
+        >
           Log Out
         </button>
         <button
-          type="submit"
+          onClick={handleDeleteAccountClick}
           className="user-sidebar-deleteaccount-button not-allowed"
           disabled
         >
