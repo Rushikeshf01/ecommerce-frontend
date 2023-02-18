@@ -6,8 +6,11 @@ import {
   Search,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
+import { Badge } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../../store/store";
 import {
   ApiConstant,
   ApplicationConstant,
@@ -19,6 +22,9 @@ import HeaderCategories from "./HeaderCategories";
 const Header = () => {
   const [isCategoryDroped, setIsCategoryDroped] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
+  const favoriteReducer = useSelector(
+    (state: RootState) => state.favoriteReducer
+  );
 
   useEffect(() => {
     getAllCategories();
@@ -34,23 +40,31 @@ const Header = () => {
     setIsCategoryDroped(true);
   };
 
-  const headerIconsArray = [
+  const [headerIconsArray, setHeaderIconsArray] = useState([
     {
       link: ApplicationConstant.CART_URL_PATH,
       component: (
-        <ShoppingCartOutlined
+        <Badge
           className="blue-font-hover hover:scale-110"
-          sx={{ fontSize: "30px" }}
-        />
+          badgeContent={5}
+          color="primary"
+          overlap="circular"
+        >
+          <ShoppingCartOutlined sx={{ fontSize: "30px" }} />
+        </Badge>
       ),
     },
     {
       link: ApplicationConstant.USER_FAVORITES_URL_PATH,
       component: (
-        <FavoriteBorder
+        <Badge
           className="blue-font-hover hover:scale-110"
-          sx={{ fontSize: "30px" }}
-        />
+          badgeContent={favoriteReducer.length}
+          color="primary"
+          overlap="circular"
+        >
+          <FavoriteBorder sx={{ fontSize: "30px" }} />
+        </Badge>
       ),
     },
     {
@@ -62,7 +76,7 @@ const Header = () => {
         />
       ),
     },
-  ];
+  ]);
 
   return (
     <div className="header-main">
