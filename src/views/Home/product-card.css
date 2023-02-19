@@ -1,0 +1,41 @@
+.prod-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  text-align: left;
+  font-family: arial;
+}
+
+.prod-detail {
+  padding: 20px;
+}
+
+.card-button {
+  border: 2px solid #006EC5;
+  border-radius: 10px;
+  color: #006EC5;
+  padding: 5px;
+  background-color: white;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.card-button:hover {
+  opacity: 0.7;
+}
+
+.like-button{
+  position: relative;
+    top: 10px;
+    left: 55%;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}

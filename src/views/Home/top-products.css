@@ -2,9 +2,13 @@
     margin: auto;
     box-sizing: border-box;
     width: 100%;
-    padding: 2rem 6rem;
+    padding: 0 6rem;
+    /* display: flex;
+    flex-direction: column; */
 }
-
+.top-card-container>p{
+    margin-top: 50px;
+}
 .product-cards {
     display: flex;
     justify-content: space-between;
