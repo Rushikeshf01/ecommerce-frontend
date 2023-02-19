@@ -37,7 +37,8 @@ export interface TopProductType {
   productDescription: string;
   productName: string;
   productPrice:number;
-  avg_rating: number;
+  productDiscount?:number;
+  avgRating: number;
 }
 
 export interface UserAccountInformationType {
