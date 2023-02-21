@@ -36,6 +36,9 @@ export interface TopProductType {
   productCategoryId: number;
   productDescription: string;
   productName: string;
+  productPrice:number;
+  productDiscount?:number;
+  avgRating: number;
 }
 
 export interface UserAccountInformationType {

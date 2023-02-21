@@ -1,41 +1,34 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActions } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
 import img from '../img/mobile.png'
+import StarRatingInput from "../User/userComponents/UserReviews/UserStarRatings";
 
-const ProductCard = (props: { productName: string, productDescription: string }) => {
-  return (
-      <Card sx={{ maxWidth: 265, maxHeight: 600 }}>
-          <IconButton aria-label="add to favorites"  className='float-right'>
-            <FavoriteIcon />
-          </IconButton>
-          <CardMedia
-            component="img"
-            height="140"
-            image={img}
-            alt="green iguana"
-            sx={{ height: 250 }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {props.productName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
+import "./product-card.css"
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-              {props.productDescription}
-            </Typography>
-          </CardContent>
-        <CardActions>
+const ProductCard2 = (props: { productName: string, productDescription: string, productPrice: number, productRating: number }) => {
+    return (
 
-          <Button variant="outlined" sx={{ borderRadius: '40px' }}> Add to cart</Button>
-        </CardActions>
-      </Card>
-  )
+        <div className='prod-card'>
+            {/* <Badge color="error" badgeContent={'Up to '+80+' %'}></Badge> */}
+            <span className='badge'>Up to 80%</span>
+            <FavoriteBorderIcon className='like-button pointer' sx={{fontSize:"30px"}}/>
+            <img src={img} alt="product image" />
+
+            <div className="prod-detail">
+
+                <p className='font-semibold text-2xl'>{props.productName}</p>
+                <p className='text-lg'>${props.productPrice}</p>
+                <p><StarRatingInput
+                    productRating={props.productRating}
+                    isEditable={false}
+                /></p>
+                <button type="submit" className='card-button'>Add to cart</button>
+            </div>
+        </div>
+    )
 }
 
-export default ProductCard
+export default ProductCard2
