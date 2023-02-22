@@ -9,7 +9,8 @@ export const ApplicationConstant = {
   USER_REVIEWS_URL_PATH: "/user/reviews",
   USER_FAVORITES_URL_PATH: "/user/favorites",
   USER_CART_URL_PATH: "/user/cart",
-  PRODUCT_URL_PATH: "/product/:id",
+  PRODUCT_DYNAMIC_URL_PATH: "/product/:id",
+  PRODUCT_URL_PATH: "/product",
 };
 
 export const ApiConstant = {

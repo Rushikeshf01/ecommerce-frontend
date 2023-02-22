@@ -1,0 +1,32 @@
+.single-product-main {
+    margin-top: 5rem;
+    padding: 0 6rem;
+}
+
+.single-product-first-box {
+    display: flex;
+    gap: 40px;
+    margin-top: 15px;
+}
+
+.single-product-img-box {
+    display: flex;
+    gap: 20px;
+}
+
+.single-product-img {
+    width: auto;
+    height: 500px;
+}
+
+.single-product-img-sidebar {
+    width: 40px;
+    height: auto;
+    margin-bottom: 12px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.single-product-img-sidebar:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0, 110, 197, 0.7);
+}
