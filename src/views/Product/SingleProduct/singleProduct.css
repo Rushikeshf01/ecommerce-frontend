@@ -30,3 +30,24 @@
 .single-product-img-sidebar:hover {
     box-shadow: 0px 0px 5px 0px rgba(0, 110, 197, 0.7);
 }
+
+.single-product-desc-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.single-product-second-box-text {
+    font-size: 22px;
+    font-weight: 400;
+    color: rgb(94, 94, 94);
+    cursor: pointer;
+}
+
+.single-product-second-box-text-active {
+    font-weight: 500;
+    color: black;
+    border-bottom: 1px solid;
+}
