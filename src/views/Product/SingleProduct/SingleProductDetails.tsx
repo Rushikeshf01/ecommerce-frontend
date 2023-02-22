@@ -6,8 +6,12 @@ import SingleProductQuntityInput from "./SingleProductQuntityInput";
 const SingleProductDetails = () => {
   const [breadCrumpsState, setbreadCrumpsState] = useState([
     {
-      previousText: "strin",
-      previousLink: "string",
+      previousText: "home",
+      previousLink: "home",
+    },
+    {
+      previousText: "categoryName",
+      previousLink: "category",
     },
   ]);
 
@@ -30,7 +34,7 @@ const SingleProductDetails = () => {
     <div className="single-product-main">
       <AppBreadcrumps
         previousData={breadCrumpsState}
-        currentData={"dynamic name"}
+        currentData={"productName"}
         className="margin-top-5"
       />
       <div className="single-product-first-box">
@@ -49,13 +53,11 @@ const SingleProductDetails = () => {
           <img className="single-product-img" src={imgOption} alt="Image" />
         </div>
         <div>
-          <p className="text-[28px] font-semibold mb-2">Product Name</p>
+          <p className="text-[28px] font-semibold mb-2">productName</p>
           <StarRatingInput productRating={4} isEditable={false} />
-          <p className="text-[20px] my-3">Price</p>
+          <p className="text-[20px] my-3">productPrice</p>
           <div>
             <SingleProductQuntityInput />
-            <p>Add to Favorite</p>
-            <p>Add to Cart</p>
           </div>
           <p>Left in stock: quntity</p>
           <p>Category: categoryName - subcategoryName </p>

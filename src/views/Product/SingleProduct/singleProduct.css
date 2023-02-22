@@ -17,6 +17,7 @@
 .single-product-img {
     width: auto;
     height: 500px;
+    border-radius: 4px;
 }
 
 .single-product-img-sidebar {
@@ -24,6 +25,7 @@
     height: auto;
     margin-bottom: 12px;
     border: 1px solid gray;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -55,4 +57,24 @@
     font-weight: 500;
     color: black;
     border-bottom: 1px solid;
+}
+
+.single-product-quntity-input-main {
+    display: flex;
+    gap: 15px;
+    margin: 2rem 0;
+}
+
+.single-product-quntity-input-box {
+    display: flex;
+    padding: 15px;
+    gap: 20px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.single-product-quntity-input-box-hover:hover {
+    color: white;
+    background-color: black;
+    transition: 0.4s;
 }
