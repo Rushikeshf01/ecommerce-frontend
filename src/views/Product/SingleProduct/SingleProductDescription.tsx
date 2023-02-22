@@ -8,10 +8,10 @@ const SingleProductDescription = () => {
   };
 
   return (
-    <div className="single-product-main">
+    <div className="single-product-desc-main">
       {isToggle ? (
         <>
-          <div onClick={handleIsToggle} className="single-product-desc-main">
+          <div onClick={handleIsToggle} className="single-product-desc-main-box">
             <p className="single-product-second-box-text">Description</p>
             <p className="single-product-second-box-text single-product-second-box-text-active">
               Reviews(count)
@@ -23,7 +23,7 @@ const SingleProductDescription = () => {
         </>
       ) : (
         <>
-          <div onClick={handleIsToggle} className="single-product-desc-main">
+          <div onClick={handleIsToggle} className="single-product-desc-main-box">
             <p className="single-product-second-box-text single-product-second-box-text-active">
               Description
             </p>

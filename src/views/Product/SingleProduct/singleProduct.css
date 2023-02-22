@@ -32,6 +32,11 @@
 }
 
 .single-product-desc-main {
+    margin-top: 2rem;
+    padding: 0 6rem;
+}
+
+.single-product-desc-main-box {
     display: flex;
     align-items: center;
     justify-content: center;
