@@ -1,32 +1,71 @@
 import {
   AccountCircle,
   FavoriteBorder,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
   Search,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { Badge } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ApplicationConstant } from "../constant/applicationConstant";
+import { RootState } from "../../store/store";
+import {
+  ApiConstant,
+  ApplicationConstant,
+} from "../constant/applicationConstant";
+import appClient from "../network/AppClient";
 import "./header.css";
+import HeaderCategories from "./HeaderCategories";
 
 const Header = () => {
-  const headerIconsArray = [
+  const [isCategoryDroped, setIsCategoryDroped] = useState(false);
+  const [allCategories, setAllCategories] = useState([]);
+  const favoriteReducer = useSelector(
+    (state: RootState) => state.favoriteReducer
+  );
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  const getAllCategories = async () => {
+    appClient.get(`${ApiConstant.HOME_API_PATH}/categories`).then((res) => {
+      setAllCategories(res.data.categories);
+    });
+  };
+
+  const handleOnClick = () => {
+    setIsCategoryDroped(!isCategoryDroped);
+  };
+
+  const [headerIconsArray, setHeaderIconsArray] = useState([
     {
-      link: ApplicationConstant.CART_URL_PATH,
+      // link: ApplicationConstant.USER_CART_URL_PATH,
+      link: ApplicationConstant.PRODUCT_URL_PATH,
       component: (
-        <ShoppingCartOutlined
+        <Badge
           className="blue-font-hover hover:scale-110"
-          sx={{ fontSize: "30px" }}
-        />
+          badgeContent={5}
+          color="primary"
+          overlap="circular"
+        >
+          <ShoppingCartOutlined sx={{ fontSize: "30px" }} />
+        </Badge>
       ),
     },
     {
       link: ApplicationConstant.USER_FAVORITES_URL_PATH,
       component: (
-        <FavoriteBorder
+        <Badge
           className="blue-font-hover hover:scale-110"
-          sx={{ fontSize: "30px" }}
-        />
+          badgeContent={favoriteReducer.length}
+          color="primary"
+          overlap="circular"
+        >
+          <FavoriteBorder sx={{ fontSize: "30px" }} />
+        </Badge>
       ),
     },
     {
@@ -38,7 +77,7 @@ const Header = () => {
         />
       ),
     },
-  ];
+  ]);
 
   return (
     <div className="header-main">
@@ -49,7 +88,18 @@ const Header = () => {
         AMEZON
       </Link>
       <div className="header-middle-area-main">
-        <p className="pointer">Categories</p>
+        <div className="pointer">
+          <p onClick={handleOnClick}>
+            Categories{" "}
+            {isCategoryDroped ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </p>
+          {isCategoryDroped && (
+            <HeaderCategories
+              setIsCategoryDroped={setIsCategoryDroped}
+              allCategories={allCategories}
+            />
+          )}
+        </div>
         <p className="pointer">Top Deals</p>
         <p className="pointer">What's New</p>
         <div className="border-[1px] px-[10px] rounded-[10px]">
