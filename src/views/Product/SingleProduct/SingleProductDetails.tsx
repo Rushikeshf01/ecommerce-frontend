@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import AppBreadcrumps from "../../../commonComponents/AppBreadcrumps";
+import { ApplicationConstant } from "../../../constant/applicationConstant";
+import { SingleProductType } from "../../../types/authTypes";
 import StarRatingInput from "../../User/userComponents/UserReviews/UserStarRatings";
 import SingleProductQuntityInput from "./SingleProductQuntityInput";
 
-const SingleProductDetails = () => {
-  const [breadCrumpsState, setbreadCrumpsState] = useState([
+const SingleProductDetails = (props: {
+  singleProductState: SingleProductType;
+}) => {
+  const breadCrumpsState = [
     {
-      previousText: "home",
-      previousLink: "home",
+      previousText: "Home",
+      previousLink: ApplicationConstant.HOME_URL_PATH,
     },
     {
-      previousText: "categoryName",
+      previousText: props.singleProductState.categoryName,
       previousLink: "category",
     },
     {
-      previousText: "subcategoryName",
+      previousText: props.singleProductState.subcategoryName,
       previousLink: "subcategory",
     },
-  ]);
+  ];
 
   const imgOptions = [
     "https://m.media-amazon.com/images/I/81DZlX8YdwS._UX569_.jpg",
@@ -57,12 +61,22 @@ const SingleProductDetails = () => {
           <img className="single-product-img" src={imgOption} alt="Image" />
         </div>
         <div>
-          <p className="text-[28px] font-semibold mb-2">productName</p>
-          <StarRatingInput productRating={4} isEditable={false} />
-          <p className="text-[20px] my-3">productPrice</p>
-          <SingleProductQuntityInput />
-          <p>Left in stock: quntity</p>
-          <p>Category: categoryName - subcategoryName </p>
+          <p className="text-[28px] font-semibold mb-2">
+            {props.singleProductState.productName}
+          </p>
+          <StarRatingInput
+            productRating={props.singleProductState.productAvgRating}
+            isEditable={false}
+          />
+          <p className="text-[20px] my-3">
+            ${props.singleProductState.productPrice}
+          </p>
+          <SingleProductQuntityInput singleProductState={props.singleProductState} />
+          <p>Left in stock: {props.singleProductState.inventoryQuantity}</p>
+          <p>
+            Category: {props.singleProductState.categoryName} -{" "}
+            {props.singleProductState.subcategoryName}{" "}
+          </p>
         </div>
       </div>
     </div>

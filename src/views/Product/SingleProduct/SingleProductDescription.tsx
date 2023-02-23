@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { SingleProductType } from "../../../types/authTypes";
 
-const SingleProductDescription = () => {
+const SingleProductDescription = (props: {
+  singleProductState: SingleProductType;
+}) => {
   const [isToggle, setIsToggle] = useState(false);
 
   const handleIsToggle = () => {
@@ -11,10 +14,13 @@ const SingleProductDescription = () => {
     <div className="single-product-desc-main">
       {isToggle ? (
         <>
-          <div onClick={handleIsToggle} className="single-product-desc-main-box">
+          <div
+            onClick={handleIsToggle}
+            className="single-product-desc-main-box"
+          >
             <p className="single-product-second-box-text">Description</p>
             <p className="single-product-second-box-text single-product-second-box-text-active">
-              Reviews(count)
+              Reviews({props.singleProductState.productRatingCount})
             </p>
           </div>
           <div>
@@ -23,14 +29,19 @@ const SingleProductDescription = () => {
         </>
       ) : (
         <>
-          <div onClick={handleIsToggle} className="single-product-desc-main-box">
+          <div
+            onClick={handleIsToggle}
+            className="single-product-desc-main-box"
+          >
             <p className="single-product-second-box-text single-product-second-box-text-active">
               Description
             </p>
-            <p className="single-product-second-box-text">Reviews(count)</p>
+            <p className="single-product-second-box-text">
+              Reviews({props.singleProductState.productRatingCount})
+            </p>
           </div>
           <div>
-            <p>Product Description</p>
+            <p>{props.singleProductState.productDescription}</p>
           </div>
         </>
       )}

@@ -1,8 +1,11 @@
 import { Add, Favorite, FavoriteBorder, Remove } from "@mui/icons-material";
-import React, { useState } from "react";
+import { useState } from "react";
+import { SingleProductType } from "../../../types/authTypes";
 
-const SingleProductQuntityInput = () => {
-  const [isFavoriteClicked, setisFavoriteClicked] = useState(false);
+const SingleProductQuntityInput = (props: {
+  singleProductState: SingleProductType;
+}) => {
+  const [isFavoriteClicked, setisFavoriteClicked] = useState(props.singleProductState.isFavorite);
 
   const handleFavoriteClicked = () => {
     setisFavoriteClicked(!isFavoriteClicked);

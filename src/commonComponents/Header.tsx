@@ -43,7 +43,7 @@ const Header = () => {
   const [headerIconsArray, setHeaderIconsArray] = useState([
     {
       // link: ApplicationConstant.USER_CART_URL_PATH,
-      link: ApplicationConstant.PRODUCT_URL_PATH,
+      link: `${ApplicationConstant.PRODUCT_URL_PATH}/1`,
       component: (
         <Badge
           className="blue-font-hover hover:scale-110"

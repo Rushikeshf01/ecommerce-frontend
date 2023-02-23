@@ -105,3 +105,24 @@ export interface UserFavoritesType {
   productSubcategoryId: number;
   userFavoriteId: number;
 }
+
+export interface SingleProductType {
+  categoryDescription: string;
+  categoryId: number;
+  categoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
+  inventoryId: number;
+  inventoryQuantity: number;
+  productAvgRating: number;
+  productDescription: string;
+  productId: number;
+  productName: string;
+  productPrice: number;
+  productRatingCount: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  isFavorite: boolean;
+}
