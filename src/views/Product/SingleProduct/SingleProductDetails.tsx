@@ -13,6 +13,10 @@ const SingleProductDetails = () => {
       previousText: "categoryName",
       previousLink: "category",
     },
+    {
+      previousText: "subcategoryName",
+      previousLink: "subcategory",
+    },
   ]);
 
   const imgOptions = [
@@ -56,9 +60,7 @@ const SingleProductDetails = () => {
           <p className="text-[28px] font-semibold mb-2">productName</p>
           <StarRatingInput productRating={4} isEditable={false} />
           <p className="text-[20px] my-3">productPrice</p>
-          <div>
-            <SingleProductQuntityInput />
-          </div>
+          <SingleProductQuntityInput />
           <p>Left in stock: quntity</p>
           <p>Category: categoryName - subcategoryName </p>
         </div>
