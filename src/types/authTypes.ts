@@ -27,18 +27,19 @@ export interface HeaderSubCategoryType {
 }
 
 export interface HomeCategoriesType {
-  productCategoryDescription: string;
-  productCategoryId: number;
-  productCategoryName: string;
+  categoryDescription: string;
+  categoryId: number;
+  categoryName: string;
 }
 
 export interface TopProductType {
-  productCategoryId: number;
   productDescription: string;
   productName: string;
-  productPrice:number;
-  productDiscount?:number;
-  avgRating: number;
+  productPrice: number;
+  productDiscount?: number;
+  productAvgRating: number;
+  productRatingCount: number;
+  productId: number;
 }
 
 export interface UserAccountInformationType {
