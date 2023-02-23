@@ -9,7 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import img from '../img/mobile.png'
 
-const ProductCard = (props: { productName: string, productDescription: string }) => {
+const ProductCard2 = (props: { productName: string, productDescription: string }) => {
   return (
       <Card sx={{ maxWidth: 265, maxHeight: 600 }}>
           <IconButton aria-label="add to favorites"  className='float-right'>
@@ -39,4 +39,4 @@ const ProductCard = (props: { productName: string, productDescription: string })
   )
 }
 
-export default ProductCard
+export default ProductCard2

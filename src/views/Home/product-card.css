@@ -1,14 +1,21 @@
 .prod-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  /* max-width: 300px; */
+  width: 300px;
+  height: 380px;
+  border-radius: 10px;
   text-align: left;
   font-family: arial;
 }
 
 .prod-detail {
-  padding: 20px;
+  padding: 10px;
 }
-
+img{
+  margin: auto;
+  max-height: 184px;
+  max-width: 224px;
+}
 .card-button {
   border: 2px solid #006EC5;
   border-radius: 10px;

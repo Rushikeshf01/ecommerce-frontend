@@ -8,19 +8,19 @@ import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const ProductCard2 = (props: { productName: string, productDescription: string, productPrice: number, productRating: number }) => {
+const ProductCard = (props: { productName: string, productDescription: string, productPrice: number, productRating: number }) => {
     return (
 
         <div className='prod-card'>
             {/* <Badge color="error" badgeContent={'Up to '+80+' %'}></Badge> */}
             <span className='badge'>Up to 80%</span>
             <FavoriteBorderIcon className='like-button pointer' sx={{fontSize:"30px"}}/>
-            <img src={img} alt="product image" />
+            <img src="https://m.media-amazon.com/images/I/41kg-+XWoxL._AC_SY200_.jpg" alt="product image" />
 
             <div className="prod-detail">
 
-                <p className='font-semibold text-2xl'>{props.productName}</p>
-                <p className='text-lg'>${props.productPrice}</p>
+                <p className='font-semibold text-lg'>{props.productName}</p>
+                <p className='text-base'>${props.productPrice}</p>
                 <p><StarRatingInput
                     productRating={props.productRating}
                     isEditable={false}
@@ -31,4 +31,4 @@ const ProductCard2 = (props: { productName: string, productDescription: string, 
     )
 }
 
-export default ProductCard2
+export default ProductCard

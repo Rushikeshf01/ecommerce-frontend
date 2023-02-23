@@ -2,8 +2,8 @@ import React from 'react'
 import "./top-products.css"
 import { useState,useEffect,useRef } from "react"
 
-import ProductCard from "./ProductCard2"
-import ProductCard2 from './ProductCard'
+import ProductCard2 from "./ProductCard2"
+import ProductCard from './ProductCard'
 
 
 import { TopProductType } from "../../types/authTypes"
@@ -23,7 +23,7 @@ const TopProducts = () => {
   const getTopProducts = async () => {
     const res = await appClient.get('/a3/products/get-top-products?category=Electronics')
     setTopProduct(res.data.products)
-    console.log(res);
+    // console.log(res);
     
   }
   return (
@@ -42,7 +42,7 @@ const TopProducts = () => {
           <ProductCard productName={item.productName} productDescription={item.productDescription} key={`topProduct-${index}`}/>
         ))} */}
         {topProduct?.map((item,index) => (
-          <ProductCard2 productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
         ))}
         
       </div>
@@ -50,14 +50,14 @@ const TopProducts = () => {
       <div className="product-cards">
 
         {topProduct?.map((item,index) => (
-          <ProductCard2 productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
         ))}
         
       </div>
       <p className="text-[28px] font-semibold blue-font">Top Products in Clothes</p>
       <div className="product-cards">
         {topProduct?.map((item,index) => (
-          <ProductCard2 productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
         ))}
         
       </div>
