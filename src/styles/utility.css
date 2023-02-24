@@ -1,7 +1,6 @@
-/* font style */
-.italic {
-    font-style: italic;
-}
+@import url('./fonts.css');
+@import url('./flex.css');
+@import url('./border.css');
 
 /* display style */
 .none {
@@ -14,15 +13,6 @@
 
 .block {
     display: block;
-}
-
-.flex {
-    display: flex;
-}
-
-/* border */
-.border-none {
-    border: none;
 }
 
 /* float */
@@ -84,175 +74,6 @@
     cursor: not-allowed;
 }
 
-/* flex property */
-.flex-wrap {
-    flex-wrap: wrap;
-}
-
-.flex-wrap-r {
-    flex-wrap: wrap-reverse;
-}
-
-.flex-direction-column {
-    flex-direction: column;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* justify content */
-.justify-content-center {
-    justify-content: center;
-}
-
-.justify-content-space-evenly {
-    justify-content: space-evenly;
-}
-
-.justify-content-space-between {
-    justify-content: space-between;
-}
-
-.justify-content-space-around {
-    justify-content: space-around;
-}
-
-.justify-content-flex-end {
-    justify-content: flex-end;
-}
-
-.justify-content-flex-start {
-    justify-content: flex-start;
-}
-
-/* align items */
-.align-items-center {
-    align-items: center;
-}
-
-.align-items-flex-start {
-    align-items: flex-start;
-}
-
-.align-items-flex-end {
-    align-items: flex-end;
-}
-
-/* color */
-.red-font {
-    color: #dc3545;
-}
-
-.gray-font {
-    color: #F7F7F7;
-}
-
-.light-gray-font {
-    color: #585858;
-}
-
-.white-font {
-    color: white;
-}
-
-.black-font {
-    color: black;
-}
-
-.green-font {
-    color: #013D29;
-}
-
-.light-green-font {
-    color: green;
-}
-
-.blue-font {
-    color: #006EC5;
-}
-
-.blue-font-hover:hover {
-    color: #006EC5;
-    transition: 0.3s;
-}
-
-.orange-font {
-    color: #FF9A02;
-}
-
-/* Background Color */
-.bg-white {
-    background-color: #fff;
-}
-
-.bg-black {
-    background-color: black;
-}
-
-.bg-gray {
-    background-color: #ececec;
-}
-
-.bg-green {
-    background-color: green;
-}
-
-.bg-light-green {
-    background-color: #29cc97;
-}
-
-.bg-orange {
-    background-color: #ff8412;
-}
-
-.bg-light-red {
-    background-color: #f12b2c;
-}
-
-.bg-red {
-    background-color: red;
-}
-
-.bg-light-black {
-    background-color: #363740;
-}
-
-.bg-blue {
-    background-color: #17a2b8;
-}
-
-.bg-yellow {
-    background-color: #ffc107;
-}
-
-/* Border */
-.border-collapse {
-    border-collapse: collapse;
-}
-
-.border-spacing-none {
-    border-spacing: 0;
-}
-
-.border-bottom-gray {
-    border-bottom: #eeeeee;
-}
-
-.border-gray {
-    border: 1px solid #e8eaed;
-}
-
-.border-radius-4px {
-    border-radius: 4px;
-}
-
-.border-black {
-    border: 1px solid #dbdeff;
-}
-
 /* width */
 .width-100 {
     width: 100%;
@@ -260,25 +81,4 @@
 
 .width-auto {
     width: auto;
-}
-
-/* font */
-.font-20px {
-    font-size: 20px;
-}
-
-.font-22px {
-    font-size: 22px;
-}
-
-.font-24px {
-    font-size: 24px;
-}
-
-.font-26px {
-    font-size: 26px;
-}
-
-.font-28px {
-    font-size: 28px;
 }

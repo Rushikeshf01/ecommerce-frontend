@@ -1,4 +1,3 @@
-import React from "react";
 import { UserCartType } from "../../../../types/authTypes";
 import UserCartCard from "./UserCartCard";
 

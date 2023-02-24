@@ -1,0 +1,128 @@
+/* color */
+.red-font {
+    color: #dc3545;
+}
+
+.gray-font {
+    color: #F7F7F7;
+}
+
+.light-gray-font {
+    color: #585858;
+}
+
+.white-font {
+    color: white;
+}
+
+.black-font {
+    color: black;
+}
+
+.green-font {
+    color: #013D29;
+}
+
+.light-green-font {
+    color: green;
+}
+
+.blue-font {
+    color: #006EC5;
+}
+
+.blue-font-hover:hover {
+    color: #006EC5;
+    transition: 0.3s;
+}
+
+.orange-font {
+    color: #FF9A02;
+}
+
+/* Background Color */
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-gray {
+    background-color: #ececec;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-light-green {
+    background-color: #29cc97;
+}
+
+.bg-orange {
+    background-color: #ff8412;
+}
+
+.bg-light-red {
+    background-color: #f12b2c;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-light-black {
+    background-color: #363740;
+}
+
+.bg-blue {
+    background-color: #17a2b8;
+}
+
+.bg-yellow {
+    background-color: #ffc107;
+}
+
+/* font style */
+.italic {
+    font-style: italic;
+}
+
+/* font */
+.font-16px {
+    font-size: 16px;
+}
+
+.font-18px {
+    font-size: 18px;
+}
+
+.font-20px {
+    font-size: 20px;
+}
+
+.font-22px {
+    font-size: 22px;
+}
+
+.font-24px {
+    font-size: 24px;
+}
+
+.font-26px {
+    font-size: 26px;
+}
+
+.font-28px {
+    font-size: 28px;
+}
+
+.font-30px {
+    font-size: 30px;
+}
+
+.font-32px {
+    font-size: 32px;
+}
