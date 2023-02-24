@@ -7,6 +7,8 @@ import { ApiConstant } from "../../../../constant/applicationConstant";
 import appClient from "../../../../network/AppClient";
 import { UserCartType } from "../../../../types/authTypes";
 import User from "../../index";
+import UserCart from "./UserCart";
+import "./userCart.css";
 
 const UserCartMain = () => {
   const [isUserCartApiCalling, setIsUserCartApiCalling] = useState(true);
@@ -34,7 +36,7 @@ const UserCartMain = () => {
     <User
       component={
         <div className="w-[100%] user-profile-main-box">
-          <p className="text-[30px] font-medium mb-4">My Cart</p>
+          <p className="text-[30px] font-medium mb-4">My Cart (count)</p>
           <hr className="my-2 mb-5" />
           {isUserCartApiCalling ? (
             <CircularProgress color="success" size="30px" />
@@ -43,7 +45,7 @@ const UserCartMain = () => {
               {userCart.length === 0 ? (
                 <NotAvailable label="Cart items" />
               ) : (
-                <></>
+                <UserCart userCart={userCart} />
               )}
             </>
           )}
