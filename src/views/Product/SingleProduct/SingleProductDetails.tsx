@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AppBreadcrumps from "../../../commonComponents/AppBreadcrumps";
 import { ApplicationConstant } from "../../../constant/applicationConstant";
 import { SingleProductType } from "../../../types/authTypes";
+import UserFavoriteButton from "../../User/userComponents/UserFavoriteButton";
 import StarRatingInput from "../../User/userComponents/UserReviews/UserStarRatings";
 import SingleProductQuntityInput from "./SingleProductQuntityInput";
 
@@ -61,9 +62,12 @@ const SingleProductDetails = (props: {
           <img className="single-product-img" src={imgOption} alt="Image" />
         </div>
         <div>
-          <p className="text-[28px] font-semibold mb-2">
-            {props.singleProductState.productName}
-          </p>
+          <div className="flex align-items-center gap-10px mb-2">
+            <p className="text-[28px] font-semibold">
+              {props.singleProductState.productName}
+            </p>
+            <UserFavoriteButton size={36} />
+          </div>
           <StarRatingInput
             productRating={props.singleProductState.productAvgRating}
             isEditable={false}
@@ -71,7 +75,9 @@ const SingleProductDetails = (props: {
           <p className="text-[20px] my-3">
             ${props.singleProductState.productPrice}
           </p>
-          <SingleProductQuntityInput singleProductState={props.singleProductState} />
+          <SingleProductQuntityInput
+            singleProductState={props.singleProductState}
+          />
           <p>Left in stock: {props.singleProductState.inventoryQuantity}</p>
           <p>
             Category: {props.singleProductState.categoryName} -{" "}

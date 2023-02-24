@@ -1,6 +1,7 @@
 import { FavoriteBorder } from "@mui/icons-material";
-import React from "react";
+import React, { useState } from "react";
 import { UserCartType } from "../../../../types/authTypes";
+import UserFavoriteButton from "../UserFavoriteButton";
 import StarRatingInput from "../UserReviews/UserStarRatings";
 
 const UserCartCard = (props: { userCart: UserCartType }) => {
@@ -20,10 +21,7 @@ const UserCartCard = (props: { userCart: UserCartType }) => {
           <p className="text-[20px] font-semibold">
             {props.userCart.productName}
           </p>
-          <FavoriteBorder
-            className="pointer"
-            onDoubleClick={handleClickFavorite}
-          />
+          <UserFavoriteButton />
         </div>
         <StarRatingInput
           productRating={props.userCart.productAvgRating}
