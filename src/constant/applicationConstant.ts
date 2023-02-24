@@ -22,4 +22,5 @@ export const ApiConstant = {
   USER_PASSWORD_API_PATH: "/a4/user/update-password",
   PRODUCT_API_PATH: "/a3/products",
   HOME_API_PATH: "/a5/home",
+  ORDER_API_PATH: "/a6/order",
 };

@@ -42,7 +42,7 @@ const SingleProductDetails = (props: {
     <div className="single-product-main">
       <AppBreadcrumps
         previousData={breadCrumpsState}
-        currentData={"productName"}
+        currentData={props.singleProductState.productName}
         className="margin-top-5"
       />
       <div className="single-product-first-box">

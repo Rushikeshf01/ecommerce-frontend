@@ -106,6 +106,17 @@ export interface UserFavoritesType {
   userFavoriteId: number;
 }
 
+export interface UserCartType {
+  cartId: number;
+  productAvgRating: number;
+  productDescription: string;
+  productId: number;
+  productName: string;
+  productPrice: number;
+  productRatingCount: number;
+  quantity: number;
+}
+
 export interface SingleProductType {
   categoryDescription: string;
   categoryId: number;

@@ -1,11 +1,34 @@
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../../../../store/slices/cartSlice";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
+import { ApiConstant } from "../../../../constant/applicationConstant";
+import appClient from "../../../../network/AppClient";
+import { UserCartType } from "../../../../types/authTypes";
 import User from "../../index";
 
 const UserCartMain = () => {
   const [isUserCartApiCalling, setIsUserCartApiCalling] = useState(true);
-  const [userCart, setUserCart] = useState([]);
+  const [userCart, setUserCart] = useState<UserCartType[]>([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUserCart();
+  }, []);
+
+  const getUserCart = () => {
+    appClient
+      .get(`${ApiConstant.ORDER_API_PATH}/cart`)
+      .then((res) => {
+        setUserCart(res.data.cart);
+        dispatch(setCart(res.data.cart));
+        setIsUserCartApiCalling(false);
+      })
+      .catch(() => {
+        setIsUserCartApiCalling(false);
+      });
+  };
 
   return (
     <User
@@ -17,7 +40,11 @@ const UserCartMain = () => {
             <CircularProgress color="success" size="30px" />
           ) : (
             <>
-              {userCart.length === 0 ? <NotAvailable label="Cart items" /> : <></>}
+              {userCart.length === 0 ? (
+                <NotAvailable label="Cart items" />
+              ) : (
+                <></>
+              )}
             </>
           )}
         </div>
