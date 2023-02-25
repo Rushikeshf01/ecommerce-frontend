@@ -43,8 +43,7 @@ const Header = () => {
 
   const headerIconsArray = [
     {
-      // link: ApplicationConstant.USER_CART_URL_PATH,
-      link: `${ApplicationConstant.PRODUCT_URL_PATH}/1`,
+      link: ApplicationConstant.USER_CART_URL_PATH,
       component: (
         <Badge
           className="blue-font-hover hover:scale-110"

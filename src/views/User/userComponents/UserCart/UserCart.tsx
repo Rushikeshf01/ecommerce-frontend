@@ -1,11 +1,16 @@
 import { UserCartType } from "../../../../types/authTypes";
-import UserCartCard from "./UserCartCard";
+import UserCartCard from "./ProductVerticalCard";
 
 const UserCart = (props: { userCart: UserCartType[] }) => {
   return (
     <div>
       {props.userCart.map((item, index) => (
-        <UserCartCard userCart={item} key={`user-cart-card-index: ${index}`} />
+        <UserCartCard
+          cardDetails={item}
+          isFavoriteIconShow
+          isCartIconShow={false}
+          key={`user-cart-card-index: ${index}`}
+        />
       ))}
     </div>
   );

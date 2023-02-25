@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../../../../store/slices/cartSlice";
 import { RootState } from "../../../../../store/store";
@@ -14,11 +14,14 @@ import "./userCart.css";
 const UserCartMain = () => {
   const [isUserCartApiCalling, setIsUserCartApiCalling] = useState(true);
   const [userCart, setUserCart] = useState<UserCartType[]>([]);
+  const dataFechedRef = useRef(false);
 
   const cartStore = useSelector((state: RootState) => state.cartReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (dataFechedRef.current) return;
+    dataFechedRef.current = true;
     getUserCart();
   }, []);
 
