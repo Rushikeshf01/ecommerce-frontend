@@ -22,9 +22,10 @@ import HeaderCategories from "./HeaderCategories";
 const Header = () => {
   const [isCategoryDroped, setIsCategoryDroped] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
-  const favoriteReducer = useSelector(
+  const favoriteStore = useSelector(
     (state: RootState) => state.favoriteReducer
   );
+  const cartStore = useSelector((state: RootState) => state.cartReducer);
 
   useEffect(() => {
     getAllCategories();
@@ -40,14 +41,13 @@ const Header = () => {
     setIsCategoryDroped(!isCategoryDroped);
   };
 
-  const [headerIconsArray, setHeaderIconsArray] = useState([
+  const headerIconsArray = [
     {
-      // link: ApplicationConstant.USER_CART_URL_PATH,
-      link: ApplicationConstant.PRODUCT_URL_PATH,
+      link: ApplicationConstant.USER_CART_URL_PATH,
       component: (
         <Badge
           className="blue-font-hover hover:scale-110"
-          badgeContent={5}
+          badgeContent={cartStore.length}
           color="primary"
           overlap="circular"
         >
@@ -60,7 +60,7 @@ const Header = () => {
       component: (
         <Badge
           className="blue-font-hover hover:scale-110"
-          badgeContent={favoriteReducer.length}
+          badgeContent={favoriteStore.length}
           color="primary"
           overlap="circular"
         >
@@ -77,7 +77,7 @@ const Header = () => {
         />
       ),
     },
-  ]);
+  ];
 
   return (
     <div className="header-main">

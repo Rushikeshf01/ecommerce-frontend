@@ -70,35 +70,29 @@ const UserAddresses = (props: {
               key={`user-address: ${index}`}
             >
               <div>
-                <p className="font-medium mb-2">
-                  {`${capitalizeFirstLetter(item.name)}`}
-                </p>
+                <div className="flex align-items-center justify-content-space-between mb-2">
+                  <p className="font-medium">
+                    {`${capitalizeFirstLetter(item.name)}`}
+                  </p>
+                  <div className="flex align-items-center gap-10px">
+                    <Edit
+                      onClick={() =>
+                        handleEditAddressInputClicked(item.addressId)
+                      }
+                      className="pointer"
+                      sx={{ fontSize: "24px" }}
+                      color="success"
+                    />
+                    <Delete
+                      onClick={() => handleDeleteAddress(item.addressId, index)}
+                      className="pointer"
+                      sx={{ fontSize: "24px" }}
+                      color="error"
+                    />
+                  </div>
+                </div>
                 <p>{combineJSONDataForUserAddress(item)}</p>
                 <p>Mobile Number: {item.mobile}</p>
-              </div>
-              <div className="mt-3 flex justify-content-space-between">
-                <Button
-                  onClick={() => handleEditAddressInputClicked(item.addressId)}
-                  startIcon={<Edit />}
-                  color="success"
-                  size="small"
-                  fullWidth
-                  sx={{ marginRight: "5px" }}
-                  variant="outlined"
-                >
-                  Edit
-                </Button>
-                <Button
-                  onClick={() => handleDeleteAddress(item.addressId, index)}
-                  startIcon={<Delete />}
-                  color="error"
-                  size="small"
-                  fullWidth
-                  sx={{ marginLeft: "5px" }}
-                  variant="outlined"
-                >
-                  Delete
-                </Button>
               </div>
             </div>
           ))}

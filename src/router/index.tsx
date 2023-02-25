@@ -68,7 +68,7 @@ export default function App() {
       element: <UserCartMain />,
     },
     {
-      path: ApplicationConstant.PRODUCT_URL_PATH,
+      path: ApplicationConstant.PRODUCT_DYNAMIC_URL_PATH,
       element: <SingleProductMain />,
     },
   ]);

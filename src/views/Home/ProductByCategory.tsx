@@ -25,7 +25,7 @@ const ProductByCategory = () => {
            <p className="text-[28px] font-semibold blue-font">Choose by Category</p>
            <div className="category-cards grid">
                {homePageAllCategories?.map((item, index) => (
-                    <CategoryCard categoryName={item.productCategoryName} categoryDescription={item.productCategoryDescription} key={`homeAllCategories-${index}`} /> 
+                    <CategoryCard categoryName={item.categoryName} categoryDescription={item.categoryDescription} key={`homeAllCategories-${index}`} /> 
                ))}
            </div>
        </div>

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { HeaderCategoriesType } from "../types/authProps";
+import { HeaderCategoriesProps } from "../types/authProps";
 
 const HeaderCategories = (props: {
   setIsCategoryDroped: any;
-  allCategories: HeaderCategoriesType[];
+  allCategories: HeaderCategoriesProps[];
 }) => {
   const handleMouseLeave = () => {
     props.setIsCategoryDroped(false);
