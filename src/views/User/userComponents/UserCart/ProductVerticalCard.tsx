@@ -35,8 +35,8 @@ const ProductVerticalCard = (props: {
             {props.cardDetails.productName}
           </p>
           <div className="flex gap-10px">
-            {props.isCartIconShow && <UserCartButton size={24} />}
-            {props.isFavoriteIconShow && <UserFavoriteButton size={24} />}
+            {props.isCartIconShow && <UserCartButton size={30} />}
+            {props.isFavoriteIconShow && <UserFavoriteButton size={30} />}
           </div>
         </div>
         <p className="light-gray-font">{props.cardDetails.subcategoryName}</p>
