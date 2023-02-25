@@ -23,6 +23,7 @@ const UserCartCard = (props: { userCart: UserCartType }) => {
           </p>
           <UserFavoriteButton />
         </div>
+        <p className="light-gray-font">{props.userCart.subcategoryName}</p>
         <StarRatingInput
           productRating={props.userCart.productAvgRating}
           isEditable={false}
@@ -33,7 +34,7 @@ const UserCartCard = (props: { userCart: UserCartType }) => {
           {"  "}
           <span className="font-20px line-through">Discounted price here</span>
           {"  "}
-          <span className="light-green-font font-20px">Discount% Off</span>
+          <span className="light-green-font font-20px">{props.userCart.discountPercent}% Off</span>
         </p>
         <p className="light-gray-font">{props.userCart.productDescription}</p>
       </div>

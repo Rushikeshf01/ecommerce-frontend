@@ -96,14 +96,22 @@ export interface UserReviewsType {
 export interface UserOrdersType {}
 
 export interface UserFavoritesType {
+  productAvgRating: 0.0;
   productCategoryId: number;
   productDescription: string;
   productId: number;
   productInventoryId: number;
   productName: string;
   productPrice: number;
+  productRatingCount: 0;
   productSubcategoryId: number;
   userFavoriteId: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
 }
 
 export interface UserCartType {
@@ -115,6 +123,12 @@ export interface UserCartType {
   productPrice: number;
   productRatingCount: number;
   quantity: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
 }
 
 export interface SingleProductType {
