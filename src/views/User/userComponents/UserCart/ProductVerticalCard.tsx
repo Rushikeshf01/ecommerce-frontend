@@ -35,8 +35,19 @@ const ProductVerticalCard = (props: {
             {props.cardDetails.productName}
           </p>
           <div className="flex gap-10px">
-            {props.isCartIconShow && <UserCartButton size={30} />}
-            {props.isFavoriteIconShow && <UserFavoriteButton size={30} />}
+            {props.isCartIconShow && (
+              <UserCartButton
+                productId={props.cardDetails.productId}
+                quantity={1}
+                size={30}
+              />
+            )}
+            {props.isFavoriteIconShow && (
+              <UserFavoriteButton
+                productId={props.cardDetails.productId}
+                size={30}
+              />
+            )}
           </div>
         </div>
         <p className="light-gray-font">{props.cardDetails.subcategoryName}</p>
@@ -58,7 +69,9 @@ const ProductVerticalCard = (props: {
             {props.cardDetails.discountPercent}% Off
           </span>
         </p>
-        <p className="light-gray-font">{props.cardDetails.productDescription}</p>
+        <p className="light-gray-font">
+          {props.cardDetails.productDescription}
+        </p>
       </div>
     </div>
   );
