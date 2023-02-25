@@ -23,7 +23,7 @@ const StarRatingInput = (props: {
           />
         ))}
       </div>
-      <p>{rating} of 5 stars</p>
+      <p>{rating.toPrecision(2)} of 5 stars</p>
     </div>
   );
 };

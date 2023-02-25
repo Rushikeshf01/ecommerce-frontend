@@ -8,8 +8,9 @@ export const ApplicationConstant = {
   USER_ORDERS_URL_PATH: "/user/orders",
   USER_REVIEWS_URL_PATH: "/user/reviews",
   USER_FAVORITES_URL_PATH: "/user/favorites",
-  CART_URL_PATH: "/cart",
-  PRODUCT_URL_PATH: "/product/:id",
+  USER_CART_URL_PATH: "/user/cart",
+  PRODUCT_DYNAMIC_URL_PATH: "/product/:id",
+  PRODUCT_URL_PATH: "/product",
 };
 
 export const ApiConstant = {
@@ -17,6 +18,8 @@ export const ApiConstant = {
   USER_PROFILE_API_PATH: "/a4/user/profile",
   USER_ADDRESS_API_PATH: "/a4/user/address",
   USER_REVIEWS_API_PATH: "/a4/user/reviews",
+  USER_FAVORITES_API_PATH: "/a4/user/favorites",
   USER_PASSWORD_API_PATH: "/a4/user/update-password",
   PRODUCT_API_PATH: "/a3/products",
+  HOME_API_PATH: "/a5/home",
 };

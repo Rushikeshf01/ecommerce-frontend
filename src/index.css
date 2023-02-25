@@ -9,13 +9,14 @@
 
 body {
   background-color: #F7F7F7;
+  margin-top: 3.5rem;
 }
 
 a {
   text-decoration: inherit;
 }
 
-::selection{
+::selection {
   background-color: #006EC5;
   color: white;
 }

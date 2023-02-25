@@ -30,6 +30,7 @@ const UserProfilePersonalInfoTextfields = (props: {
           label={item.label}
           type={item.type}
           InputLabelProps={{ shrink: true }}
+          key={`user-profile-personal-input: ${index}`}
           id="filled-basic"
           variant="filled"
           margin="normal"

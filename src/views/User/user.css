@@ -48,3 +48,32 @@
 .user-review-product-link:hover {
     color: #015392;
 }
+
+.user-sidebar-logout-button {
+    margin: 10px 5px 0 5px;
+    padding: 5px 10px;
+    color: red;
+    border: 1px solid red;
+    border-radius: 6px;
+}
+
+.user-sidebar-logout-button:hover {
+    color: white;
+    background-color: red;
+    transition: 0.3s;
+}
+
+.user-sidebar-deleteaccount-button {
+    margin: 10px 5px 0 5px;
+    padding: 5px 10px;
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+    border-radius: 6px;
+}
+
+.user-sidebar-deleteaccount-button:hover {
+    color: red;
+    background-color: white;
+    transition: 0.3s;
+}

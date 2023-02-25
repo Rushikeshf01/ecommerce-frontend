@@ -94,4 +94,13 @@ export interface UserReviewsType {
 
 export interface UserOrdersType {}
 
-export interface UserFavoritesType {}
+export interface UserFavoritesType {
+  productCategoryId: number;
+  productDescription: string;
+  productId: number;
+  productInventoryId: number;
+  productName: string;
+  productPrice: number;
+  productSubcategoryId: number;
+  userFavoriteId: number;
+}
