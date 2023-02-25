@@ -78,18 +78,15 @@ export interface UserAddressesType {
 }
 
 export interface UserReviewsType {
-  productCategoryId: number;
+  productAvgRating: number;
   productDescription: string;
   productId: number;
-  productInventoryId: number;
   productName: string;
   productPrice: number;
-  productRating: number;
-  productRatingId: number;
-  productReviewId: number;
-  productReviewMsg: string;
-  productSubcategoryId: number;
-  userId: number;
+  productRatingCount: number;
+  reviewId: number;
+  reviewMsg: string;
+  reviewRating: number;
   updatedAt: string;
 }
 

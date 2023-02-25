@@ -12,10 +12,11 @@ const UserReview = (props: { userReviewsList: UserReviewsType[] }) => {
             className="border-[1px] border-radius-4px p-[15px]"
             key={`user-review-item:${index}`}
           >
-            <p className="font-medium text-[20px]">{item.productReviewMsg}</p>
+            <p className="font-medium text-[20px]">{item.reviewMsg}</p>
             <StarRatingInput
-              productRating={item.productRating}
+              productRating={item.reviewRating}
               isEditable={false}
+              productRatingCount={item.productRatingCount}
             />
             <p className="orange-font text-[14px] my-1">{`(${item.updatedAt})`}</p>
             <Link
