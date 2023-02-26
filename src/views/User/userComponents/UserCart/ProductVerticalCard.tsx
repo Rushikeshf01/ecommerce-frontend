@@ -1,7 +1,11 @@
 import { Add, Remove } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increaseProductQuntity } from "../../../../../store/slices/cartSlice";
+import {
+  decreaseProductQuntity,
+  increaseProductQuntity,
+} from "../../../../../store/slices/cartSlice";
 import { RootState } from "../../../../../store/store";
 import { ProductVerticleCardProps } from "../../../../types/authProps";
 import { UserCartType } from "../../../../types/authTypes";
@@ -18,7 +22,6 @@ const ProductVerticalCard = (props: {
   );
 
   const handleQuntityIncrease = () => {
-    dispatch(increaseProductQuntity(props.cardDetails.productId));
     setquntityCount(
       cartStore[
         cartStore.findIndex(
@@ -26,24 +29,44 @@ const ProductVerticalCard = (props: {
         )
       ].quantity
     );
+    dispatch(increaseProductQuntity(props.cardDetails.productId));
   };
 
-  const handleQuntityDecrease = () => {};
+  const handleQuntityDecrease = () => {
+    setquntityCount(
+      cartStore[
+        cartStore.findIndex(
+          (item) => item.productId == props.cardDetails.productId
+        )
+      ].quantity
+    );
+    dispatch(decreaseProductQuntity(props.cardDetails.productId));
+  };
 
   if (props.isCartCard) {
     return (
       <BasicProductVerticalCard
         component={
           <div className="product-vertical-card-quntity-input-box border-light-gray">
-            <Remove
-              className="product-vertical-card-action"
+            <IconButton
               onClick={handleQuntityDecrease}
-            />
+              size="large"
+              color="primary"
+              aria-label="delete"
+              disabled={quntityCount <= 0}
+            >
+              <Remove fontSize="inherit" />
+            </IconButton>
             <p>{quntityCount}</p>
-            <Add
-              className="product-vertical-card-action"
+            <IconButton
               onClick={handleQuntityIncrease}
-            />
+              size="large"
+              color="primary"
+              aria-label="delete"
+              // disabled={}
+            >
+              <Add fontSize="inherit" />
+            </IconButton>
           </div>
         }
         cardDetails={props.cardDetails}
