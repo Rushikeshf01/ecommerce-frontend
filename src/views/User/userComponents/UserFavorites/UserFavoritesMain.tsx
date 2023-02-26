@@ -38,7 +38,10 @@ const UserFavoritesMain = () => {
         setIsUserFavoritesApiCalling(false);
         dispatch(setFavorites(res.data.favorites));
       })
-      .catch(() => dispatch(setFavorites([])));
+      .catch(() => {
+        setIsUserFavoritesApiCalling(false);
+        dispatch(setFavorites([]));
+      });
   };
 
   return (

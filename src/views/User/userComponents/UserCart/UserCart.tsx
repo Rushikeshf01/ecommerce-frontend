@@ -7,8 +7,7 @@ const UserCart = (props: { userCart: UserCartType[] }) => {
       {props.userCart.map((item, index) => (
         <UserCartCard
           cardDetails={item}
-          isFavoriteIconShow
-          isCartIconShow={false}
+          isCartCard
           key={`user-cart-card-index: ${index}`}
         />
       ))}

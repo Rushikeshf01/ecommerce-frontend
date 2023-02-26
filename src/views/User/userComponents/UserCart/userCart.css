@@ -1,4 +1,4 @@
-.user-cart-main-box {
+.product-vertical-card-main-box {
     display: grid;
     grid-template-columns: auto auto;
     align-items: stretch;
@@ -10,6 +10,32 @@
     background-color: white;
 }
 
-.user-cart-main-box:hover{
+.product-vertical-card-main-box:hover {
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.product-vertical-card-quntity-input-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    font-size: 24px;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.product-vertical-card-action {
+    font-size: 34px !important;
+    padding: 5px;
+    color: white;
+    background-color: #006EC5;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.product-vertical-card-action:hover {
+    background-color: #0046a1;
+    transition: 0.4s;
 }
