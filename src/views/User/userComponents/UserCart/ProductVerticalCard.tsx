@@ -15,33 +15,26 @@ const ProductVerticalCard = (props: {
   cardDetails: ProductVerticleCardProps;
   isCartCard: boolean;
 }) => {
-  const [quntityCount, setquntityCount] = useState(0);
   const dispatch = useDispatch();
   const cartStore: UserCartType[] = useSelector(
     (state: RootState) => state.cartReducer
   );
 
   const handleQuntityIncrease = () => {
-    setquntityCount(
-      cartStore[
-        cartStore.findIndex(
-          (item) => item.productId == props.cardDetails.productId
-        )
-      ].quantity
-    );
     dispatch(increaseProductQuntity(props.cardDetails.productId));
   };
 
   const handleQuntityDecrease = () => {
-    setquntityCount(
-      cartStore[
-        cartStore.findIndex(
-          (item) => item.productId == props.cardDetails.productId
-        )
-      ].quantity
-    );
     dispatch(decreaseProductQuntity(props.cardDetails.productId));
   };
+
+  function quntityCount(): number {
+    return cartStore[
+      cartStore.findIndex(
+        (item) => item.productId == props.cardDetails.productId
+      )
+    ].quantity;
+  }
 
   if (props.isCartCard) {
     return (
@@ -53,11 +46,11 @@ const ProductVerticalCard = (props: {
               size="large"
               color="primary"
               aria-label="delete"
-              disabled={quntityCount <= 0}
+              disabled={quntityCount() <= 1}
             >
               <Remove fontSize="inherit" />
             </IconButton>
-            <p>{quntityCount}</p>
+            <p>{quntityCount()}</p>
             <IconButton
               onClick={handleQuntityIncrease}
               size="large"
