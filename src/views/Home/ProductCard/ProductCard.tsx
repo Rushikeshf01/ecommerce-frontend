@@ -1,5 +1,5 @@
 import img from '../img/mobile.png'
-import StarRatingInput from "../User/userComponents/UserReviews/UserStarRatings";
+import StarRatingInput from "../../User/userComponents/UserReviews/UserStarRatings";
 
 import "./product-card.css"
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -11,11 +11,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const ProductCard = (props: { productName: string, productDescription: string, productPrice: number, productRating: number }) => {
     return (
 
-        <div className='prod-card'>
+        <div className='prod-box-card'>
             {/* <Badge color="error" badgeContent={'Up to '+80+' %'}></Badge> */}
             <span className='badge'>Up to 80%</span>
             <FavoriteBorderIcon className='like-button pointer' sx={{fontSize:"30px"}}/>
-            <img src="https://m.media-amazon.com/images/I/41kg-+XWoxL._AC_SY200_.jpg" alt="product image" />
+            <img className='prod-box-img' src="https://m.media-amazon.com/images/I/41kg-+XWoxL._AC_SY200_.jpg" alt="product image" />
 
             <div className="prod-detail">
 

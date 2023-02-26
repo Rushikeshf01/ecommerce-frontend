@@ -2,8 +2,8 @@ import React from 'react'
 import "./top-products.css"
 import { useState,useEffect,useRef } from "react"
 
-import ProductCard2 from "./ProductCard2"
-import ProductCard from './ProductCard'
+import ProductCard2 from "./ProductCard/ProductCard2"
+import ProductCard from './ProductCard/ProductCard'
 
 
 import { TopProductType } from "../../types/authTypes"

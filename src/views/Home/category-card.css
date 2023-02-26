@@ -4,6 +4,7 @@
     background-color: rgb(223, 217, 217);
     display: flex;
     border-radius: 8px;
+    cursor: pointer;
     
 }
 .category-logo{

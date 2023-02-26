@@ -1,8 +1,8 @@
-.prod-card {
+.prod-box-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   /* max-width: 300px; */
   width: 300px;
-  height: 380px;
+  height: 385px;
   border-radius: 10px;
   text-align: left;
   font-family: arial;
@@ -11,7 +11,7 @@
 .prod-detail {
   padding: 10px;
 }
-img{
+.prod-box-img{
   margin: auto;
   max-height: 184px;
   max-width: 224px;

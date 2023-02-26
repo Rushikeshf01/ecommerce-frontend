@@ -1,0 +1,54 @@
+.prod-result{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5rem;
+    padding: 0 14rem;
+}
+
+.filter-card{
+    padding: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 100%;
+    width: 25%;
+}
+
+.filters {
+    margin-top: 10px;
+}
+.filters p{
+    margin-top: 20px;
+}
+.filter-button{
+    position: relative;
+    top: 10px;
+    left: 55%;
+}
+.title{
+    border-bottom: 2px solid #006EC5;
+}
+
+
+.items{
+    margin-left: 12px;
+    width: 100%;
+}
+
+.prod-h-card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width:800px;
+  height: 250px;
+  display: flex;
+  border-radius: 10px;
+  text-align: left;
+  font-family: arial;
+  margin-top: 20px;
+  padding: 15px;
+}
+.prod-h-img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.prod-h-detail{
+    padding: 10px;
+}
