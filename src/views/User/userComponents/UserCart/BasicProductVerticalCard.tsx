@@ -17,11 +17,12 @@ const BasicProductVerticalCard = (props: {
 
   return (
     <div className="product-vertical-card-main-box">
-      <div>
+      <div className="flex justify-content-center">
         <img
-          src=""
+          src="https://m.media-amazon.com/images/I/414+xRBltFL._SY300_SX300_.jpg"
           alt="Product Img"
-          className="pointer"
+          width={props.component ? 260 : 230}
+          className="pointer product-vertical-card-img"
           onClick={() => handleViewSingleProduct(props.cardDetails.productId)}
         />
       </div>
@@ -54,12 +55,16 @@ const BasicProductVerticalCard = (props: {
           productRatingCount={props.cardDetails.productRatingCount}
         />
         <p className="mt-2">
-          <span className="font-26px">₹{props.cardDetails.productPrice}</span>
+          <span className="font-26px">
+            ₹{props.cardDetails.productPrice.toFixed(2)}
+          </span>
           {"  "}
           <span className="font-20px line-through">
             ₹
-            {(props.cardDetails.productPrice * 100) /
-              props.cardDetails.discountPercent}
+            {(
+              (props.cardDetails.productPrice * 100) /
+              props.cardDetails.discountPercent
+            ).toFixed(2)}
           </span>
           {"  "}
           <span className="light-green-font font-20px">

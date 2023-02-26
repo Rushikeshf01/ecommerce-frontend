@@ -1,8 +1,6 @@
 .product-vertical-card-main-box {
     display: grid;
     grid-template-columns: auto auto;
-    align-items: stretch;
-    justify-items: stretch;
     margin-bottom: 10px;
     padding: 15px;
     border: 1px solid #d3d3d3;
@@ -12,6 +10,10 @@
 
 .product-vertical-card-main-box:hover {
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.product-vertical-card-img {
+    align-items: center;
 }
 
 .product-vertical-card-quntity-input-box {
