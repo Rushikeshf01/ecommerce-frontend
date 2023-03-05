@@ -87,3 +87,19 @@
     transition: 0.5s;
 }
 
+.single-product-review-card-main {
+    width: 400px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.single-product-review-card-main>p {
+    margin: 7px 0;
+}
+
+.single-product-review-card-main img {
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}

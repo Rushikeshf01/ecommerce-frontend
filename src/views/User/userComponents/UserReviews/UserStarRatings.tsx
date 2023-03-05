@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const StarRatingInput = (props: {
   productRating: number;
-  productRatingCount: number;
+  productRatingCount?: number;
   isEditable: boolean;
 }) => {
   const [rating, setRating] = useState(props.productRating);
@@ -25,7 +25,7 @@ const StarRatingInput = (props: {
         ))}
       </div>
       <p>
-        {rating.toPrecision(2)} of 5 stars from ({props.productRatingCount})
+        {rating.toPrecision(2)} of 5 stars from {props.productRatingCount && (props.productRatingCount)}
       </p>
     </div>
   );
