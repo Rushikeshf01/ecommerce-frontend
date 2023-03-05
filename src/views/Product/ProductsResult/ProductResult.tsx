@@ -1,7 +1,7 @@
 import Header from "../../../commonComponents/Header"
 import FilterCard from "./FilterCard"
 import ProductList from "./ProductList"
-import "./productList.css"
+import "./productResult.css"
 const ProductResult = () => {
     return(
         <div>

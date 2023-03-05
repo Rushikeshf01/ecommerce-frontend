@@ -9,6 +9,7 @@ const ProductHorizontalView = () => {
             <p className='font-thin'> subcategory</p>
             <p><StarRatingInput
                     productRating={4.5}
+                    productRatingCount={3}
                     isEditable={false}
                 /></p>
                 <p className='text-base'>50$</p>

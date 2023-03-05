@@ -11,6 +11,7 @@ export const ApplicationConstant = {
   USER_CART_URL_PATH: "/user/cart",
   PRODUCT_DYNAMIC_URL_PATH: "/product/:id",
   PRODUCT_URL_PATH: "/product",
+  PRODUCT_CATEGORY_DYNAMIC_URL_PATH: "/product/category/:catgory",
 };
 
 export const ApiConstant = {
@@ -22,4 +23,5 @@ export const ApiConstant = {
   USER_PASSWORD_API_PATH: "/a4/user/update-password",
   PRODUCT_API_PATH: "/a3/products",
   HOME_API_PATH: "/a5/home",
+  ORDER_API_PATH: "/a6/order",
 };

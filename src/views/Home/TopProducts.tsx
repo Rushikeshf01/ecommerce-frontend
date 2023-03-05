@@ -2,7 +2,6 @@ import React from 'react'
 import "./top-products.css"
 import { useState,useEffect,useRef } from "react"
 
-import ProductCard2 from "./ProductCard/ProductCard2"
 import ProductCard from './ProductCard/ProductCard'
 
 
@@ -27,42 +26,62 @@ const TopProducts = () => {
     
   }
   return (
-    <div className='top-card-container'>
-
+    <div className="top-card-container">
       {/* we have to show here top 4 products of 3 categories
       and that 3 categories will be decided by the 
       number of orders recived by the each category
       i.e. top 3 category with highest sales */}
-      
 
-      <p className="text-[28px] font-semibold blue-font ">Top Products in Electronics</p>
+      <p className="text-[28px] font-semibold blue-font ">
+        Top Products in Electronics
+      </p>
       <div className="product-cards">
-
         {/* {topProduct?.map((item,index) => (
           <ProductCard productName={item.productName} productDescription={item.productDescription} key={`topProduct-${index}`}/>
         ))} */}
-        {topProduct?.map((item,index) => (
-          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+        {topProduct?.map((item, index) => (
+          <ProductCard
+            productName={item.productName}
+            productDescription={item.productDescription}
+            productPrice={item.productPrice}
+            productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
+            key={`topProduct-${index}`}
+          />
         ))}
-        
       </div>
-      <p className="text-[28px] font-semibold blue-font">Top Products in Books</p>
+      <p className="text-[28px] font-semibold blue-font">
+        Top Products in Books
+      </p>
       <div className="product-cards">
-
-        {topProduct?.map((item,index) => (
-          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+        {topProduct?.map((item, index) => (
+          <ProductCard
+            productName={item.productName}
+            productDescription={item.productDescription}
+            productPrice={item.productPrice}
+            productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
+            key={`topProduct-${index}`}
+          />
         ))}
-        
       </div>
-      <p className="text-[28px] font-semibold blue-font">Top Products in Clothes</p>
+      <p className="text-[28px] font-semibold blue-font">
+        Top Products in Clothes
+      </p>
       <div className="product-cards">
-        {topProduct?.map((item,index) => (
-          <ProductCard productName={item.productName} productDescription={item.productDescription} productPrice={item.productPrice} productRating={item.avgRating} key={`topProduct-${index}`}/>
+        {topProduct?.map((item, index) => (
+          <ProductCard
+            productName={item.productName}
+            productDescription={item.productDescription}
+            productPrice={item.productPrice}
+            productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
+            key={`topProduct-${index}`}
+          />
         ))}
-        
       </div>
     </div>
-  )
+  );
 }
 
 export default TopProducts

@@ -8,7 +8,7 @@ import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const ProductCard = (props: { productName: string, productDescription: string, productPrice: number, productRating: number }) => {
+const ProductCard = (props: { productName: string, productDescription: string, productPrice: number, productRating: number,productRatingCount:number }) => {
     return (
 
         <div className='prod-box-card'>
@@ -23,6 +23,7 @@ const ProductCard = (props: { productName: string, productDescription: string, p
                 <p className='text-base'>${props.productPrice}</p>
                 <p><StarRatingInput
                     productRating={props.productRating}
+                    productRatingCount={props.productRatingCount}
                     isEditable={false}
                 /></p>
                 <button type="submit" className='card-button'>Add to cart</button>

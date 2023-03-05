@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AppBreadcrumps from "../../../commonComponents/AppBreadcrumps";
+import { ApplicationConstant } from "../../../constant/applicationConstant";
+import { SingleProductType } from "../../../types/authTypes";
+import UserFavoriteButton from "../../User/userComponents/UserFavoriteButton";
 import StarRatingInput from "../../User/userComponents/UserReviews/UserStarRatings";
 import SingleProductQuntityInput from "./SingleProductQuntityInput";
 
-const SingleProductDetails = () => {
-  const [breadCrumpsState, setbreadCrumpsState] = useState([
+const SingleProductDetails = (props: {
+  singleProductState: SingleProductType;
+}) => {
+  const breadCrumpsState = [
     {
-      previousText: "home",
-      previousLink: "home",
+      previousText: "Home",
+      previousLink: ApplicationConstant.HOME_URL_PATH,
     },
     {
-      previousText: "categoryName",
+      previousText: props.singleProductState.categoryName,
       previousLink: "category",
     },
-  ]);
+    {
+      previousText: props.singleProductState.subcategoryName,
+      previousLink: "subcategory",
+    },
+  ];
 
   const imgOptions = [
     "https://m.media-amazon.com/images/I/81DZlX8YdwS._UX569_.jpg",
@@ -34,7 +43,7 @@ const SingleProductDetails = () => {
     <div className="single-product-main">
       <AppBreadcrumps
         previousData={breadCrumpsState}
-        currentData={"productName"}
+        currentData={props.singleProductState.productName}
         className="margin-top-5"
       />
       <div className="single-product-first-box">
@@ -53,14 +62,28 @@ const SingleProductDetails = () => {
           <img className="single-product-img" src={imgOption} alt="Image" />
         </div>
         <div>
-          <p className="text-[28px] font-semibold mb-2">productName</p>
-          <StarRatingInput productRating={4} isEditable={false} />
-          <p className="text-[20px] my-3">productPrice</p>
-          <div>
-            <SingleProductQuntityInput />
+          <div className="flex align-items-center gap-10px mb-2">
+            <p className="text-[28px] font-semibold">
+              {props.singleProductState.productName}
+            </p>
+            <UserFavoriteButton size={36} />
           </div>
-          <p>Left in stock: quntity</p>
-          <p>Category: categoryName - subcategoryName </p>
+          <StarRatingInput
+            productRating={props.singleProductState.productAvgRating}
+            productRatingCount={3}
+            isEditable={false}
+          />
+          <p className="text-[20px] my-3">
+            ${props.singleProductState.productPrice}
+          </p>
+          <SingleProductQuntityInput
+            singleProductState={props.singleProductState}
+          />
+          <p>Left in stock: {props.singleProductState.inventoryQuantity}</p>
+          <p>
+            Category: {props.singleProductState.categoryName} -{" "}
+            {props.singleProductState.subcategoryName}{" "}
+          </p>
         </div>
       </div>
     </div>

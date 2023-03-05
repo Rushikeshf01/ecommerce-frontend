@@ -27,18 +27,19 @@ export interface HeaderSubCategoryType {
 }
 
 export interface HomeCategoriesType {
-  productCategoryDescription: string;
-  productCategoryId: number;
-  productCategoryName: string;
+  categoryDescription: string;
+  categoryId: number;
+  categoryName: string;
 }
 
 export interface TopProductType {
-  productCategoryId: number;
   productDescription: string;
   productName: string;
-  productPrice:number;
-  productDiscount?:number;
-  avgRating: number;
+  productPrice: number;
+  productDiscount?: number;
+  productAvgRating: number;
+  productRatingCount: number;
+  productId: number;
 }
 
 export interface UserAccountInformationType {
@@ -77,30 +78,73 @@ export interface UserAddressesType {
 }
 
 export interface UserReviewsType {
-  productCategoryId: number;
+  productAvgRating: number;
   productDescription: string;
   productId: number;
-  productInventoryId: number;
   productName: string;
   productPrice: number;
-  productRating: number;
-  productRatingId: number;
-  productReviewId: number;
-  productReviewMsg: string;
-  productSubcategoryId: number;
-  userId: number;
+  productRatingCount: number;
+  reviewId: number;
+  reviewMsg: string;
+  reviewRating: number;
   updatedAt: string;
 }
 
 export interface UserOrdersType {}
 
 export interface UserFavoritesType {
+  productAvgRating: 0.0;
   productCategoryId: number;
   productDescription: string;
   productId: number;
   productInventoryId: number;
   productName: string;
   productPrice: number;
+  productRatingCount: 0;
   productSubcategoryId: number;
   userFavoriteId: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
+}
+
+export interface UserCartType {
+  cartId: number;
+  productAvgRating: number;
+  productDescription: string;
+  productId: number;
+  productName: string;
+  productPrice: number;
+  productRatingCount: number;
+  quantity: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
+}
+
+export interface SingleProductType {
+  categoryDescription: string;
+  categoryId: number;
+  categoryName: string;
+  discountId: number;
+  discountName: string;
+  discountPercent: number;
+  inventoryId: number;
+  inventoryQuantity: number;
+  productAvgRating: number;
+  productDescription: string;
+  productId: number;
+  productName: string;
+  productPrice: number;
+  productRatingCount: number;
+  subcategoryDescription: string;
+  subcategoryId: number;
+  subcategoryName: string;
+  isFavorite: boolean;
 }
