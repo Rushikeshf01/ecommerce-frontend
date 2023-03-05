@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { SingleProductType } from "../../../types/authTypes";
+import {
+  SingleProductReviewType,
+  SingleProductType,
+} from "../../../types/authTypes";
+import SingleProductReviewCard from "./SingleProductReviewCard";
 
 const SingleProductDescription = (props: {
   singleProductState: SingleProductType;
+  singleProductReviewsState: SingleProductReviewType[];
 }) => {
   const [isToggle, setIsToggle] = useState(false);
 
@@ -20,11 +25,16 @@ const SingleProductDescription = (props: {
           >
             <p className="single-product-second-box-text">Description</p>
             <p className="single-product-second-box-text single-product-second-box-text-active">
-              Reviews({props.singleProductState.productRatingCount})
+              Reviews({props.singleProductReviewsState.length})
             </p>
           </div>
           <div>
-            <p>Product Reviews</p>
+            {props.singleProductReviewsState.map((item, index) => (
+              <SingleProductReviewCard
+                reviewData={item}
+                key={`single-product-review-card: ${index}`}
+              />
+            ))}
           </div>
         </>
       ) : (
@@ -37,7 +47,7 @@ const SingleProductDescription = (props: {
               Description
             </p>
             <p className="single-product-second-box-text">
-              Reviews({props.singleProductState.productRatingCount})
+              Reviews({props.singleProductReviewsState.length})
             </p>
           </div>
           <div>

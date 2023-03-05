@@ -87,7 +87,10 @@ const SingleProductMain = () => {
       ) : (
         <>
           <SingleProductDetails singleProductState={singleProductState} />
-          <SingleProductDescription singleProductState={singleProductState} />
+          <SingleProductDescription
+            singleProductState={singleProductState}
+            singleProductReviewsState={singleProductReviewsState}
+          />
         </>
       )}
     </div>
