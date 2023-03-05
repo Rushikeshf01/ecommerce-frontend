@@ -9,7 +9,10 @@ import {
   ApiConstant,
   ApplicationConstant,
 } from "../../../constant/applicationConstant";
-import { SingleProductType } from "../../../types/authTypes";
+import {
+  SingleProductReviewType,
+  SingleProductType,
+} from "../../../types/authTypes";
 import { CircularProgress } from "@mui/material";
 
 export const singleProductInitialState = {
@@ -36,6 +39,9 @@ export const singleProductInitialState = {
 const SingleProductMain = () => {
   const [singleProductState, setSingleProductState] =
     useState<SingleProductType>(singleProductInitialState);
+  const [singleProductReviewsState, setSingleProductReviewsState] = useState<
+    SingleProductReviewType[]
+  >([]);
   const [isSingleProductApiCalling, setIsSingleProductApiCalling] =
     useState<boolean>(true);
 
@@ -45,19 +51,32 @@ const SingleProductMain = () => {
   useEffect(() => {
     if (dataRef.current) return;
     dataRef.current = true;
-    getSinglePartnerProfile();
-  }, []);
-
-  const getSinglePartnerProfile = async () => {
-    appClient
-      .get(`${ApiConstant.PRODUCT_API_PATH}/${param.id}`)
-      .then((res) => {
-        setSingleProductState(res.data);
+    getSingleProductAndReviews()
+      .then(() => {
         setIsSingleProductApiCalling(false);
       })
       .catch(() => {
         setIsSingleProductApiCalling(false);
       });
+  }, []);
+
+  const getSingleProductAndReviews = async () => {
+    getSingleProduct();
+    getSingleProductReviews();
+  };
+
+  const getSingleProduct = async () => {
+    const res = await appClient.get(
+      `${ApiConstant.PRODUCT_API_PATH}/${param.id}`
+    );
+    setSingleProductState(res.data);
+  };
+
+  const getSingleProductReviews = async () => {
+    const res = await appClient.get(
+      `${ApiConstant.PRODUCT_API_PATH}/reviews/${param.id}`
+    );
+    setSingleProductReviewsState(res.data.reviews);
   };
 
   return (

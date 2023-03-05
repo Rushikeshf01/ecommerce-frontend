@@ -148,3 +148,15 @@ export interface SingleProductType {
   subcategoryName: string;
   isFavorite: boolean;
 }
+
+export interface SingleProductReviewType {
+  dob: string;
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  profilePic: string;
+  reviewId: 2;
+  reviewMsg: string;
+  reviewRating: 4.0;
+  updatedAt: string;
+}
