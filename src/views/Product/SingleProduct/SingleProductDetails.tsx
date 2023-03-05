@@ -16,11 +16,11 @@ const SingleProductDetails = (props: {
     },
     {
       previousText: props.singleProductState.categoryName,
-      previousLink: "category",
+      previousLink: props.singleProductState.categoryName.toLowerCase(),
     },
     {
       previousText: props.singleProductState.subcategoryName,
-      previousLink: "subcategory",
+      previousLink: props.singleProductState.subcategoryName.toLowerCase(),
     },
   ];
 
