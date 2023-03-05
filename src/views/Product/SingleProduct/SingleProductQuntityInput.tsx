@@ -5,7 +5,10 @@ import { addcart } from "../../../../store/slices/cartSlice";
 import { ApiConstant } from "../../../constant/applicationConstant";
 import appClient from "../../../network/AppClient";
 import { SingleProductType } from "../../../types/authTypes";
-import { ToastSuccessMessage } from "../../../utils/toastMessages";
+import {
+  ToastDangerMessage,
+  ToastSuccessMessage,
+} from "../../../utils/toastMessages";
 
 const SingleProductQuntityInput = (props: {
   singleProductState: SingleProductType;
@@ -21,15 +24,28 @@ const SingleProductQuntityInput = (props: {
     //   })
     //   .then((res) => {
     //     dispatch(addcart(res.data.cart));
-    //     // setIsCartButtonClicked(true);
-    //     // ToastSuccessMessage("Product added in cart");
     //   });
     setQuantityInput(quantityInput + 1);
   };
-  
+
   const handleDecreaseQuantity = () => {
-    // setIsCartButtonClicked(false);
     setQuantityInput(quantityInput - 1);
+  };
+
+  const handleAddToCart = () => {
+    if (quantityInput >= 1) {
+      appClient
+        .post(`${ApiConstant.ORDER_API_PATH}/cart`, {
+          productId: props.singleProductState.productId,
+          quantity: quantityInput,
+        })
+        .then((res) => {
+          dispatch(addcart(res.data.cart));
+          ToastSuccessMessage("Successfull added in cart");
+        });
+    } else {
+      ToastDangerMessage("Please fill quantity");
+    }
   };
 
   return (
@@ -45,7 +61,10 @@ const SingleProductQuntityInput = (props: {
           className="pointer single-product-quntity-input-icon-hover"
         />
       </div>
-      <div className="single-product-quntity-input-box single-product-quntity-input-box-hover pointer">
+      <div
+        onClick={handleAddToCart}
+        className="single-product-quntity-input-box single-product-quntity-input-box-hover pointer"
+      >
         ADD TO CART
       </div>
     </div>
