@@ -10,6 +10,7 @@ import {
   ApplicationConstant,
 } from "../../../constant/applicationConstant";
 import { SingleProductType } from "../../../types/authTypes";
+import { CircularProgress } from "@mui/material";
 
 export const singleProductInitialState = {
   categoryDescription: "",
@@ -35,6 +36,9 @@ export const singleProductInitialState = {
 const SingleProductMain = () => {
   const [singleProductState, setSingleProductState] =
     useState<SingleProductType>(singleProductInitialState);
+  const [isSingleProductApiCalling, setIsSingleProductApiCalling] =
+    useState<boolean>(true);
+
   const param = useParams();
   const dataRef = useRef(false);
 
@@ -45,16 +49,28 @@ const SingleProductMain = () => {
   }, []);
 
   const getSinglePartnerProfile = async () => {
-    appClient.get(`${ApiConstant.PRODUCT_API_PATH}/${param.id}`).then((res) => {
-      setSingleProductState(res.data);
-    });
+    appClient
+      .get(`${ApiConstant.PRODUCT_API_PATH}/${param.id}`)
+      .then((res) => {
+        setSingleProductState(res.data);
+        setIsSingleProductApiCalling(false);
+      })
+      .catch(() => {
+        setIsSingleProductApiCalling(false);
+      });
   };
 
   return (
     <div>
       <Header />
-      <SingleProductDetails singleProductState={singleProductState} />
-      <SingleProductDescription singleProductState={singleProductState} />
+      {isSingleProductApiCalling ? (
+        <CircularProgress color="success" size="30px" />
+      ) : (
+        <>
+          <SingleProductDetails singleProductState={singleProductState} />
+          <SingleProductDescription singleProductState={singleProductState} />
+        </>
+      )}
     </div>
   );
 };
