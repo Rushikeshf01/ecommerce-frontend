@@ -66,10 +66,14 @@ const SingleProductDetails = (props: {
             <p className="text-[28px] font-semibold">
               {props.singleProductState.productName}
             </p>
-            <UserFavoriteButton size={36} />
+            <UserFavoriteButton
+              size={36}
+              productId={props.singleProductState.productId}
+            />
           </div>
           <StarRatingInput
             productRating={props.singleProductState.productAvgRating}
+            productRatingCount={props.singleProductState.productRatingCount}
             isEditable={false}
           />
           <p className="text-[20px] my-3">
