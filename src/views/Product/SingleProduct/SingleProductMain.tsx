@@ -51,7 +51,7 @@ const SingleProductMain = () => {
   useEffect(() => {
     if (dataRef.current) return;
     dataRef.current = true;
-    getSingleProductAndReviews()
+    getSingleProductAndReviews();
   }, []);
 
   const getSingleProductAndReviews = async () => {
@@ -77,7 +77,9 @@ const SingleProductMain = () => {
   return (
     <div>
       {isSingleProductApiCalling ? (
-        <CircularProgress color="success" size="30px" />
+        <div className="height-60 flex align-items-center justify-content-center">
+          <CircularProgress size="30px" />
+        </div>
       ) : (
         <>
           <SingleProductDetails singleProductState={singleProductState} />
