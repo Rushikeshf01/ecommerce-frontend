@@ -76,7 +76,6 @@ const SingleProductMain = () => {
 
   return (
     <div>
-      <Header />
       {isSingleProductApiCalling ? (
         <CircularProgress color="success" size="30px" />
       ) : (

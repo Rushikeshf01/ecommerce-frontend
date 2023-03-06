@@ -2,10 +2,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
 }
 
 .box {
+    width: 50%;
     padding: 30px 50px;
     background-color: white;
     border-radius: 6px;
