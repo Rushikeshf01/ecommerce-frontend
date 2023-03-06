@@ -87,6 +87,7 @@ const SingleProductDetails = (props: {
             Category: {props.singleProductState.categoryName} -{" "}
             {props.singleProductState.subcategoryName}{" "}
           </p>
+          <p>{props.singleProductState.productDescription}</p>
         </div>
       </div>
     </div>

@@ -51,7 +51,7 @@ const SingleProductDescription = (props: {
             </p>
           </div>
           <div>
-            <p>{props.singleProductState.productDescription}</p>
+            <p>Display description with JSON file with file system</p>
           </div>
         </>
       )}
