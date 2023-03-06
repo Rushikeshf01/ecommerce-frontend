@@ -52,12 +52,6 @@ const SingleProductMain = () => {
     if (dataRef.current) return;
     dataRef.current = true;
     getSingleProductAndReviews()
-      .then(() => {
-        setIsSingleProductApiCalling(false);
-      })
-      .catch(() => {
-        setIsSingleProductApiCalling(false);
-      });
   }, []);
 
   const getSingleProductAndReviews = async () => {
@@ -70,6 +64,7 @@ const SingleProductMain = () => {
       `${ApiConstant.PRODUCT_API_PATH}/${param.id}`
     );
     setSingleProductState(res.data);
+    setIsSingleProductApiCalling(false);
   };
 
   const getSingleProductReviews = async () => {
