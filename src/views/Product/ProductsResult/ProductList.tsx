@@ -23,15 +23,9 @@ const ProductList = (props: { productDetailList: ProductVerticleCardProps[] }) =
                 currentData={"productName"}
                 className="margin-top-5"
             />
-            {/* <ProductHorizontalView />
-            <ProductHorizontalView />
-            <ProductHorizontalView /> */}
-            <>
-                {props.productDetailList.map((item, index) => {
-
-                    <ProductVerticalCard key={`category-productList-item-${index}`} cardDetails={item} isFavoriteIconShow isCartIconShow />
-                })}
-            </>
+            {props.productDetailList.map((item, index) => (
+                <ProductVerticalCard key={`category-productList-item-${index}`} cardDetails={item} isFavoriteIconShow isCartIconShow />
+            ))}
         </div>
     )
 }
