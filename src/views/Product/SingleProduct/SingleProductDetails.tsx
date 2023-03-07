@@ -16,11 +16,11 @@ const SingleProductDetails = (props: {
     },
     {
       previousText: props.singleProductState.categoryName,
-      previousLink: "category",
+      previousLink: props.singleProductState.categoryName.toLowerCase(),
     },
     {
       previousText: props.singleProductState.subcategoryName,
-      previousLink: "subcategory",
+      previousLink: props.singleProductState.subcategoryName.toLowerCase(),
     },
   ];
 
@@ -66,10 +66,14 @@ const SingleProductDetails = (props: {
             <p className="text-[28px] font-semibold">
               {props.singleProductState.productName}
             </p>
-            <UserFavoriteButton size={36} />
+            <UserFavoriteButton
+              size={36}
+              productId={props.singleProductState.productId}
+            />
           </div>
           <StarRatingInput
             productRating={props.singleProductState.productAvgRating}
+            productRatingCount={props.singleProductState.productRatingCount}
             isEditable={false}
           />
           <p className="text-[20px] my-3">
@@ -83,6 +87,7 @@ const SingleProductDetails = (props: {
             Category: {props.singleProductState.categoryName} -{" "}
             {props.singleProductState.subcategoryName}{" "}
           </p>
+          <p>{props.singleProductState.productDescription}</p>
         </div>
       </div>
     </div>

@@ -25,7 +25,8 @@ const Register = () => {
 
   useEffect(() => {
     if (authStore.isAuthenticated) {
-      navigate(ApplicationConstant.HOME_URL_PATH);
+      // Redirect user to the previous URL
+      navigate(-1);
     }
   });
 

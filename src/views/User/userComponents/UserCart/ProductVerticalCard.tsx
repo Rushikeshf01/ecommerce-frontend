@@ -1,67 +1,73 @@
-import { useNavigate } from "react-router-dom";
-import { ApplicationConstant } from "../../../../constant/applicationConstant";
+import { Add, Remove } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseProductQuntity,
+  increaseProductQuntity,
+} from "../../../../../store/slices/cartSlice";
+import { RootState } from "../../../../../store/store";
 import { ProductVerticleCardProps } from "../../../../types/authProps";
 import { UserCartType } from "../../../../types/authTypes";
-import UserCartButton from "../UserCartButton";
-import UserFavoriteButton from "../UserFavoriteButton";
-import StarRatingInput from "../UserReviews/UserStarRatings";
+import BasicProductVerticalCard from "./BasicProductVerticalCard";
 
 const ProductVerticalCard = (props: {
   cardDetails: ProductVerticleCardProps;
-  isFavoriteIconShow: boolean;
-  isCartIconShow: boolean;
+  isCartCard: boolean;
 }) => {
-  const navigate = useNavigate();
-  const handleViewSingleProduct = (id: number) => {
-    navigate(`${ApplicationConstant.PRODUCT_URL_PATH}/${id}`);
+  const dispatch = useDispatch();
+  const cartStore: UserCartType[] = useSelector(
+    (state: RootState) => state.cartReducer
+  );
+
+  const handleQuntityIncrease = () => {
+    dispatch(increaseProductQuntity(props.cardDetails.productId));
   };
 
-  return (
-    <div className="user-cart-main-box">
-      <div>
-        <img
-          src=""
-          alt="Product Img"
-          className="pointer"
-          onClick={() => handleViewSingleProduct(props.cardDetails.productId)}
-        />
-      </div>
-      <div>
-        <div className="flex align-items-center justify-content-space-between">
-          <p
-            className="text-[20px] font-semibold pointer"
-            onClick={() => handleViewSingleProduct(props.cardDetails.productId)}
-          >
-            {props.cardDetails.productName}
-          </p>
-          <div className="flex gap-10px">
-            {props.isCartIconShow && <UserCartButton size={30} />}
-            {props.isFavoriteIconShow && <UserFavoriteButton size={30} />}
+  const handleQuntityDecrease = () => {
+    dispatch(decreaseProductQuntity(props.cardDetails.productId));
+  };
+
+  function quntityCount(): number {
+    return cartStore[
+      cartStore.findIndex(
+        (item) => item.productId == props.cardDetails.productId
+      )
+    ].quantity;
+  }
+
+  if (props.isCartCard) {
+    return (
+      <BasicProductVerticalCard
+        component={
+          <div className="product-vertical-card-quntity-input-box border-light-gray">
+            <IconButton
+              onClick={handleQuntityDecrease}
+              size="large"
+              color="primary"
+              aria-label="delete"
+              disabled={quntityCount() <= 1}
+            >
+              <Remove fontSize="inherit" />
+            </IconButton>
+            <p>{quntityCount()}</p>
+            <IconButton
+              onClick={handleQuntityIncrease}
+              size="large"
+              color="primary"
+              aria-label="delete"
+              // disabled={}
+            >
+              <Add fontSize="inherit" />
+            </IconButton>
           </div>
-        </div>
-        <p className="light-gray-font">{props.cardDetails.subcategoryName}</p>
-        <StarRatingInput
-          productRating={props.cardDetails.productAvgRating}
-          isEditable={false}
-          productRatingCount={props.cardDetails.productRatingCount}
-        />
-        <p>
-          <span className="font-26px">₹{props.cardDetails.productPrice}</span>
-          {"  "}
-          <span className="font-20px line-through">
-            ₹
-            {(props.cardDetails.productPrice * 100) /
-              props.cardDetails.discountPercent}
-          </span>
-          {"  "}
-          <span className="light-green-font font-20px">
-            {props.cardDetails.discountPercent}% Off
-          </span>
-        </p>
-        <p className="light-gray-font">{props.cardDetails.productDescription}</p>
-      </div>
-    </div>
-  );
+        }
+        cardDetails={props.cardDetails}
+      />
+    );
+  }
+
+  return <BasicProductVerticalCard cardDetails={props.cardDetails} />;
 };
 
 export default ProductVerticalCard;

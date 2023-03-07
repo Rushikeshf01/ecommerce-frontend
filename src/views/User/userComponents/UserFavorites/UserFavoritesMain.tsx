@@ -1,7 +1,10 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorites, setFavorites } from "../../../../../store/slices/favoriteSlice";
+import {
+  addFavorites,
+  setFavorites,
+} from "../../../../../store/slices/favoriteSlice";
 import { RootState } from "../../../../../store/store";
 import NotAvailable from "../../../../commonComponents/NotAvailable";
 import { ApiConstant } from "../../../../constant/applicationConstant";
@@ -16,7 +19,9 @@ const UserFavoritesMain = () => {
     useState(true);
   const dataFechedRef = useRef(false);
 
-  const favoriteStore = useSelector((state: RootState) => state.favoriteReducer);
+  const favoriteStore = useSelector(
+    (state: RootState) => state.favoriteReducer
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,11 +31,17 @@ const UserFavoritesMain = () => {
   }, []);
 
   const getUserFavorites = async () => {
-    appClient.get(ApiConstant.USER_FAVORITES_API_PATH).then((res) => {
-      setUserFavorites(res.data.favorites);
-      setIsUserFavoritesApiCalling(false);
-      dispatch(setFavorites(res.data.favorites));
-    });
+    appClient
+      .get(ApiConstant.USER_FAVORITES_API_PATH)
+      .then((res) => {
+        setUserFavorites(res.data.favorites);
+        setIsUserFavoritesApiCalling(false);
+        dispatch(setFavorites(res.data.favorites));
+      })
+      .catch(() => {
+        setIsUserFavoritesApiCalling(false);
+        dispatch(setFavorites([]));
+      });
   };
 
   return (

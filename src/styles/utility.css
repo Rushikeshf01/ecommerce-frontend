@@ -1,3 +1,4 @@
+@import url('./dimensions.css');
 @import url('./fonts.css');
 @import url('./flex.css');
 @import url('./border.css');
@@ -72,13 +73,4 @@
 
 .not-allowed {
     cursor: not-allowed;
-}
-
-/* width */
-.width-100 {
-    width: 100%;
-}
-
-.width-auto {
-    width: auto;
 }

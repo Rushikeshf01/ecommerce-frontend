@@ -1,4 +1,3 @@
-import img from '../img/mobile.png'
 import StarRatingInput from "../User/userComponents/UserReviews/UserStarRatings";
 
 import "./product-card.css"
@@ -15,7 +14,7 @@ const ProductCard2 = (props: { productName: string, productDescription: string, 
             {/* <Badge color="error" badgeContent={'Up to '+80+' %'}></Badge> */}
             <span className='badge'>Up to 80%</span>
             <FavoriteBorderIcon className='like-button pointer' sx={{fontSize:"30px"}}/>
-            <img src={img} alt="product image" />
+            <img src="" alt="product image" />
 
             <div className="prod-detail">
 
