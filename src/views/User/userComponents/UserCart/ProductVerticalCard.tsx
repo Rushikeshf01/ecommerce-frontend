@@ -14,6 +14,8 @@ import BasicProductVerticalCard from "./BasicProductVerticalCard";
 const ProductVerticalCard = (props: {
   cardDetails: ProductVerticleCardProps;
   isCartCard: boolean;
+  isCartIconShow: boolean;
+  isFavoriteIconShow: boolean;
 }) => {
   const dispatch = useDispatch();
   const cartStore: UserCartType[] = useSelector(
@@ -46,7 +48,8 @@ const ProductVerticalCard = (props: {
               size="large"
               color="primary"
               aria-label="delete"
-              disabled={quntityCount() <= 1}
+              // disabled={quntityCount() <= 1}
+              disabled
             >
               <Remove fontSize="inherit" />
             </IconButton>
@@ -56,18 +59,26 @@ const ProductVerticalCard = (props: {
               size="large"
               color="primary"
               aria-label="delete"
-              // disabled={}
+              disabled
             >
               <Add fontSize="inherit" />
             </IconButton>
           </div>
         }
         cardDetails={props.cardDetails}
+        isCartIconShow={props.isCartIconShow}
+        isFavoriteIconShow={props.isFavoriteIconShow}
       />
     );
   }
 
-  return <BasicProductVerticalCard cardDetails={props.cardDetails} />;
+  return (
+    <BasicProductVerticalCard
+      cardDetails={props.cardDetails}
+      isCartIconShow={props.isCartIconShow}
+      isFavoriteIconShow={props.isFavoriteIconShow}
+    />
+  );
 };
 
 export default ProductVerticalCard;
