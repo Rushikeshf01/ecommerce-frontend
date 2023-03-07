@@ -1,26 +1,26 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import AppBreadcrumps from "../../../commonComponents/AppBreadcrumps";
+import { ApplicationConstant } from "../../../constant/applicationConstant";
 import { ProductVerticleCardProps } from "../../../types/authProps";
+import { capitalizeFirstLetter } from "../../../utils/jsFunctionsUtils";
 import ProductVerticalCard from "../../User/userComponents/UserCart/ProductVerticalCard";
 import ProductHorizontalView from "./ProductHorizontalView"
 
-const ProductList = (props: { productDetailList: ProductVerticleCardProps[] }) => {
-    const [breadCrumpsState, setbreadCrumpsState] = useState([
-        {
-            previousText: "home",
-            previousLink: "home",
-        },
-        {
-            previousText: "categoryName",
-            previousLink: "category",
-        },
-    ]);
-
+const breadCrumpsState = [
+    {
+        previousText: "Home",
+        previousLink: ApplicationConstant.HOME_URL_PATH,
+    },
+]
+const ProductList = (props: { productDetailList: ProductVerticleCardProps[]}) => {
+    const param = useParams()
+    const categoryName = param.category? param.category: ''
     return (
         <div className="items">
             <AppBreadcrumps
                 previousData={breadCrumpsState}
-                currentData={"productName"}
+                currentData={categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
                 className="margin-top-5"
             />
             {props.productDetailList.map((item, index) => (
