@@ -16,21 +16,6 @@ import SingleProductMain from "../views/Product/SingleProduct/SingleProductMain"
 import ProductResult from "../views/Product/ProductsResult/ProductResult";
 
 export default function App() {
-  const authStore = useSelector((state: RootState) => state.authReducer);
-
-  if (!authStore.isAuthenticated) {
-    return useRoutes([
-      {
-        path: ApplicationConstant.LOGIN_URL_PATH,
-        element: <Login />,
-      },
-      {
-        path: ApplicationConstant.REGISTER_URL_PATH,
-        element: <Register />,
-      },
-    ]);
-  }
-
   return useRoutes([
     {
       path: ApplicationConstant.LOGIN_URL_PATH,

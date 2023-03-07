@@ -7,7 +7,7 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Badge } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/store";
@@ -22,12 +22,17 @@ import HeaderCategories from "./HeaderCategories";
 const Header = () => {
   const [isCategoryDroped, setIsCategoryDroped] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
+
+  const dataRef = useRef(false);
+
   const favoriteStore = useSelector(
     (state: RootState) => state.favoriteReducer
   );
   const cartStore = useSelector((state: RootState) => state.cartReducer);
 
   useEffect(() => {
+    if (dataRef.current) return;
+    dataRef.current = true;
     getAllCategories();
   }, []);
 

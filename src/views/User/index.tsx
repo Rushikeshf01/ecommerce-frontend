@@ -12,7 +12,6 @@ const previousData = [
 const User = (props: { component: React.ReactNode }) => {
   return (
     <div>
-      <Header />
       <div className="user-main-box">
         <AppBreadcrumps
           previousData={previousData}

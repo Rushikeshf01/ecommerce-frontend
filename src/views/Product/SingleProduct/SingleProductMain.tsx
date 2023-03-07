@@ -9,7 +9,11 @@ import {
   ApiConstant,
   ApplicationConstant,
 } from "../../../constant/applicationConstant";
-import { SingleProductType } from "../../../types/authTypes";
+import {
+  SingleProductReviewType,
+  SingleProductType,
+} from "../../../types/authTypes";
+import { CircularProgress } from "@mui/material";
 
 export const singleProductInitialState = {
   categoryDescription: "",
@@ -35,26 +39,56 @@ export const singleProductInitialState = {
 const SingleProductMain = () => {
   const [singleProductState, setSingleProductState] =
     useState<SingleProductType>(singleProductInitialState);
+  const [singleProductReviewsState, setSingleProductReviewsState] = useState<
+    SingleProductReviewType[]
+  >([]);
+  const [isSingleProductApiCalling, setIsSingleProductApiCalling] =
+    useState<boolean>(true);
+
   const param = useParams();
   const dataRef = useRef(false);
 
   useEffect(() => {
     if (dataRef.current) return;
     dataRef.current = true;
-    getSinglePartnerProfile();
+    getSingleProductAndReviews();
   }, []);
 
-  const getSinglePartnerProfile = async () => {
-    appClient.get(`${ApiConstant.PRODUCT_API_PATH}/${param.id}`).then((res) => {
-      setSingleProductState(res.data);
-    });
+  const getSingleProductAndReviews = async () => {
+    getSingleProduct();
+    getSingleProductReviews();
+  };
+
+  const getSingleProduct = async () => {
+    const res = await appClient.get(
+      `${ApiConstant.PRODUCT_API_PATH}/${param.id}`
+    );
+    setSingleProductState(res.data);
+    setIsSingleProductApiCalling(false);
+  };
+
+  const getSingleProductReviews = async () => {
+    const res = await appClient.get(
+      `${ApiConstant.PRODUCT_API_PATH}/reviews/${param.id}`
+    );
+    setSingleProductReviewsState(res.data.reviews);
   };
 
   return (
     <div>
-      <Header />
-      <SingleProductDetails singleProductState={singleProductState} />
-      <SingleProductDescription singleProductState={singleProductState} />
+      {isSingleProductApiCalling ? (
+        <div className="height-60 flex align-items-center justify-content-center">
+          <CircularProgress size="30px" />
+        </div>
+      ) : (
+        <>
+          <SingleProductDetails singleProductState={singleProductState} />
+          <SingleProductDescription
+            singleProductState={singleProductState}
+            singleProductReviewsState={singleProductReviewsState}
+          />
+        </>
+      )}
     </div>
   );
 };
