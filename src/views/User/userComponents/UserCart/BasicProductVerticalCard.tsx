@@ -9,6 +9,8 @@ import StarRatingInput from "../UserReviews/UserStarRatings";
 const BasicProductVerticalCard = (props: {
   component?: React.ReactNode;
   cardDetails: ProductVerticleCardProps;
+  isCartIconShow: boolean;
+  isFavoriteIconShow: boolean;
 }) => {
   const navigate = useNavigate();
   const handleViewSingleProduct = (id: number) => {
@@ -35,15 +37,19 @@ const BasicProductVerticalCard = (props: {
             {props.cardDetails.productName}
           </p>
           <div className="flex gap-10px">
-            <UserCartButton
-              productId={props.cardDetails.productId}
-              quantity={1}
-              size={30}
-            />
-            <UserFavoriteButton
-              productId={props.cardDetails.productId}
-              size={30}
-            />
+            {props.isCartIconShow && (
+              <UserCartButton
+                productId={props.cardDetails.productId}
+                quantity={1}
+                size={30}
+              />
+            )}
+            {props.isFavoriteIconShow && (
+              <UserFavoriteButton
+                productId={props.cardDetails.productId}
+                size={30}
+              />
+            )}
           </div>
         </div>
         <p className="light-gray-font mb-2">

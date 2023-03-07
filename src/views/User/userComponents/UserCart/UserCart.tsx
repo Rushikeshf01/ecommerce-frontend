@@ -8,6 +8,8 @@ const UserCart = (props: { userCart: UserCartType[] }) => {
         <ProductVerticalCard
           cardDetails={item}
           isCartCard
+          isFavoriteIconShow
+          isCartIconShow={false}
           key={`user-cart-card-index: ${index}`}
         />
       ))}

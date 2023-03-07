@@ -8,6 +8,8 @@ const UserFavorite = (props: { userFavorites: UserFavoritesType[] }) => {
         <ProductVerticalCard
           cardDetails={item}
           isCartCard={false}
+          isCartIconShow 
+          isFavoriteIconShow={false}
           key={`user-favorite-card-index: ${index}`}
         />
       ))}
