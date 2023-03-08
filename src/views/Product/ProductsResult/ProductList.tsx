@@ -24,7 +24,7 @@ const ProductList = (props: { productDetailList: ProductVerticleCardProps[]}) =>
                 className="margin-top-5"
             />
             {props.productDetailList.map((item, index) => (
-                <ProductVerticalCard key={`category-productList-item-${index}`} cardDetails={item} isCartCard />
+                <ProductVerticalCard key={`category-productList-item-${index}`} cardDetails={item} isCartCard={false}/>
             ))}
         </div>
     )
