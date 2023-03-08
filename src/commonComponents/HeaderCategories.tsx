@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ApplicationConstant } from "../constant/applicationConstant";
 import { HeaderCategoriesProps } from "../types/authProps";
 
 const HeaderCategories = (props: {
@@ -14,7 +15,11 @@ const HeaderCategories = (props: {
       {props.allCategories.map((category, index) => (
         <div key={`header-category-index: ${index}`}>
           <p className="header-category-text">
-            <Link to={""}>{category.categoryName}</Link>
+            <Link
+              to={`${ApplicationConstant.PRODUCT_URL_PATH}/category/${category.categoryName.toLowerCase()}`}
+            >
+              {category.categoryName}
+            </Link>
           </p>
           {category.subCategories.map((subcategory, index) => (
             <p className="header-subcategory-text">
