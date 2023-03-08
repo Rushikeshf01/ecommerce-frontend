@@ -19,8 +19,6 @@ const ProductResult = () => {
 
     const getProdcutsByCategory = async() => {
             const res = await appClient(`${ApiConstant.PRODUCT_API_PATH}?category=${capitalizeFirstLetter(param.category)}`)
-            console.log(res);
-            
             setCategoryProductState(res.data.products)
     }
     
