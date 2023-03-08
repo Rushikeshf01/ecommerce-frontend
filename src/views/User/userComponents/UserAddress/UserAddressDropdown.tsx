@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/system";
 import appClient from "../../../../network/AppClient";
@@ -19,10 +19,15 @@ const UserAddressDropdown = (props: {
   const [countryOptions, setCountryOptions] = useState<string[]>([]);
   const [stateOptions, setStateOptions] = useState<string[]>([]);
   const [cityOptions, setCityOptions] = useState<string[]>([]);
+  const dataRef = useRef(false);
 
   useEffect(() => {
+    if (dataRef.current) return;
+    dataRef.current = true;
     getCountries();
+  }, []);
 
+  useEffect(() => {
     if (props.userAddressInputState.country) {
       getStates(props.userAddressInputState.country);
     }
