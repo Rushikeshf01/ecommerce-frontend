@@ -22,7 +22,14 @@ const UserAddressDropdown = (props: {
 
   useEffect(() => {
     getCountries();
-  }, []);
+
+    if (props.userAddressInputState.country) {
+      getStates(props.userAddressInputState.country);
+    }
+    if (props.userAddressInputState.state) {
+      getCities(props.userAddressInputState.state);
+    }
+  }, [props.userAddressInputState.country, props.userAddressInputState.state]);
 
   const getCountries = async () => {
     const res = await appClient.get("/a2/location/countries");
@@ -91,14 +98,17 @@ const UserAddressDropdown = (props: {
       {inputFieldsData.map((item, index) => (
         <FormControl fullWidth key={`user-address-select: ${index}`}>
           <label htmlFor={item.name} className="pointer">
-            {item.label}<span className="red-font"> *</span>
+            {item.label}
+            <span className="red-font"> *</span>
           </label>
           <CustomSelect
             id={item.name}
             labelId={item.name}
             name={item.name}
             value={(props.userAddressInputState as any)[item.name]}
-            onChange={(e: any) => {(item.onChange as any)(e);}}
+            onChange={(e: any) => {
+              (item.onChange as any)(e);
+            }}
           >
             {item.options.map((subItem, subIndex) => (
               <MenuItem value={subItem} key={`${subItem}: ${subIndex}`}>
