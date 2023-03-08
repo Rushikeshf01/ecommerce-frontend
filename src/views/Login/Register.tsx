@@ -1,15 +1,15 @@
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../../store/store";
 import { ApplicationConstant } from "../../constant/applicationConstant";
 import { RegisterStateType } from "../../types/authTypes";
-import "./login.css";
 import authClient from "../../network/AuthClient";
 import { ToastDangerMessage, ToastSuccessMessage } from "../../utils/toastMessages";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
 import { joiUtilObject } from "../../utils/joiValidation";
+import "./login.css";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterStateType>({
@@ -26,7 +26,9 @@ const Register = () => {
   useEffect(() => {
     if (authStore.isAuthenticated) {
       // Redirect user to the previous URL
-      navigate(-1);
+      window.history.length > 2
+        ? navigate(-1)
+        : navigate(ApplicationConstant.HOME_URL_PATH);
     }
   });
 

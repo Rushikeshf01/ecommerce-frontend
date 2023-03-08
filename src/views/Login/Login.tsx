@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { AccountCircle, Lock } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
-import { ApplicationConstant } from "../../constant/applicationConstant";
-import { LoginStateType } from "../../types/authTypes";
-import "./login.css";
-import {
-  ToastDangerMessage,
-  ToastSuccessMessage,
-} from "../../utils/toastMessages";
-import authClient from "../../network/AuthClient";
-import { useDispatch, useSelector } from "react-redux";
 import { setAuthentication } from "../../../store/slices/authSlice";
 import { RootState } from "../../../store/store";
+import { ApplicationConstant } from "../../constant/applicationConstant";
+import { LoginStateType } from "../../types/authTypes";
+import { ToastDangerMessage } from "../../utils/toastMessages";
+import authClient from "../../network/AuthClient";
 import { joiUtilObject } from "../../utils/joiValidation";
+import "./login.css";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginStateType>({
