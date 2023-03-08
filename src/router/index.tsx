@@ -13,6 +13,7 @@ import UserFavoritesMain from "../views/User/userComponents/UserFavorites/UserFa
 import UserReviewsMain from "../views/User/userComponents/UserReviews/UserReviewsMain";
 import UserCartMain from "../views/User/userComponents/UserCart/UserCartMain";
 import SingleProductMain from "../views/Product/SingleProduct/SingleProductMain";
+import ProductResult from "../views/Product/ProductsResult/ProductResult";
 
 export default function App() {
   return useRoutes([
@@ -55,6 +56,10 @@ export default function App() {
     {
       path: ApplicationConstant.PRODUCT_DYNAMIC_URL_PATH,
       element: <SingleProductMain />,
+    },
+    {
+      path: ApplicationConstant.PRODUCT_CATEGORY_DYNAMIC_URL_PATH,
+      element: <ProductResult />,
     },
   ]);
 }

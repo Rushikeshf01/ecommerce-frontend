@@ -2,8 +2,7 @@ import React from 'react'
 import "./top-products.css"
 import { useState,useEffect,useRef } from "react"
 
-import ProductCard from "./ProductCard2"
-import ProductCard2 from './ProductCard'
+import ProductCard from './ProductCard/ProductCard'
 
 
 import { TopProductType } from "../../types/authTypes"
@@ -23,7 +22,7 @@ const TopProducts = () => {
   const getTopProducts = async () => {
     const res = await appClient.get('/a3/products/get-top-products?category=Electronics')
     setTopProduct(res.data.products)
-    console.log(res);
+    // console.log(res);
     
   }
   return (
@@ -41,11 +40,12 @@ const TopProducts = () => {
           <ProductCard productName={item.productName} productDescription={item.productDescription} key={`topProduct-${index}`}/>
         ))} */}
         {topProduct?.map((item, index) => (
-          <ProductCard2
+          <ProductCard
             productName={item.productName}
             productDescription={item.productDescription}
             productPrice={item.productPrice}
             productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
             key={`topProduct-${index}`}
           />
         ))}
@@ -55,11 +55,12 @@ const TopProducts = () => {
       </p>
       <div className="product-cards">
         {topProduct?.map((item, index) => (
-          <ProductCard2
+          <ProductCard
             productName={item.productName}
             productDescription={item.productDescription}
             productPrice={item.productPrice}
             productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
             key={`topProduct-${index}`}
           />
         ))}
@@ -69,11 +70,12 @@ const TopProducts = () => {
       </p>
       <div className="product-cards">
         {topProduct?.map((item, index) => (
-          <ProductCard2
+          <ProductCard
             productName={item.productName}
             productDescription={item.productDescription}
             productPrice={item.productPrice}
             productRating={item.productAvgRating}
+            productRatingCount={item.productRatingCount}
             key={`topProduct-${index}`}
           />
         ))}
