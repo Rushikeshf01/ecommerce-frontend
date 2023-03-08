@@ -11,6 +11,7 @@ export const ApplicationConstant = {
   USER_CART_URL_PATH: "/user/cart",
   PRODUCT_DYNAMIC_URL_PATH: "/product/:id",
   PRODUCT_URL_PATH: "/product",
+  PRODUCT_CATEGORY_DYNAMIC_URL_PATH: "/product/category/:category",
 };
 
 export const ApiConstant = {
