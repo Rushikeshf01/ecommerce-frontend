@@ -29,9 +29,11 @@ const Login = () => {
   useEffect(() => {
     if (authStore.isAuthenticated) {
       // Redirect user to the previous URL
-      navigate(-1);
+      window.history.length > 2
+        ? navigate(-1)
+        : navigate(ApplicationConstant.HOME_URL_PATH);
     }
-  });
+  }, [authStore.isAuthenticated, navigate]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
