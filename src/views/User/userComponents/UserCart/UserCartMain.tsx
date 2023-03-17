@@ -18,13 +18,7 @@ const UserCartMain = () => {
 
   const cartStore = useSelector((state: RootState) => state.cartReducer);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (dataFechedRef.current) return;
-    dataFechedRef.current = true;
-    getUserCart();
-  }, []);
-
+  
   const getUserCart = () => {
     appClient
       .get(`${ApiConstant.ORDER_API_PATH}/cart`)
@@ -38,6 +32,12 @@ const UserCartMain = () => {
         dispatch(setCart([]));
       });
   };
+  
+  useEffect(() => {
+    if (dataFechedRef.current) return;
+    dataFechedRef.current = true;
+    getUserCart();
+  }, [cartStore]);
 
   return (
     <User

@@ -1,7 +1,7 @@
 import { ShoppingCart, ShoppingCartOutlined } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addcart } from "../../../../store/slices/cartSlice";
+import { addItemIntocart } from "../../../../store/slices/cartSlice";
 import { ApiConstant } from "../../../constant/applicationConstant";
 import appClient from "../../../network/AppClient";
 import { ToastSuccessMessage } from "../../../utils/toastMessages";
@@ -23,7 +23,7 @@ const UserCartButton = (props: {
         quantity: props.quantity,
       })
       .then((res) => {
-        dispatch(addcart(res.data.cart));
+        dispatch(addItemIntocart(res.data.cart));
         setIsCartButtonClicked(true);
         ToastSuccessMessage("Product added in cart");
       });

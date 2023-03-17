@@ -1,7 +1,7 @@
 import { Add, Remove } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addcart } from "../../../../store/slices/cartSlice";
+import { addItemIntocart } from "../../../../store/slices/cartSlice";
 import { ApiConstant } from "../../../constant/applicationConstant";
 import appClient from "../../../network/AppClient";
 import { SingleProductType } from "../../../types/authTypes";
@@ -40,7 +40,7 @@ const SingleProductQuntityInput = (props: {
           quantity: quantityInput,
         })
         .then((res) => {
-          dispatch(addcart(res.data.cart));
+          dispatch(addItemIntocart(res.data.cart));
           ToastSuccessMessage("Successfull added in cart");
         });
     } else {

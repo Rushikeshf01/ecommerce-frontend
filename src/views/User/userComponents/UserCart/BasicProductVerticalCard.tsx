@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ApplicationConstant } from "../../../../constant/applicationConstant";
 import { ProductVerticleCardProps } from "../../../../types/authProps";
 import UserCartButton from "../UserCartButton";
+import UserDeleteButton from "../UserDeleteButton";
 import UserFavoriteButton from "../UserFavoriteButton";
 import StarRatingInput from "../UserReviews/UserStarRatings";
 
@@ -36,7 +37,7 @@ const BasicProductVerticalCard = (props: {
           >
             {props.cardDetails.productName}
           </p>
-          <div className="flex gap-10px">
+          <div className="flex align-items-center gap-6px">
             {props.isCartIconShow && (
               <UserCartButton
                 productId={props.cardDetails.productId}
@@ -50,6 +51,14 @@ const BasicProductVerticalCard = (props: {
                 size={30}
               />
             )}
+            <UserDeleteButton
+              cartId={props.cardDetails.cartId}
+              favoriteId={props.cardDetails.userFavoriteId}
+              toolTipTitle={
+                props.component ? "Remove from cart" : "Remove from favorite"
+              }
+              component={props.component}
+            />
           </div>
         </div>
         <p className="light-gray-font mb-2">

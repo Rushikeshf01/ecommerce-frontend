@@ -11,8 +11,19 @@ export const cartSlice = createSlice({
     setCart: (state: UserCartType[], action: PayloadAction<UserCartType[]>) => {
       return [...action.payload];
     },
-    addcart: (state: UserCartType[], action: PayloadAction<UserCartType>) => {
+    addItemIntocart: (
+      state: UserCartType[],
+      action: PayloadAction<UserCartType>
+    ) => {
       state.push(action.payload);
+    },
+    removeItemFromcart: (
+      state: UserCartType[],
+      action: PayloadAction<number>
+    ) => {
+      // let cartState = [...state];
+      return state = state.filter((item) => item.cartId !== action.payload);
+      // state = cartState;
     },
     increaseProductQuntity: (
       state: UserCartType[],
@@ -41,7 +52,8 @@ export const cartSlice = createSlice({
 
 export const {
   setCart,
-  addcart,
+  addItemIntocart,
+  removeItemFromcart,
   increaseProductQuntity,
   decreaseProductQuntity,
 } = cartSlice.actions;
